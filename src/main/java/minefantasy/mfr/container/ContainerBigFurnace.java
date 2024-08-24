@@ -76,7 +76,7 @@ public class ContainerBigFurnace extends ContainerBase {
 			}
 
 			if (this.lastMaxFuel != this.smelter.maxFuel) {
-				listener.sendWindowProperty(this, 2, this.smelter.maxFuel);
+				listener.sendWindowProperty(this, 2, (int) this.smelter.maxFuel);
 			}
 
 			if (this.lastHeat != this.smelter.heat) {
@@ -92,8 +92,8 @@ public class ContainerBigFurnace extends ContainerBase {
 		this.lastProgress = this.smelter.progress;
 		this.lastFuel = this.smelter.fuel;
 		this.lastMaxFuel = this.smelter.maxFuel;
-		this.lastHeat = (int) this.smelter.heat;
-		this.lastMaxHeat = (int) this.smelter.maxHeat;
+		this.lastHeat = this.smelter.heat;
+		this.lastMaxHeat = this.smelter.maxHeat;
 	}
 
 	@SideOnly(Side.CLIENT)

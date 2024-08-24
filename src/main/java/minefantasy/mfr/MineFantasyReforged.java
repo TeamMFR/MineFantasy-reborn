@@ -44,6 +44,7 @@ import minefantasy.mfr.recipe.CraftingManagerTransformation;
 import minefantasy.mfr.recipe.RecipeRemover;
 import minefantasy.mfr.recipe.ingredients.IngredientCount;
 import minefantasy.mfr.recipe.ingredients.IngredientOreCount;
+import minefantasy.mfr.registry.ForgeFuelRegistry;
 import minefantasy.mfr.registry.MetalMaterialRegistry;
 import minefantasy.mfr.registry.WoodMaterialRegistry;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
@@ -74,7 +75,7 @@ import org.apache.logging.log4j.Logger;
 
 @Mod(modid = MineFantasyReforged.MOD_ID, name = MineFantasyReforged.NAME, version = "@VERSION@", dependencies = "required:forge@[0.000.000.001,);" + CodeChickenLib.MOD_VERSION_DEP + "required-after:mixinbooter;")
 public class MineFantasyReforged {
-	public static final boolean shouldRemap = true;//DO NOT COMMIT AS FALSE
+	public static final boolean shouldRemap = false;//DO NOT COMMIT AS FALSE
 	public static final String MOD_ID = "minefantasyreforged";
 	public static final String NAME = "MineFantasy Reforged";
 
@@ -141,6 +142,7 @@ public class MineFantasyReforged {
 		MineFantasyMaterials.initBaseMaterials();
 		WoodMaterialRegistry.INSTANCE.preInit();
 		MetalMaterialRegistry.INSTANCE.preInit();
+		ForgeFuelRegistry.INSTANCE.preInit();
 		MineFantasyMaterials.initLeatherMaterials();
 
 		MineFantasyLoot.load();
