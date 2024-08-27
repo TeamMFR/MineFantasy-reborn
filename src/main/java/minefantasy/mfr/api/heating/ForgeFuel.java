@@ -5,12 +5,15 @@ import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.registry.ForgeFuelRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 
 public class ForgeFuel {
 	private String name;
 
 	public ItemStack item;
+	public Ingredient ingredient;
 	public float duration;
 	public int baseHeat;
 	/**
@@ -38,12 +41,9 @@ public class ForgeFuel {
 		if (item.isEmpty()) {
 			return null;
 		}
-
-		MineFantasyReforged.LOG.info("searching for stats:");
-		MineFantasyReforged.LOG.info(item);
 		for (ForgeFuel forgeFuel : ForgeFuelRegistry.forgeFuel) {
-			MineFantasyReforged.LOG.info(forgeFuel);
-			if (item == forgeFuel.item) {
+			MineFantasyReforged.LOG.info(forgeFuel.item);
+			if (item.isItemEqual(forgeFuel.item)) {
 				return forgeFuel;
 			}
 		}

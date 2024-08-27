@@ -1369,10 +1369,10 @@ public class MineFantasyItems {
 		//MineFantasyFuels.addForgeFuel(Items.LAVA_BUCKET, 2400, 5000, true);// 5000C , 2m
 		//MineFantasyFuels.addForgeFuel(Items.MAGMA_CREAM, 2400, 4000, true, true);// 4000C , 2m
 
-		MineFantasyFuels.addForgeFuel(COKE, 1200, 2500, false, true);// 2500C , 1m
-		MineFantasyFuels.addForgeFuel(MAGMA_CREAM_REFINED, 2400, 5000, true, true);// 5000C , 2m
+		//MineFantasyFuels.addForgeFuel(COKE, 1200, 2500, false, true);// 2500C , 1m
+		//MineFantasyFuels.addForgeFuel(MAGMA_CREAM_REFINED, 2400, 5000, true, true);// 5000C , 2m
 
-		MineFantasyFuels.addForgeFuel(COAL_DUST, 1200, 180);// 180C , 60s
+		//MineFantasyFuels.addForgeFuel(COAL_DUST, 1200, 180);// 180C , 60s
 	}
 
 	public static void addRandomDrops() {
