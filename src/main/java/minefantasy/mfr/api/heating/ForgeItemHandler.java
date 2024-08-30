@@ -12,7 +12,7 @@ public class ForgeItemHandler {
 	public static int forgeMaxTemp = 0;
 
 	public static void addFuel(ItemStack item, int fuel, int heat, boolean willLight) {
-		forgeFuel.add(new ForgeFuel(item, fuel, heat, willLight));
+		//forgeFuel.add(new ForgeFuel(item, fuel, heat, willLight));
 	}
 
 	public static ForgeFuel getStats(ItemStack item) {
@@ -21,9 +21,9 @@ public class ForgeItemHandler {
 
 		for (ForgeFuel fuel : forgeFuel) {
 			if (fuel != null) {
-				if (fuel.fuel.getItem() == item.getItem()) {
-					if (fuel.fuel.getItemDamage() == OreDictionary.WILDCARD_VALUE
-							|| fuel.fuel.getItemDamage() == item.getItemDamage()) {
+				if (fuel.item.getItem() == item.getItem()) {
+					if (fuel.item.getItemDamage() == OreDictionary.WILDCARD_VALUE
+							|| fuel.item.getItemDamage() == item.getItemDamage()) {
 						return fuel;
 					}
 				}
@@ -44,9 +44,9 @@ public class ForgeItemHandler {
 
 		for (ForgeFuel fuel : forgeFuel) {
 			if (fuel != null) {
-				if (fuel.fuel.getItem() == item.getItem()) {
-					if (fuel.fuel.getItemDamage() == OreDictionary.WILDCARD_VALUE
-							|| fuel.fuel.getItemDamage() == item.getItemDamage()) {
+				if (fuel.item.getItem() == item.getItem()) {
+					if (fuel.item.getItemDamage() == OreDictionary.WILDCARD_VALUE
+							|| fuel.item.getItemDamage() == item.getItemDamage()) {
 						return fuel.duration;
 					}
 				}
@@ -62,9 +62,9 @@ public class ForgeItemHandler {
 
 		for (ForgeFuel fuel : forgeFuel) {
 			if (fuel != null) {
-				if (fuel.fuel.getItem() == item.getItem()) {
-					if (fuel.fuel.getItemDamage() == OreDictionary.WILDCARD_VALUE
-							|| fuel.fuel.getItemDamage() == item.getItemDamage()) {
+				if (fuel.item.getItem() == item.getItem()) {
+					if (fuel.item.getItemDamage() == OreDictionary.WILDCARD_VALUE
+							|| fuel.item.getItemDamage() == item.getItemDamage()) {
 						return fuel.doesLight;
 					}
 				}
@@ -83,7 +83,7 @@ public class ForgeItemHandler {
 	public static float getForgeFuelWithoutSubid(Item id) {
 		for (ForgeFuel fuel : forgeFuel) {
 			if (fuel != null) {
-				if (fuel.fuel.getItem() == id) {
+				if (fuel.item.getItem() == id) {
 					return fuel.baseHeat;
 				}
 			}
@@ -103,9 +103,9 @@ public class ForgeItemHandler {
 
 		for (ForgeFuel fuel : forgeFuel) {
 			if (fuel != null) {
-				if (fuel.fuel.getItem() == item.getItem()) {
-					if (fuel.fuel.getItemDamage() == OreDictionary.WILDCARD_VALUE
-							|| fuel.fuel.getItemDamage() == item.getItemDamage()) {
+				if (fuel.item.getItem() == item.getItem()) {
+					if (fuel.item.getItemDamage() == OreDictionary.WILDCARD_VALUE
+							|| fuel.item.getItemDamage() == item.getItemDamage()) {
 						return fuel.baseHeat;
 					}
 				}
@@ -120,9 +120,9 @@ public class ForgeItemHandler {
 	 * @param item The item id in the fuel slot
 	 * @return The amount of smelts it has(will not consume if its 0)
 	 */
-	public static int getForgeHeat(Item item) {
+	public static float getForgeHeat(Item item) {
 		for (ForgeFuel fuel : forgeFuel) {
-			if (fuel != null && fuel.fuel.getItem() == item) {
+			if (fuel != null && fuel.item.getItem() == item) {
 				return fuel.baseHeat;
 			}
 		}
