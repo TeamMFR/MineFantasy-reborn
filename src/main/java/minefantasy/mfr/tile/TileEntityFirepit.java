@@ -3,11 +3,13 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.IHeatSource;
 import minefantasy.mfr.api.crafting.IHeatUser;
+import minefantasy.mfr.api.heating.FirepitFuel;
 import minefantasy.mfr.block.BlockFirepit;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.mechanics.RPGElements;
+import minefantasy.mfr.registry.FirepitFuelRegistry;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.Functions;
 import net.minecraft.block.Block;
@@ -16,7 +18,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -96,22 +97,19 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 	}
 
 	/**
-	 * Gets the burn time
+	 * Gets the burn time from the FirepitFuelRegistry
 	 * <p>
-	 * Wood tools and plank item are 1-minute sticks and saplings are 30seconds
+	 * Data-driven woods receive a burn-time modifier based on their density
 	 */
 	public static int getItemBurnTime(ItemStack input) {
 		if (!input.isEmpty()) {
 			Item i = input.getItem();
-			if (i == Items.STICK)
-				return 600;// 30Sec
-			if (i == MineFantasyItems.TIMBER || i == MineFantasyItems.TIMBER_CUT) {
-				return (int) (200 * CustomToolHelper.getBurnModifier(input));
-			}
-			if (i == MineFantasyItems.TIMBER_PANE) {
-				return (int) (600 * CustomToolHelper.getBurnModifier(input));
-			}
+			FirepitFuel fuel = FirepitFuelRegistry.getFuelStats(input);
 
+			if (i == MineFantasyItems.TIMBER || i == MineFantasyItems.TIMBER_CUT || i == MineFantasyItems.TIMBER_PANE) {
+				return (int) (fuel.burnTime * CustomToolHelper.getBurnModifier(input));
+			}
+			return (int) fuel.burnTime;
 		}
 		return 0;
 	}
@@ -149,6 +147,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 
 			if (fuel <= 0) {
 				setIsLit(false);
+				BlockFirepit.setActiveState(isBurning(), fuel > 0, hasBlockAbove(), world, pos);
 			}
 		} else if (fuel > 0 && ticksExisted % 10 == 0) {
 			tryLight();

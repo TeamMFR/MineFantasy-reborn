@@ -1,6 +1,6 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.api.crafting.MineFantasyFuels;
+import minefantasy.mfr.api.crafting.MineFantasyCarbons;
 import minefantasy.mfr.container.slots.SlotRestrictive;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastChamber;
 import net.minecraft.entity.player.EntityPlayer;
@@ -63,7 +63,7 @@ public class ContainerBlastChamber extends ContainerBase {
 
 			if (clicked > 1)// INVENTORY
 			{
-				if (MineFantasyFuels.isCarbon(itemstack1)) {
+				if (MineFantasyCarbons.isCarbon(itemstack1)) {
 					if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
 						return ItemStack.EMPTY;
 					}

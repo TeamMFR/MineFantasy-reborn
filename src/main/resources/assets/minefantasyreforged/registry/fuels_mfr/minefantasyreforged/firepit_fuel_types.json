@@ -1,0 +1,135 @@
+{
+  "mod": "minefantasyreforged",
+  "fuels": [
+    {
+      "name" : "stick",
+      "inputItem": "minecraft:stick",
+      "inputItemMeta": 0,
+      "properties": {
+        "burn_time": 300,
+        "base_heat": 150,
+        "does_light": false
+      }
+    },
+    {
+      "name" : "oak sapling",
+      "inputItem": "minecraft:sapling",
+      "inputItemMeta": 0,
+      "properties": {
+        "burn_time": 300,
+        "base_heat": 150,
+        "does_light": false
+      }
+    },
+    {
+      "name" : "spruce sapling",
+      "inputItem": "minecraft:sapling",
+      "inputItemMeta": 1,
+      "properties": {
+        "burn_time": 300,
+        "base_heat": 150,
+        "does_light": false
+      }
+    },
+    {
+      "name" : "birch sapling",
+      "inputItem": "minecraft:sapling",
+      "inputItemMeta": 2,
+      "properties": {
+        "burn_time": 300,
+        "base_heat": 150,
+        "does_light": false
+      }
+    },
+    {
+      "name" : "jungle sapling",
+      "inputItem": "minecraft:sapling",
+      "inputItemMeta": 3,
+      "properties": {
+        "burn_time": 300,
+        "base_heat": 150,
+        "does_light": false
+      }
+    },
+    {
+      "name" : "acacia sapling",
+      "inputItem": "minecraft:sapling",
+      "inputItemMeta": 4,
+      "properties": {
+        "burn_time": 300,
+        "base_heat": 150,
+        "does_light": false
+      }
+    },
+    {
+      "name" : "dark oak sapling",
+      "inputItem": "minecraft:sapling",
+      "inputItemMeta": 5,
+      "properties": {
+        "burn_time": 300,
+        "base_heat": 150,
+        "does_light": false
+      }
+    },
+    {
+      "name" : "timber",
+      "inputItem": "minefantasyreforged:timber",
+      "inputItemMeta": 0,
+      "properties": {
+        "burn_time": 400,
+        "base_heat": 150,
+        "does_light": false
+      }
+    },
+    {
+      "name" : "timber_cut",
+      "inputItem": "minefantasyreforged:timber_cut",
+      "inputItemMeta": 0,
+      "properties": {
+        "burn_time": 400,
+        "base_heat": 150,
+        "does_light": false
+      }
+    },
+    {
+      "name" : "timber_pane",
+      "inputItem": "minefantasyreforged:timber_pane",
+      "inputItemMeta": 0,
+      "properties": {
+        "burn_time": 1200,
+        "base_heat": 150,
+        "does_light": false
+      }
+    },
+    {
+      "name" : "yew sapling",
+      "inputItem": "minefantasyreforged:yew_sapling",
+      "inputItemMeta": 0,
+      "properties": {
+        "burn_time": 300,
+        "base_heat": 150,
+        "does_light": false
+      }
+    },
+    {
+      "name" : "ironbark sapling",
+      "inputItem": "minefantasyreforged:ironbark_sapling",
+      "inputItemMeta": 0,
+      "properties": {
+        "burn_time": 300,
+        "base_heat": 150,
+        "does_light": false
+      }
+    },
+    {
+      "name" : "ebony sapling",
+      "inputItem": "minefantasyreforged:ebony_sapling",
+      "inputItemMeta": 0,
+      "properties": {
+        "burn_time": 300,
+        "base_heat": 150,
+        "does_light": false
+      }
+    }
+  ]
+}

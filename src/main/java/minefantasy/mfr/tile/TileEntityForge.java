@@ -4,7 +4,6 @@ import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.IHeatSource;
 import minefantasy.mfr.api.crafting.IHeatUser;
 import minefantasy.mfr.api.heating.ForgeFuel;
-import minefantasy.mfr.api.heating.ForgeItemHandler;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.refine.IBellowsUseable;
 import minefantasy.mfr.api.refine.SmokeMechanics;
@@ -13,6 +12,7 @@ import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerForge;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.registry.ForgeFuelRegistry;
 import minefantasy.mfr.util.Functions;
 import minefantasy.mfr.util.InventoryUtils;
 import net.minecraft.block.Block;
@@ -77,7 +77,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 			@Override
 			protected void onContentsChanged(int slot) {
 				ItemStack fuelStack = getStackInSlot(slot);
-				ForgeFuel stats = ForgeItemHandler.getStats(fuelStack);
+				ForgeFuel stats = ForgeFuelRegistry.getFuelStats(fuelStack);
 				if (stats != null) {
 					if (addFuel(stats, false)) {
 						if (fuelStack != ItemStack.EMPTY) {
@@ -132,7 +132,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 			}
 			ItemStack fuelItem = fuelInventory.getStackInSlot(0);
 			if (!fuelItem.isEmpty() && !world.isRemote) {
-				ForgeFuel stats = ForgeItemHandler.getStats(fuelItem);
+				ForgeFuel stats = ForgeFuelRegistry.getFuelStats(fuelItem);
 				if (stats != null) {
 					if (addFuel(stats, false)) {
 						if (fuelItem != ItemStack.EMPTY) {
@@ -296,7 +296,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack item) {
-		ForgeFuel stats = ForgeItemHandler.getStats(item);
+		ForgeFuel stats = ForgeFuelRegistry.getFuelStats(item);
 		return stats != null;
 	}
 
@@ -344,11 +344,11 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 		int room_left = (int) (maxFuel - fuel);
 		if (hand && room_left > 0) {
 			hasUsed = true;
-			fuel = Math.min(fuel + stats.duration, maxFuel);// Fill as much as can fit
-		} else if (!hand && (fuel == 0 || room_left >= stats.duration))// For hoppers: only fill when there's full room
+			fuel = Math.min(fuel + stats.burnTime, maxFuel);// Fill as much as can fit
+		} else if (!hand && (fuel == 0 || room_left >= stats.burnTime))// For hoppers: only fill when there's full room
 		{
 			hasUsed = true;
-			fuel = Math.min(fuel + stats.duration, maxFuel);// Fill as much as can fit
+			fuel = Math.min(fuel + stats.burnTime, maxFuel);// Fill as much as can fit
 		}
 		if (stats.doesLight && !isLit()) {
 			if (!(getTier() == 1)) {

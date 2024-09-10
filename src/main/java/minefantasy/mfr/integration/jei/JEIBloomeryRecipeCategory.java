@@ -15,7 +15,7 @@ import mezz.jei.api.recipe.IStackHelper;
 import mezz.jei.config.Constants;
 import mezz.jei.gui.GuiHelper;
 import minefantasy.mfr.MineFantasyReforged;
-import minefantasy.mfr.api.crafting.MineFantasyFuels;
+import minefantasy.mfr.api.crafting.MineFantasyCarbons;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.recipe.BloomeryRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerBloomery;
@@ -96,7 +96,7 @@ public class JEIBloomeryRecipeCategory implements IRecipeCategory<JEIBloomeryRec
 
 		List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);
 		List<List<ItemStack>> outputList = ingredients.getOutputs(VanillaTypes.ITEM);
-		List<ItemStack> fuels = recipeWrapper.getFuelItemStacks().stream().filter(MineFantasyFuels::isCarbon).collect(Collectors.toList());
+		List<ItemStack> fuels = recipeWrapper.getFuelItemStacks().stream().filter(MineFantasyCarbons::isCarbon).collect(Collectors.toList());
 
 		slots.init(0, true, 1, 1);
 		slots.init(1, true, 1, 34);

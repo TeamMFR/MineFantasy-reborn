@@ -3,7 +3,7 @@ package minefantasy.mfr.registry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import minefantasy.mfr.api.heating.ForgeFuel;
+import minefantasy.mfr.api.heating.FirepitFuel;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.util.FileUtils;
 import net.minecraft.item.Item;
@@ -17,23 +17,23 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ForgeFuelRegistry extends DataLoader {
+public class FirepitFuelRegistry extends DataLoader {
 
-    public static HashMap<ArrayList<Object>, ForgeFuel> forgeFuelRegistry = new HashMap<>();
+    public static HashMap<ArrayList<Object>, FirepitFuel> firepitFuelRegistry = new HashMap<>();
 
-    private static final String FORGE_FUEL_TYPES = "forge_fuel_types";
+    private static final String FIREPIT_FUEL_TYPES = "firepit_fuel_types";
 
-    public static final ForgeFuelRegistry INSTANCE = new ForgeFuelRegistry();
+    public static final FirepitFuelRegistry INSTANCE = new FirepitFuelRegistry();
 
-    private static final String TYPE = "forge fuel";
+    private static final String TYPE = "firepit fuel";
     private static final String DEFAULT_RECIPE_DIRECTORY = Constants.ASSET_DIRECTORY +"/fuels_mfr";
     private static final String CUSTOM_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY +"/custom/registry";
 
-    public static ForgeFuel getFuelStats(ItemStack item) {
+    public static FirepitFuel getFuelStats(ItemStack item) {
         ArrayList<Object> key = new ArrayList<>();
         key.add(item.getItem());
         key.add(item.getMetadata());
-        return ForgeFuelRegistry.forgeFuelRegistry.get(key);
+        return FirepitFuelRegistry.firepitFuelRegistry.get(key);
     }
 
     public void init() {
@@ -43,9 +43,9 @@ public class ForgeFuelRegistry extends DataLoader {
 
     public void loadRegistryFiles(File source, String base, String type) {
         FileUtils.findFiles(source, base, (root, file) -> {
-            String extension = FilenameUtils.getExtension(file.toString());
+            String extensions = FilenameUtils.getExtension(file.toString());
 
-            if (!extension.equals(JSON_FILE_EXT)) {
+            if (!extensions.equals(JSON_FILE_EXT)) {
                 return;
             }
 
@@ -54,7 +54,7 @@ public class ForgeFuelRegistry extends DataLoader {
                 String modName = relative.getName(0).toString();
                 String fileName = FilenameUtils.removeExtension(relative.getFileName().toString());
 
-                if (!Loader.isModLoaded(modName) || !fileName.equals(FORGE_FUEL_TYPES)) {
+                if (!Loader.isModLoaded(modName) || !fileName.equals(FIREPIT_FUEL_TYPES)) {
                     return;
                 }
 
@@ -85,7 +85,7 @@ public class ForgeFuelRegistry extends DataLoader {
         key.add(item);
         key.add(inputItemMeta);
 
-        if (forgeFuelRegistry.containsKey(key)) {
+        if (firepitFuelRegistry.containsKey(key)) {
             return;
         }
 
@@ -93,8 +93,7 @@ public class ForgeFuelRegistry extends DataLoader {
         float burnTime = JsonUtils.getFloat(properties, "burn_time");
         int baseHeat = JsonUtils.getInt(properties, "base_heat");
         boolean doesLight = JsonUtils.getBoolean(properties, "does_light");
-        boolean isRefined = JsonUtils.getBoolean(properties, "is_refined");
-        ForgeFuel fuel = new ForgeFuel(itemStack, burnTime, baseHeat, doesLight, isRefined);
-        forgeFuelRegistry.put(key, fuel);
+        FirepitFuel fuel = new FirepitFuel(itemStack, burnTime, baseHeat, doesLight);
+        firepitFuelRegistry.put(key, fuel);
     }
 }

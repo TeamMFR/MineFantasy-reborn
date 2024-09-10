@@ -10,6 +10,7 @@ import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemApron;
 import minefantasy.mfr.item.ItemLighter;
 import minefantasy.mfr.item.ItemTongs;
+import minefantasy.mfr.registry.ForgeFuelRegistry;
 import minefantasy.mfr.tile.TileEntityForge;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -211,9 +212,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> implements IIgn
 				}
 
 				// Adding fuel
-				//ForgeFuel stats = ForgeItemHandler.getStats(held);
-
-				ForgeFuel stats = ForgeFuel.getStats(held);
+				ForgeFuel stats = ForgeFuelRegistry.getFuelStats(held);
 
 				if (stats != null && forge.addFuel(stats, true)) {
 					if (player.capabilities.isCreativeMode) {

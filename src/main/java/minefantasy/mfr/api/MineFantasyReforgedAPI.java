@@ -2,6 +2,8 @@ package minefantasy.mfr.api;
 
 import com.google.common.collect.Lists;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
+import minefantasy.mfr.api.heating.FirepitFuel;
+import minefantasy.mfr.api.heating.ForgeFuel;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
@@ -21,6 +23,8 @@ import minefantasy.mfr.recipe.CraftingManagerQuern;
 import minefantasy.mfr.recipe.CraftingManagerRoast;
 import minefantasy.mfr.recipe.QuernRecipeBase;
 import minefantasy.mfr.recipe.RoastRecipeBase;
+import minefantasy.mfr.registry.FirepitFuelRegistry;
+import minefantasy.mfr.registry.ForgeFuelRegistry;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -34,6 +38,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -276,6 +281,43 @@ public class MineFantasyReforgedAPI {
 			String requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
 		CraftingManagerBigFurnace.addRecipe(new BigFurnaceRecipeBase(output, input, tier,
 				requiredResearch, skill, skillXp, vanillaXp), true, new ResourceLocation(modId, name));
+	}
+
+	/**
+	 * Adds an item as a valid forge & big furnace fuel.
+	 * It is recommended you add forge fuels via JSON files, but this exists to bypass that method
+	 *
+	 * @param item 		input ItemStack
+	 * @param duration 	how much time the fuel will burn for
+	 * @param heat		what temperature the fuel will burn at
+	 * @param willLight	if the fuel will light the forge when added
+	 * @param refined	if the fuel counts as refined
+	 */
+	public static void addForgeFuel(ItemStack item, int duration, int heat, boolean willLight, boolean refined) {
+		ArrayList<Object> key = new ArrayList<>();
+		key.add(item.getItem());
+		key.add(item.getMetadata());
+		ForgeFuel fuel = new ForgeFuel(item, duration, heat, willLight, refined);
+
+		ForgeFuelRegistry.forgeFuelRegistry.put(key, fuel);
+	}
+
+	/**
+	 * Adds an item as a valid forge & big furnace fuel.
+	 * It is recommended you add firepit fuels via JSON files, but this exists to bypass that method
+	 *
+	 * @param item
+	 * @param duration
+	 * @param heat
+	 * @param willLight
+	 */
+	public static void addFirepitFuel(ItemStack item, int duration, int heat, boolean willLight) {
+		ArrayList<Object> key = new ArrayList<>();
+		key.add(item.getItem());
+		key.add(item.getMetadata());
+		FirepitFuel fuel = new FirepitFuel(item, duration, heat, willLight);
+
+		FirepitFuelRegistry.firepitFuelRegistry.put(key, fuel);
 	}
 
 	public static void registerFuelHandler(IFuelHandler handler) {

@@ -1,30 +1,11 @@
 package minefantasy.mfr.api.crafting;
 
-import minefantasy.mfr.api.heating.ForgeFuel;
-import minefantasy.mfr.api.heating.ForgeItemHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class MineFantasyFuels {
-	public static void addForgeFuel(Object input, float time, int temperature) {
-		addForgeFuel(input, time, temperature, false, false);
-	}
-
-	public static void addForgeFuel(Object input, float time, int temperature, boolean willLight) {
-		addForgeFuel(input, time, temperature, willLight, false);
-	}
-
-	public static void addForgeFuel(Object input, float time, int temperature, boolean willLight, boolean refined) {
-		ItemStack item = convert(input);
-		if (!item.isEmpty()) {
-			//ForgeItemHandler.forgeFuel.add(new ForgeFuel(item, time, temperature, willLight, refined));
-			if ((int) (temperature * 1.25) > ForgeItemHandler.forgeMaxTemp) {
-				ForgeItemHandler.forgeMaxTemp = (int) (temperature * 1.25);
-			}
-		}
-	}
+public class MineFantasyCarbons {
 
 	/**
 	 * Adds a carbon item for smelting

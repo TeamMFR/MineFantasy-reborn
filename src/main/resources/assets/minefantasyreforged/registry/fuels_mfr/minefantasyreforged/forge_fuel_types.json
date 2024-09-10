@@ -6,7 +6,7 @@
       "inputItem": "minecraft:coal",
       "inputItemMeta": 0,
       "properties": {
-        "duration": 900,
+        "burn_time": 900,
         "base_heat": 1500,
         "does_light": false,
         "is_refined": false
@@ -17,7 +17,7 @@
       "inputItem": "minecraft:coal",
       "inputItemMeta": 1,
       "properties": {
-        "duration": 1200,
+        "burn_time": 1200,
         "base_heat": 1800,
         "does_light": false,
         "is_refined": false
@@ -28,7 +28,7 @@
       "inputItem": "minecraft:blaze_powder",
       "inputItemMeta": 0,
       "properties": {
-        "duration": 200,
+        "burn_time": 200,
         "base_heat": 3000,
         "does_light": true,
         "is_refined": false
@@ -39,7 +39,7 @@
       "inputItem": "minecraft:blaze_rod",
       "inputItemMeta": 0,
       "properties": {
-        "duration": 300,
+        "burn_time": 300,
         "base_heat": 3000,
         "does_light": true,
         "is_refined": false
@@ -50,7 +50,7 @@
       "inputItem": "minecraft:fire_charge",
       "inputItemMeta": 0,
       "properties": {
-        "duration": 1200,
+        "burn_time": 1200,
         "base_heat": 3500,
         "does_light": true,
         "is_refined": false
@@ -61,7 +61,7 @@
       "inputItem": "minecraft:lava_bucket",
       "inputItemMeta": 0,
       "properties": {
-        "duration": 2400,
+        "burn_time": 2400,
         "base_heat": 5000,
         "does_light": true,
         "is_refined": false
@@ -72,7 +72,7 @@
       "inputItem": "minecraft:magma_cream",
       "inputItemMeta": 0,
       "properties": {
-        "duration": 2400,
+        "burn_time": 2400,
         "base_heat": 4000,
         "does_light": true,
         "is_refined": true
@@ -83,7 +83,7 @@
       "inputItem": "minefantasyreforged:coke",
       "inputItemMeta": 0,
       "properties": {
-        "duration": 1200,
+        "burn_time": 1200,
         "base_heat": 2500,
         "does_light": false,
         "is_refined": true
@@ -94,9 +94,9 @@
       "inputItem": "minefantasyreforged:magma_cream_refined",
       "inputItemMeta": 0,
       "properties": {
-        "duration": 2400,
+        "burn_time": 2400,
         "base_heat": 5000,
-        "does_light": false,
+        "does_light": true,
         "is_refined": true
       }
     },
@@ -105,7 +105,7 @@
       "inputItem": "minefantasyreforged:coal_dust",
       "inputItemMeta": 0,
       "properties": {
-        "duration": 1200,
+        "burn_time": 1200,
         "base_heat": 180,
         "does_light": false,
         "is_refined": true
