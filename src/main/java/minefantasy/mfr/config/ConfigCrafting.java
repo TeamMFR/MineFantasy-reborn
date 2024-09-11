@@ -6,10 +6,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
 public class ConfigCrafting extends ConfigurationBaseMF {
-	public static final String CATEGORY_REFINING = "01 Refining";
-	public static final String CATEGORY_COOKING = "02 Cooking";
-	public static final String ANVIL_RECIPE_SETTINGS = "03 Anvil Recipe Settings";
-	public static final String CARPENTER_RECIPE_SETTINGS = "04 Carpenter Recipe Settings";
+	private static final String CATEGORY_REFINING = "01 Refining";
+	private static final String CATEGORY_COOKING = "02 Cooking";
+	private static final String ANVIL_RECIPE_SETTINGS = "03 Anvil Recipe Settings";
+	private static final String CARPENTER_RECIPE_SETTINGS = "04 Carpenter Recipe Settings";
 	private static final String BIG_FURNACE_RECIPE_SETTINGS = "05 Big Furnace Recipe Settings";
 	private static final String ALLOY_RECIPE_SETTINGS = "06 Alloy Recipe Settings";
 	private static final String BLOOMERY_RECIPE_SETTINGS = "07 Bloomery Recipe Settings";

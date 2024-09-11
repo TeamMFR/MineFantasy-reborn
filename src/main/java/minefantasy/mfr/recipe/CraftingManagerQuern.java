@@ -1,52 +1,41 @@
 package minefantasy.mfr.recipe;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.recipe.factories.QuernRecipeFactory;
 import minefantasy.mfr.recipe.types.QuernRecipeType;
 import minefantasy.mfr.util.CustomToolHelper;
-import minefantasy.mfr.util.FileUtils;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.common.crafting.JsonContext;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class CraftingManagerQuern {
+public class CraftingManagerQuern extends CraftingManagerBase<QuernRecipeBase> {
 
-	public static final String RECIPE_FOLDER_PATH = Constants.ASSET_DIRECTORY + "/recipes_mfr/quern_recipes/";
-
-	public static final String CONFIG_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/quern_recipes/";
+	private static final IForgeRegistry<QuernRecipeBase> QUERN_RECIPES =
+			new RegistryBuilder<QuernRecipeBase>()
+			.setName(new ResourceLocation(MineFantasyReforged.MOD_ID, "quern_recipes"))
+					.setType(QuernRecipeBase.class)
+					.setMaxID(Integer.MAX_VALUE >> 5)
+					.disableSaving()
+					.allowModification()
+					.create();
+	private static final Set<String> QUERN_RESEARCHES = new HashSet<>();
 
 	public CraftingManagerQuern() {
-
+		super(new QuernRecipeFactory(),
+				QuernRecipeType.NONE,
+				Constants.ASSET_DIRECTORY + "/recipes_mfr/quern_recipes/",
+				"config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/quern_recipes/");
 	}
-
-	private static final IForgeRegistry<QuernRecipeBase> QUERN_RECIPES = (new RegistryBuilder<QuernRecipeBase>()).setName(new ResourceLocation(MineFantasyReforged.MOD_ID, "quern_recipes")).setType(QuernRecipeBase.class).setMaxID(Integer.MAX_VALUE >> 5).disableSaving().allowModification().create();
-	private static final Set<String> QUERN_RESEARCHES = new HashSet<>();
 
 	public static void init() {
 		//call this so that the static final gets initialized at proper time
@@ -56,83 +45,7 @@ public class CraftingManagerQuern {
 		return QUERN_RECIPES.getValuesCollection();
 	}
 
-	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-	private static final QuernRecipeFactory factory = new QuernRecipeFactory();
-
-	public static void loadRecipes() {
-		ModContainer modContainer = Loader.instance().activeModContainer();
-
-		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
-		Loader.instance().getActiveModList().forEach(m -> CraftingHelper
-				.loadFactories(m, String.format(RECIPE_FOLDER_PATH, m.getModId()), CraftingHelper.CONDITIONS));
-		//noinspection ConstantConditions
-		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
-		Loader.instance().getActiveModList().forEach(m ->
-				loadRecipes(m, m.getSource(), String.format(RECIPE_FOLDER_PATH, m.getModId())));
-
-		Loader.instance().setActiveModContainer(modContainer);
-	}
-
-	private static void loadRecipes(ModContainer mod, File source, String base) {
-		JsonContext ctx = new JsonContext(mod.getModId());
-
-		FileUtils.findFiles(source, base, root -> FileUtils.loadConstants(source, base, ctx), (root, file) -> {
-			Path relative = root.relativize(file);
-			if (relative.getNameCount() > 1) {
-				String extension = FilenameUtils.getExtension(file.toString());
-
-				if (!extension.equals(Constants.JSON_FILE_EXT)) {
-					return;
-				}
-
-				String modName = relative.getName(relative.getNameCount() - 2).toString();
-				String fileName = FilenameUtils.removeExtension(relative.getFileName().toString());
-
-				if (!Loader.isModLoaded(modName) || fileName.startsWith("_")) {
-					return;
-				}
-
-				Loader.instance().setActiveModContainer(mod);
-
-				if (!"json".equals(FilenameUtils.getExtension(file.toString())) || relative.startsWith("_"))
-					return;
-
-				ResourceLocation key = new ResourceLocation(ctx.getModId(), fileName);
-
-				BufferedReader reader = null;
-				try {
-					reader = Files.newBufferedReader(file);
-					JsonObject json = JsonUtils.fromJson(GSON, reader, JsonObject.class);
-
-					String type = ctx.appendModId(JsonUtils.getString(json, "type"));
-					if (Loader.isModLoaded(mod.getModId())) {
-						if (QuernRecipeType.getByNameWithModId(type, mod.getModId()) != QuernRecipeType.NONE) {
-							QuernRecipeBase recipe = factory.parse(ctx, json);
-							if (CraftingHelper.processConditions(json, "conditions", ctx)) {
-								addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID), key);
-							}
-						} else {
-							MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it's not a MFR Quern recipe", key, type);
-						}
-					}
-					else {
-						MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it the mod it depends on is not loaded", key, type);
-					}
-				}
-				catch (JsonParseException e) {
-					MineFantasyReforged.LOG.error("Parsing error loading recipe {}", key, e);
-				}
-				catch (IOException e) {
-					MineFantasyReforged.LOG.error("Couldn't read recipe {} from {}", key, file, e);
-				}
-				finally {
-					IOUtils.closeQuietly(reader);
-				}
-			}
-		});
-	}
-
-	public static void addRecipe(QuernRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
+	public void addRecipe(QuernRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getQuernRecipeOutput();
 		if (ConfigCrafting.isQuernItemCraftable(itemStack)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();

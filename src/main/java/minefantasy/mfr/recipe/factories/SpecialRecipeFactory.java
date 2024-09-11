@@ -9,7 +9,7 @@ import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 
-public class SpecialRecipeFactory {
+public class SpecialRecipeFactory implements IRecipeMFRFactory<SpecialRecipeBase> {
 	public SpecialRecipeBase parse(JsonContext context, JsonObject json) {
 		String type = JsonUtils.getString(json, "type");
 		SpecialRecipeType recipeType = SpecialRecipeType.deserialize(type);

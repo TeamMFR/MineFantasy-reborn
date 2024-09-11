@@ -1,10 +1,11 @@
 package minefantasy.mfr.recipe;
 
+import minefantasy.mfr.constants.Skill;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public  class SpecialRecipeBase extends IForgeRegistryEntry.Impl<SpecialRecipeBase> {
+public  class SpecialRecipeBase extends IForgeRegistryEntry.Impl<SpecialRecipeBase> implements IRecipeMFR {
 	protected Ingredient input;
 	protected Ingredient specialInput;
 	protected ItemStack output;
@@ -35,11 +36,36 @@ public  class SpecialRecipeBase extends IForgeRegistryEntry.Impl<SpecialRecipeBa
 		return output;
 	}
 
-	public String getResearch() {
+	public String getRequiredResearch() {
 		return research;
 	}
 
 	public String getDesign() {
 		return design;
+	}
+
+	@Override
+	public String getResourceLocation() {
+		return this.getRegistryName() != null ? this.getRegistryName().toString() : "";
+	}
+
+	@Override
+	public Skill getSkill() {
+		return null;
+	}
+
+	@Override
+	public int getSkillXp() {
+		return 0;
+	}
+
+	@Override
+	public boolean shouldSlotGiveSkillXp() {
+		return false;
+	}
+
+	@Override
+	public float getVanillaXp() {
+		return 0;
 	}
 }

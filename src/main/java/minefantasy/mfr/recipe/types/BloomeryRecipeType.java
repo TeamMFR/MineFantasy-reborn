@@ -2,7 +2,7 @@ package minefantasy.mfr.recipe.types;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum BloomeryRecipeType implements IStringSerializable {
+public enum BloomeryRecipeType implements IStringSerializable, IRecipeMFRType {
 	BLOOMERY_RECIPE,
 	NONE;
 
@@ -21,7 +21,7 @@ public enum BloomeryRecipeType implements IStringSerializable {
 		return NONE;
 	}
 
-	public static BloomeryRecipeType getByNameWithModId(String name, String modId) {
+	public BloomeryRecipeType getByNameWithModId(String name, String modId) {
 		for (BloomeryRecipeType type : values()) {
 
 			if ((modId + ":" + type.getName()).equals(name)) {

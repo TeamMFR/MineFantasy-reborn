@@ -2,7 +2,7 @@ package minefantasy.mfr.recipe.types;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum AlloyRecipeType implements IStringSerializable {
+public enum AlloyRecipeType implements IStringSerializable, IRecipeMFRType {
 	ALLOY_RATIO_RECIPE,
 	ALLOY_SHAPED_RECIPE,
 	NONE;
@@ -22,7 +22,7 @@ public enum AlloyRecipeType implements IStringSerializable {
 		return NONE;
 	}
 
-	public static AlloyRecipeType getByNameWithModId(String name, String modId) {
+	public AlloyRecipeType getByNameWithModId(String name, String modId) {
 		for (AlloyRecipeType type : values()) {
 
 			if ((modId + ":" + type.getName()).equals(name)) {

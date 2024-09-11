@@ -2,7 +2,7 @@ package minefantasy.mfr.recipe.types;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum TannerRecipeType implements IStringSerializable {
+public enum TannerRecipeType implements IStringSerializable, IRecipeMFRType {
 	TANNER_RECIPE,
 	NONE;
 
@@ -21,7 +21,7 @@ public enum TannerRecipeType implements IStringSerializable {
 		return NONE;
 	}
 
-	public static TannerRecipeType getByNameWithModId(String name, String modId) {
+	public TannerRecipeType getByNameWithModId(String name, String modId) {
 		for (TannerRecipeType type : values()) {
 
 			if ((modId + ":" + type.getName()).equals(name)) {

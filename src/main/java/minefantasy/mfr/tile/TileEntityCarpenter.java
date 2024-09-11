@@ -144,16 +144,12 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 	}
 
 	private SoundEvent getUseSound(CarpenterRecipeBase recipe) {
-		if (recipe.getSound().toString().equalsIgnoreCase("engineering")) {
-			if (world.rand.nextInt(5) == 0) {
-				return SoundEvents.UI_BUTTON_CLICK;
-			}
-			if (world.rand.nextInt(20) == 0) {
-				return SoundEvents.BLOCK_WOODEN_DOOR_OPEN;
-			}
-			return SoundEvents.BLOCK_WOOD_STEP;
+		if (recipe.getSound() != null) {
+			return recipe.getSound();
 		}
-		return recipe.getSound();
+		else {
+			return SoundEvents.BLOCK_WOOD_HIT;
+		}
 	}
 
 	private void craftItem(EntityPlayer user, CarpenterRecipeBase carpenterRecipe) {

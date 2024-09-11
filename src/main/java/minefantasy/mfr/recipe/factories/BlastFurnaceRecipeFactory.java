@@ -13,7 +13,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 
-public class BlastFurnaceRecipeFactory {
+public class BlastFurnaceRecipeFactory implements IRecipeMFRFactory<BlastFurnaceRecipeBase> {
 	public BlastFurnaceRecipeBase parse(JsonContext context, JsonObject json) {
 		String type = JsonUtils.getString(json, "type");
 		BlastFurnaceRecipeType recipeType = BlastFurnaceRecipeType.deserialize(type);

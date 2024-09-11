@@ -18,7 +18,7 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-public class KitchenBenchRecipeFactory {
+public class KitchenBenchRecipeFactory implements IRecipeMFRFactory<KitchenBenchRecipeBase> {
 	public KitchenBenchRecipeBase parse(JsonContext context, JsonObject json) {
 		String type = JsonUtils.getString(json, "type");
 		KitchenBenchRecipeType recipeType = KitchenBenchRecipeType.deserialize(type);

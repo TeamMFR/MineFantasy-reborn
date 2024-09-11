@@ -19,7 +19,7 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-public class AnvilRecipeFactory {
+public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 
 	public AnvilRecipeBase parse(JsonContext context, JsonObject json) {
 		String type = JsonUtils.getString(json, "type");

@@ -1,48 +1,39 @@
 package minefantasy.mfr.recipe;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.recipe.factories.TransformationRecipeFactory;
 import minefantasy.mfr.recipe.types.TransformationRecipeType;
-import minefantasy.mfr.util.FileUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.common.crafting.JsonContext;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.ModContainer;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CraftingManagerTransformation {
+public class CraftingManagerTransformation extends CraftingManagerBase<TransformationRecipeBase> {
 
-	public static final String RECIPE_FOLDER_PATH = Constants.ASSET_DIRECTORY + "/recipes_mfr/transformation_recipes/";
-
-	public static final String CONFIG_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/transformation_recipes/";
+	private static final IForgeRegistry<TransformationRecipeBase> TRANSFORMATION_RECIPES =
+			new RegistryBuilder<TransformationRecipeBase>()
+					.setName(new ResourceLocation(MineFantasyReforged.MOD_ID, "transformation_recipes"))
+					.setType(TransformationRecipeBase.class)
+					.setMaxID(Integer.MAX_VALUE >> 5)
+					.disableSaving()
+					.allowModification()
+					.create();
 
 	public CraftingManagerTransformation() {
+		super(new TransformationRecipeFactory(),
+				TransformationRecipeType.NONE,
+				Constants.ASSET_DIRECTORY + "/recipes_mfr/transformation_recipes/",
+				"config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/transformation_recipes/");
 	}
 
-	private static final IForgeRegistry<TransformationRecipeBase> TRANSFORMATION_RECIPES = (new RegistryBuilder<TransformationRecipeBase>()).setName(new ResourceLocation(MineFantasyReforged.MOD_ID, "transformation_recipes")).setType(TransformationRecipeBase.class).setMaxID(Integer.MAX_VALUE >> 5).disableSaving().allowModification().create();
 	public static void init() {
 		//call this so that the static final gets initialized at proper time
 	}
@@ -51,83 +42,7 @@ public class CraftingManagerTransformation {
 		return TRANSFORMATION_RECIPES.getValuesCollection();
 	}
 
-	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-	private static final TransformationRecipeFactory factory = new TransformationRecipeFactory();
-
-	public static void loadRecipes() {
-		ModContainer modContainer = Loader.instance().activeModContainer();
-
-		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
-		Loader.instance().getActiveModList().forEach(m -> CraftingHelper
-				.loadFactories(m, String.format(RECIPE_FOLDER_PATH, m.getModId()), CraftingHelper.CONDITIONS));
-		//noinspection ConstantConditions
-		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
-		Loader.instance().getActiveModList().forEach(m ->
-				loadRecipes(m, m.getSource(), String.format(RECIPE_FOLDER_PATH, m.getModId())));
-
-		Loader.instance().setActiveModContainer(modContainer);
-	}
-
-	private static void loadRecipes(ModContainer mod, File source, String base) {
-		JsonContext ctx = new JsonContext(mod.getModId());
-
-		FileUtils.findFiles(source, base, root -> FileUtils.loadConstants(source, base, ctx), (root, file) -> {
-			Path relative = root.relativize(file);
-			if (relative.getNameCount() > 1) {
-				String extension = FilenameUtils.getExtension(file.toString());
-
-				if (!extension.equals(Constants.JSON_FILE_EXT)) {
-					return;
-				}
-
-				String modName = relative.getName(relative.getNameCount() - 2).toString();
-				String fileName = FilenameUtils.removeExtension(relative.getFileName().toString());
-
-				if (!Loader.isModLoaded(modName) || fileName.startsWith("_")) {
-					return;
-				}
-
-				Loader.instance().setActiveModContainer(mod);
-
-				if (!"json".equals(FilenameUtils.getExtension(file.toString())) || relative.startsWith("_"))
-					return;
-
-				ResourceLocation key = new ResourceLocation(ctx.getModId(), fileName);
-
-				BufferedReader reader = null;
-				try {
-					reader = Files.newBufferedReader(file);
-					JsonObject json = JsonUtils.fromJson(GSON, reader, JsonObject.class);
-
-					String type = ctx.appendModId(JsonUtils.getString(json, "type"));
-					if (Loader.isModLoaded(mod.getModId())) {
-						if (TransformationRecipeType.getByNameWithModId(type, mod.getModId()) != TransformationRecipeType.NONE) {
-							TransformationRecipeBase recipe = factory.parse(ctx, json);
-							if (CraftingHelper.processConditions(json, "conditions", ctx)) {
-								addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID), key);
-							}
-						} else {
-							MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it's not a MFR Transformation recipe", key, type);
-						}
-					}
-					else {
-						MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it the mod it depends on is not loaded", key, type);
-					}
-				}
-				catch (JsonParseException e) {
-					MineFantasyReforged.LOG.error("Parsing error loading recipe {}", key, e);
-				}
-				catch (IOException e) {
-					MineFantasyReforged.LOG.error("Couldn't read recipe {} from {}", key, file, e);
-				}
-				finally {
-					IOUtils.closeQuietly(reader);
-				}
-			}
-		});
-	}
-
-	public static void addRecipe(TransformationRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
+	public void addRecipe(TransformationRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		recipe.setRegistryName(key);
 		if (recipe instanceof TransformationRecipeStandard) {
 			addStandardRecipe((TransformationRecipeStandard) recipe, checkForExistence);

@@ -2,7 +2,7 @@ package minefantasy.mfr.recipe.types;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum SalvageRecipeType implements IStringSerializable {
+public enum SalvageRecipeType implements IStringSerializable, IRecipeMFRType {
 	SALVAGE_RECIPE,
 	SALVAGE_RECIPE_SHARED,
 	NONE;
@@ -22,7 +22,7 @@ public enum SalvageRecipeType implements IStringSerializable {
 		return NONE;
 	}
 
-	public static SalvageRecipeType getByNameWithModId(String name, String modId) {
+	public SalvageRecipeType getByNameWithModId(String name, String modId) {
 		for (SalvageRecipeType type : values()) {
 
 			if ((modId + ":" + type.getName()).equals(name)) {

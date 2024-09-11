@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AlloyRecipeFactory {
+public class AlloyRecipeFactory implements IRecipeMFRFactory<AlloyRecipeBase> {
 	public AlloyRecipeBase parse(JsonContext context, JsonObject json) {
 		String type = JsonUtils.getString(json, "type");
 		AlloyRecipeType recipeType = AlloyRecipeType.deserialize(type);

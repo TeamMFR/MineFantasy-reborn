@@ -70,6 +70,7 @@ public class NetworkHandler implements IGuiHandler {
 	private static final int RESEARCH_TABLE_PACKET = 13;
 	private static final int TROUGH_PACKET = 14;
 	private static final int BOMB_BENCH_PACKET = 15;
+	private static final int BELLOW_PACKET = 16;
 	private static final int ROAD_PACKET = 17;
 	private static final int CROSSBOW_BENCH_PACKET = 19;
 	private static final int BIG_FURNACE_PACKET = 21;
@@ -118,6 +119,7 @@ public class NetworkHandler implements IGuiHandler {
 		PacketMF.registerPacket(TROUGH_PACKET, TroughPacket.class, TroughPacket::new);
 		PacketMF.registerPacket(FORGE_PACKET, ForgePacket.class, ForgePacket::new);
 		PacketMF.registerPacket(BOMB_BENCH_PACKET, BombBenchPacket.class, BombBenchPacket::new);
+		PacketMF.registerPacket(BELLOW_PACKET, BellowsPacket.class, BellowsPacket::new);
 		PacketMF.registerPacket(ROAD_PACKET, RoadPacket.class, RoadPacket::new);
 		PacketMF.registerPacket(CROSSBOW_BENCH_PACKET, CrossbowBenchPacket.class, CrossbowBenchPacket::new);
 		PacketMF.registerPacket(BIG_FURNACE_PACKET, BigFurnacePacket.class, BigFurnacePacket::new);

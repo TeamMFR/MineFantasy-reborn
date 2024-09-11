@@ -13,7 +13,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 
-public class BloomeryRecipeFactory {
+public class BloomeryRecipeFactory implements IRecipeMFRFactory<BloomeryRecipeBase> {
 	public BloomeryRecipeBase parse(JsonContext context, JsonObject json) {
 		String type = JsonUtils.getString(json, "type");
 		BloomeryRecipeType recipeType = BloomeryRecipeType.deserialize(type);

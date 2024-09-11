@@ -15,7 +15,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 
-public class SalvageRecipeFactory {
+public class SalvageRecipeFactory implements IRecipeMFRFactory<SalvageRecipeBase> {
 	public SalvageRecipeBase parse(JsonContext context, JsonObject json) {
 		String type = JsonUtils.getString(json, "type");
 		SalvageRecipeType recipeType = SalvageRecipeType.deserialize(type);

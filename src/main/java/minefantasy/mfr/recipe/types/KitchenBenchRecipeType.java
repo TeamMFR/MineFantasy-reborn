@@ -2,7 +2,7 @@ package minefantasy.mfr.recipe.types;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum KitchenBenchRecipeType implements IStringSerializable {
+public enum KitchenBenchRecipeType implements IStringSerializable, IRecipeMFRType {
 	KITCHEN_BENCH_SHAPED_RECIPE,
 	KITCHEN_BENCH_SHAPELESS_RECIPE,
 	NONE;
@@ -22,7 +22,7 @@ public enum KitchenBenchRecipeType implements IStringSerializable {
 		return NONE;
 	}
 
-	public static KitchenBenchRecipeType getByNameWithModId(String name, String modId) {
+	public KitchenBenchRecipeType getByNameWithModId(String name, String modId) {
 		for (KitchenBenchRecipeType type : values()) {
 
 			if ((modId + ":" + type.getName()).equals(name)) {

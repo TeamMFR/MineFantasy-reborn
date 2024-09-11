@@ -2,7 +2,7 @@ package minefantasy.mfr.recipe.types;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum QuernRecipeType implements IStringSerializable {
+public enum QuernRecipeType implements IStringSerializable, IRecipeMFRType {
 	QUERN_RECIPE,
 	NONE;
 
@@ -21,7 +21,7 @@ public enum QuernRecipeType implements IStringSerializable {
 		return NONE;
 	}
 
-	public static QuernRecipeType getByNameWithModId(String name, String modId) {
+	public QuernRecipeType getByNameWithModId(String name, String modId) {
 		for (QuernRecipeType type : values()) {
 
 			if ((modId + ":" + type.getName()).equals(name)) {

@@ -2,7 +2,7 @@ package minefantasy.mfr.recipe.types;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum AnvilRecipeType implements IStringSerializable {
+public enum AnvilRecipeType implements IStringSerializable, IRecipeMFRType {
 	ANVIL_SHAPED_RECIPE,
 	ANVIL_SHAPELESS_RECIPE,
 	ANVIL_SHAPED_CUSTOM_MATERIAL_RECIPE,
@@ -25,7 +25,7 @@ public enum AnvilRecipeType implements IStringSerializable {
 		return NONE;
 	}
 
-	public static AnvilRecipeType getByNameWithModId(String name, String modId) {
+	public AnvilRecipeType getByNameWithModId(String name, String modId) {
 		for (AnvilRecipeType type : values()) {
 
 			if ((modId + ":" + type.getName()).equals(name)) {

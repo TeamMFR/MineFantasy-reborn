@@ -86,20 +86,34 @@ public class MineFantasyReforged {
 	@Mod.Instance
 	public static MineFantasyReforged INSTANCE;
 
+	public static final CraftingManagerAnvil CRAFTING_MANAGER_ANVIL = new CraftingManagerAnvil();
+	public static final CraftingManagerCarpenter CRAFTING_MANAGER_CARPENTER = new CraftingManagerCarpenter();
+	public static final CraftingManagerBigFurnace CRAFTING_MANAGER_BIG_FURNACE = new CraftingManagerBigFurnace();
+	public static final CraftingManagerAlloy CRAFTING_MANAGER_ALLOY = new CraftingManagerAlloy();
+	public static final CraftingManagerBloomery CRAFTING_MANAGER_BLOOMERY = new CraftingManagerBloomery();
+	public static final CraftingManagerBlastFurnace CRAFTING_MANAGER_BLAST_FURNACE = new CraftingManagerBlastFurnace();
+	public static final CraftingManagerQuern CRAFTING_MANAGER_QUERN = new CraftingManagerQuern();
+	public static final CraftingManagerTanner CRAFTING_MANAGER_TANNER = new CraftingManagerTanner();
+	public static final CraftingManagerRoast CRAFTING_MANAGER_ROAST = new CraftingManagerRoast();
+	public static final CraftingManagerKitchenBench CRAFTING_MANAGER_KITCHEN_BENCH = new CraftingManagerKitchenBench();
+	public static final CraftingManagerSalvage CRAFTING_MANAGER_SALVAGE = new CraftingManagerSalvage();
+	public static final CraftingManagerTransformation CRAFTING_MANAGER_TRANSFORMATION = new CraftingManagerTransformation();
+	public static final CraftingManagerSpecial CRAFTING_MANAGER_SPECIAL = new CraftingManagerSpecial();
+
 	@SideOnly(Side.CLIENT)
-	public static ConfigClient configClient;
-	public static ConfigArmour configArmour;
-	public static ConfigSpecials configSpecials;
-	public static ConfigHardcore configHardcore;
-	public static ConfigIntegration configIntegration;
-	public static ConfigTools configTools;
-	public static ConfigWeapon configWeapon;
-	public static ConfigStamina configStamina;
-	public static ConfigItemRegistry configItemRegistry;
-	public static ConfigFarming configFarming;
-	public static ConfigWorldGen configWorldGen;
+	private static ConfigClient configClient;
+	private static ConfigArmour configArmour;
+	private static ConfigSpecials configSpecials;
+	private static ConfigHardcore configHardcore;
+	private static ConfigIntegration configIntegration;
+	private static ConfigTools configTools;
+	private static ConfigWeapon configWeapon;
+	private static ConfigStamina configStamina;
+	private static ConfigItemRegistry configItemRegistry;
+	private static ConfigFarming configFarming;
+	private static ConfigWorldGen configWorldGen;
 	public static ConfigCrafting configCrafting;
-	public static ConfigMobs configMobs;
+	private static ConfigMobs configMobs;
 
 	public static final Logger LOG = LogManager.getLogger(MOD_ID);
 
@@ -178,19 +192,19 @@ public class MineFantasyReforged {
 
 		registerIngredients();
 
-		CraftingManagerAnvil.loadRecipes();
-		CraftingManagerCarpenter.loadRecipes();
-		CraftingManagerBigFurnace.loadRecipes();
-		CraftingManagerAlloy.loadRecipes();
-		CraftingManagerBloomery.loadRecipes();
-		CraftingManagerBlastFurnace.loadRecipes();
-		CraftingManagerQuern.loadRecipes();
-		CraftingManagerTanner.loadRecipes();
-		CraftingManagerRoast.loadRecipes();
-		CraftingManagerKitchenBench.loadRecipes();
-		CraftingManagerSalvage.loadRecipes();
-		CraftingManagerTransformation.loadRecipes();
-		CraftingManagerSpecial.loadRecipes();
+		CRAFTING_MANAGER_ANVIL.loadRecipes();
+		CRAFTING_MANAGER_CARPENTER.loadRecipes();
+		CRAFTING_MANAGER_BIG_FURNACE.loadRecipes();
+		CRAFTING_MANAGER_ALLOY.loadRecipes();
+		CRAFTING_MANAGER_BLOOMERY.loadRecipes();
+		CRAFTING_MANAGER_BLAST_FURNACE.loadRecipes();
+		CRAFTING_MANAGER_QUERN.loadRecipes();
+		CRAFTING_MANAGER_TANNER.loadRecipes();
+		CRAFTING_MANAGER_ROAST.loadRecipes();
+		CRAFTING_MANAGER_KITCHEN_BENCH.loadRecipes();
+		CRAFTING_MANAGER_SALVAGE.loadRecipes();
+		CRAFTING_MANAGER_TRANSFORMATION.loadRecipes();
+		CRAFTING_MANAGER_SPECIAL.loadRecipes();
 
 		PROXY.init();
 	}

@@ -356,7 +356,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			String design = recipe.getDesign();
 
 			if (design.equals("dragonforged") && ResearchLogic
-					.getResearchCheck(player, ResearchLogic.getResearch(recipe.getResearch()))) {
+					.getResearchCheck(player, ResearchLogic.getResearch(recipe.getRequiredResearch()))) {
 
 				// DRAGONFORGE
 				float totalTemp = 0;
@@ -395,7 +395,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			}
 
 			if (design.equals("ornate") && ResearchLogic
-					.getResearchCheck(player, ResearchLogic.getResearch(recipe.getResearch()))) {
+					.getResearchCheck(player, ResearchLogic.getResearch(recipe.getRequiredResearch()))) {
 
 				// Ornate
 				NBTBase nbt = !(recipeResultStack.hasTagCompound())

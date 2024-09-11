@@ -2,7 +2,7 @@ package minefantasy.mfr.recipe.types;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum CarpenterRecipeType implements IStringSerializable {
+public enum CarpenterRecipeType implements IStringSerializable, IRecipeMFRType {
 	CARPENTER_SHAPED_RECIPE,
 	CARPENTER_SHAPELESS_RECIPE,
 	CARPENTER_SHAPED_CUSTOM_MATERIAL_RECIPE,
@@ -25,7 +25,7 @@ public enum CarpenterRecipeType implements IStringSerializable {
 		return NONE;
 	}
 
-	public static CarpenterRecipeType getByNameWithModId(String name, String modId) {
+	public CarpenterRecipeType getByNameWithModId(String name, String modId) {
 		for (CarpenterRecipeType type : values()) {
 
 			if ((modId + ":" + type.getName()).equals(name)) {

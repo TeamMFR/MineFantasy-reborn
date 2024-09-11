@@ -2,7 +2,7 @@ package minefantasy.mfr.recipe.types;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum SpecialRecipeType implements IStringSerializable {
+public enum SpecialRecipeType implements IStringSerializable, IRecipeMFRType {
 	SPECIAL_RECIPE_DRAGONFORGED,
 	SPECIAL_RECIPE_ORNATE,
 	NONE;
@@ -22,7 +22,7 @@ public enum SpecialRecipeType implements IStringSerializable {
 		return NONE;
 	}
 
-	public static SpecialRecipeType getByNameWithModId(String name, String modId) {
+	public SpecialRecipeType getByNameWithModId(String name, String modId) {
 		for (SpecialRecipeType type : values()) {
 
 			if ((modId + ":" + type.getName()).equals(name)) {

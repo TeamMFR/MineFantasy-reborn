@@ -13,7 +13,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 
-public class RoastRecipeFactory {
+public class RoastRecipeFactory implements IRecipeMFRFactory<RoastRecipeBase> {
 	public RoastRecipeBase parse(JsonContext context, JsonObject json) {
 		String type = JsonUtils.getString(json, "type");
 		RoastRecipeType recipeType = RoastRecipeType.deserialize(type);

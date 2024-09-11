@@ -31,7 +31,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TransformationRecipeFactory {
+public class TransformationRecipeFactory implements IRecipeMFRFactory<TransformationRecipeBase> {
 	public TransformationRecipeBase parse(JsonContext context, JsonObject json) {
 		String type = JsonUtils.getString(json, "type");
 		TransformationRecipeType recipeType = TransformationRecipeType.deserialize(type);

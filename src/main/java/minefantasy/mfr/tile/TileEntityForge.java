@@ -118,12 +118,13 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	public void update() {
 		++ticksExisted;
 
+		if (justShared > 0) {
+			--justShared;
+		}
+
 		if (world.isRemote){
 			return;
 		}
-
-		if (justShared > 0)
-			--justShared;
 
 		if (ticksExisted % 20 == 0) {
 			ItemStack item = getInventory().getStackInSlot(0);

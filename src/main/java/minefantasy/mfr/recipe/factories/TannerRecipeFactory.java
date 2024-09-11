@@ -13,7 +13,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 
-public class TannerRecipeFactory {
+public class TannerRecipeFactory implements IRecipeMFRFactory<TannerRecipeBase> {
 	public TannerRecipeBase parse(JsonContext context, JsonObject json) {
 		String type = JsonUtils.getString(json, "type");
 		TannerRecipeType recipeType = TannerRecipeType.deserialize(type);

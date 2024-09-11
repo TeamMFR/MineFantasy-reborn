@@ -41,7 +41,7 @@ public class TileEntityBellowsRenderer<T extends TileEntity> extends TileEntityS
 			facing = facing.rotateY();
 		}
 
-		model.rotate(tile.press);
+		model.rotate(tile.getPress());
 		this.bindTexture(texture); //texture
 
 		GlStateManager.pushMatrix(); // start

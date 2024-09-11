@@ -2,7 +2,7 @@ package minefantasy.mfr.recipe.types;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum RoastRecipeType implements IStringSerializable {
+public enum RoastRecipeType implements IStringSerializable, IRecipeMFRType {
 	COOKING_RECIPE,
 	NONE;
 
@@ -21,7 +21,7 @@ public enum RoastRecipeType implements IStringSerializable {
 		return NONE;
 	}
 
-	public static RoastRecipeType getByNameWithModId(String name, String modId) {
+	public RoastRecipeType getByNameWithModId(String name, String modId) {
 		for (RoastRecipeType type : values()) {
 
 			if ((modId + ":" + type.getName()).equals(name)) {

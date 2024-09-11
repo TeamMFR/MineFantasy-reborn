@@ -2,7 +2,7 @@ package minefantasy.mfr.recipe.types;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum TransformationRecipeType implements IStringSerializable {
+public enum TransformationRecipeType implements IStringSerializable, IRecipeMFRType {
 	TRANSFORMATION_RECIPE,
 	TRANSFORMATION_RECIPE_BLOCKSTATE,
 	NONE;
@@ -22,7 +22,7 @@ public enum TransformationRecipeType implements IStringSerializable {
 		return NONE;
 	}
 
-	public static TransformationRecipeType getByNameWithModId(String name, String modId) {
+	public TransformationRecipeType getByNameWithModId(String name, String modId) {
 		for (TransformationRecipeType type : values()) {
 
 			if ((modId + ":" + type.getName()).equals(name)) {

@@ -2,7 +2,7 @@ package minefantasy.mfr.recipe.types;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum BigFurnaceRecipeType implements IStringSerializable {
+public enum BigFurnaceRecipeType implements IStringSerializable, IRecipeMFRType {
 	BIG_FURNACE_RECIPE,
 	NONE;
 
@@ -21,7 +21,7 @@ public enum BigFurnaceRecipeType implements IStringSerializable {
 		return NONE;
 	}
 
-	public static BigFurnaceRecipeType getByNameWithModId(String name, String modId) {
+	public BigFurnaceRecipeType getByNameWithModId(String name, String modId) {
 		for (BigFurnaceRecipeType type : values()) {
 
 			if ((modId + ":" + type.getName()).equals(name)) {
