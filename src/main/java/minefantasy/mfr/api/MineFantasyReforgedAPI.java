@@ -729,7 +729,7 @@ public class MineFantasyReforgedAPI {
 	}
 
 	/**
-	 * Adds an item as a valid forge & big furnace fuel.
+	 * Adds an item as a valid firepit fuel.
 	 * It is recommended you add firepit fuels via JSON files, but this exists to bypass that method
 	 *
 	 * @param item
