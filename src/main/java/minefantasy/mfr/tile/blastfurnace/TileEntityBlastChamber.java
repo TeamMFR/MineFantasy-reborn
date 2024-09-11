@@ -1,6 +1,6 @@
 package minefantasy.mfr.tile.blastfurnace;
 
-import minefantasy.mfr.api.crafting.MineFantasyFuels;
+import minefantasy.mfr.api.crafting.MineFantasyCarbons;
 import minefantasy.mfr.api.refine.ISmokeCarrier;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.container.ContainerBase;
@@ -157,7 +157,7 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 	private boolean canShare(ItemStack mySlot, int a) {
 		if (a == 1)
 			return isInput(mySlot);
-		return MineFantasyFuels.isCarbon(mySlot);
+		return MineFantasyCarbons.isCarbon(mySlot);
 	}
 
 	public void updateBuild() {
@@ -184,7 +184,7 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack item) {
 		if (slot == 0) {
-			return MineFantasyFuels.isCarbon(item);
+			return MineFantasyCarbons.isCarbon(item);
 		}
 		return isInput(item);
 	}
@@ -215,7 +215,7 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 			MFRLogUtil.logDebug("Decr Carbon Uses: " + tempUses);
 			return false;
 		} else {
-			int carb = MineFantasyFuels.getCarbon(getInventory().getStackInSlot(0)) - 1;
+			int carb = MineFantasyCarbons.getCarbon(getInventory().getStackInSlot(0)) - 1;
 			if (carb > 0) {
 				tempUses = carb;
 				MFRLogUtil.logDebug("Set Carbon Uses: " + tempUses);

@@ -1,6 +1,6 @@
 package minefantasy.mfr.tile;
 
-import minefantasy.mfr.api.crafting.MineFantasyFuels;
+import minefantasy.mfr.api.crafting.MineFantasyCarbons;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.block.BlockBloomery;
 import minefantasy.mfr.constants.Tool;
@@ -139,7 +139,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 
 	private boolean hasEnoughCarbon(ItemStack input, ItemStack coal) {
 		int amount = input.getCount();
-		int uses = MineFantasyFuels.getCarbon(coal);
+		int uses = MineFantasyCarbons.getCarbon(coal);
 		if (uses > 0) {
 			int coalNeeded = (int) Math.ceil((float) amount / (float) uses);
 			MFRLogUtil.logDebug("Required Coal: " + coalNeeded);
@@ -266,7 +266,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 	}
 
 	public boolean isItemValidForSlot(int slot, ItemStack item) {
-		if (!item.isEmpty() && MineFantasyFuels.isCarbon(item)) {
+		if (!item.isEmpty() && MineFantasyCarbons.isCarbon(item)) {
 			return slot == 1;
 		}
 		if (!item.isEmpty() && !getResult(item).isEmpty()) {

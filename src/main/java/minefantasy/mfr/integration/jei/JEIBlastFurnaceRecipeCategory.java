@@ -15,7 +15,7 @@ import mezz.jei.api.recipe.IStackHelper;
 import mezz.jei.config.Constants;
 import mezz.jei.gui.GuiHelper;
 import minefantasy.mfr.MineFantasyReforged;
-import minefantasy.mfr.api.crafting.MineFantasyFuels;
+import minefantasy.mfr.api.crafting.MineFantasyCarbons;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.recipe.BlastFurnaceRecipeBase;
@@ -101,7 +101,7 @@ public class JEIBlastFurnaceRecipeCategory implements IRecipeCategory<JEIBlastFu
 
 		List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);
 		List<List<ItemStack>> outputList = ingredients.getOutputs(VanillaTypes.ITEM);
-		List<ItemStack> fuels = recipeWrapper.getFuelItemStacks().stream().filter(MineFantasyFuels::isCarbon).collect(Collectors.toList());
+		List<ItemStack> fuels = recipeWrapper.getFuelItemStacks().stream().filter(MineFantasyCarbons::isCarbon).collect(Collectors.toList());
 		fuels.add(new ItemStack(MineFantasyItems.COAL_FLUX));
 
 		slots.init(0, true, 15, 1);//inputs

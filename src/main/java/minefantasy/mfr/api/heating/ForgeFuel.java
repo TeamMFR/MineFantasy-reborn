@@ -3,25 +3,24 @@ package minefantasy.mfr.api.heating;
 import net.minecraft.item.ItemStack;
 
 public class ForgeFuel {
-	public ItemStack fuel;
-	public float duration;
+
+	private String name;
+
+	public ItemStack item;
+	public float burnTime;
 	public int baseHeat;
-	/**
-	 * Some sources only accept refined fuel
-	 */
-	public boolean isRefined;
 	/**
 	 * Applied to lava, auto-lights the forge when placed
 	 */
 	public boolean doesLight;
-
-	public ForgeFuel(ItemStack item, float dura, int heat, boolean light) {
-		this(item, dura, heat, light, false);
-	}
+	/**
+	 * Some sources only accept refined fuel
+	 */
+	public boolean isRefined;
 
 	public ForgeFuel(ItemStack item, float dura, int heat, boolean light, boolean refined) {
-		this.fuel = item;
-		this.duration = dura;
+		this.item = item;
+		this.burnTime = dura;
 		this.baseHeat = heat;
 		this.doesLight = light;
 		this.isRefined = refined;

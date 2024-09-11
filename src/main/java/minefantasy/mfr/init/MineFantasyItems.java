@@ -3,7 +3,6 @@ package minefantasy.mfr.init;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.api.armour.ArmourDesign;
-import minefantasy.mfr.api.crafting.MineFantasyFuels;
 import minefantasy.mfr.api.mining.RandomDigs;
 import minefantasy.mfr.api.mining.RandomOre;
 import minefantasy.mfr.config.ConfigHardcore;
@@ -1356,23 +1355,6 @@ public class MineFantasyItems {
 		Items.POTIONITEM.setContainerItem(Items.GLASS_BOTTLE);
 		GameRegistry.registerFuelHandler(new FuelHandlerMF());
 		MineFantasyReforgedAPI.registerFuelHandler(new AdvancedFuelHandler());
-
-		initFuels();
-	}
-
-	private static void initFuels() {
-		MineFantasyFuels.addForgeFuel(new ItemStack(Items.COAL, 1, 0), 900, 1500);// 1500C , 45s
-		MineFantasyFuels.addForgeFuel(new ItemStack(Items.COAL, 1, 1), 1200, 1800);// 1800C , 1m
-		MineFantasyFuels.addForgeFuel(Items.BLAZE_POWDER, 200, 3000, true);// 3000C , 10s
-		MineFantasyFuels.addForgeFuel(Items.BLAZE_ROD, 300, 3000, true);// 3000C , 15s
-		MineFantasyFuels.addForgeFuel(Items.FIRE_CHARGE, 1200, 3500, true);// 3500C , 1m
-		MineFantasyFuels.addForgeFuel(Items.LAVA_BUCKET, 2400, 5000, true);// 5000C , 2m
-		MineFantasyFuels.addForgeFuel(Items.MAGMA_CREAM, 2400, 4000, true, true);// 4000C , 2m
-
-		MineFantasyFuels.addForgeFuel(COKE, 1200, 2500, false, true);// 2500C , 1m
-		MineFantasyFuels.addForgeFuel(MAGMA_CREAM_REFINED, 2400, 5000, true, true);// 5000C , 2m
-
-		MineFantasyFuels.addForgeFuel(COAL_DUST, 1200, 180);// 180C , 60s
 	}
 
 	public static void addRandomDrops() {

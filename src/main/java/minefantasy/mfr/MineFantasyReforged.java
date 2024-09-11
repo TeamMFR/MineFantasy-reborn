@@ -44,6 +44,8 @@ import minefantasy.mfr.recipe.CraftingManagerTransformation;
 import minefantasy.mfr.recipe.RecipeRemover;
 import minefantasy.mfr.recipe.ingredients.IngredientCount;
 import minefantasy.mfr.recipe.ingredients.IngredientOreCount;
+import minefantasy.mfr.registry.FirepitFuelRegistry;
+import minefantasy.mfr.registry.ForgeFuelRegistry;
 import minefantasy.mfr.registry.MetalMaterialRegistry;
 import minefantasy.mfr.registry.WoodMaterialRegistry;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
@@ -211,6 +213,8 @@ public class MineFantasyReforged {
 	public void postInit(FMLPostInitializationEvent postEvent) {
 		MineFantasyArmorCustomEntries.initVanillaArmorEntries();
 		MineFantasyArmorCustomEntries.initModdedArmorCustomEntries();
+		ForgeFuelRegistry.INSTANCE.init();
+		FirepitFuelRegistry.INSTANCE.init();
 		ConfigItemRegistry.readCustoms();
 
 		for (Biome biome : Biome.REGISTRY) {

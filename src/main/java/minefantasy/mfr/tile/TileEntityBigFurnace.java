@@ -1,6 +1,5 @@
 package minefantasy.mfr.tile;
 
-import minefantasy.mfr.api.heating.ForgeItemHandler;
 import minefantasy.mfr.api.refine.IBellowsUseable;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.block.BlockBigFurnace;
@@ -13,6 +12,7 @@ import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.BigFurnaceRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.recipe.IRecipeMFR;
+import minefantasy.mfr.registry.ForgeFuelRegistry;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.block.Block;
@@ -344,7 +344,13 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 	}
 
 	private int getItemHeat(ItemStack itemStack) {
-		return ForgeItemHandler.getForgeHeat(itemStack);
+		if (itemStack.isEmpty()){
+			return 0;
+		}
+		if(ForgeFuelRegistry.getFuelStats(itemStack) != null) {
+			return ForgeFuelRegistry.getFuelStats(itemStack).baseHeat;
+		}
+		return 0;
 	}
 
 	public ItemStack getResult(ItemStack item) {
@@ -436,7 +442,11 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		if (itemstack.isEmpty()) {
 			return 0;
 		}
-		return (int) Math.ceil(ForgeItemHandler.getForgeFuel(itemstack) / 8);
+		if (ForgeFuelRegistry.getFuelStats(itemstack) != null) {
+			return (int) Math.ceil(ForgeFuelRegistry.getFuelStats(itemstack).burnTime / 8);
+		} else {
+			return 0;
+		}
 	}
 
 	public void openChest() {

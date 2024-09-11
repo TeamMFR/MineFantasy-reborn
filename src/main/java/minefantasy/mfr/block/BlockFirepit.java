@@ -1,9 +1,11 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.crafting.IIgnitable;
+import minefantasy.mfr.api.heating.FirepitFuel;
 import minefantasy.mfr.api.tool.ILighter;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemLighter;
+import minefantasy.mfr.registry.FirepitFuelRegistry;
 import minefantasy.mfr.tile.TileEntityFirepit;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -126,8 +128,13 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> implements 
 
 			if (!held.isEmpty()) {
 				// Adding fuel
-				if (firepit.addFuel(held) && !player.capabilities.isCreativeMode) {
-					if (!world.isRemote) {
+				FirepitFuel fuel = FirepitFuelRegistry.getFuelStats(held);
+				if (fuel != null) {
+					firepit.addFuel(held);
+					if (!burning && fuel.doesLight) {
+						igniteBlock(world, pos, state);
+					}
+					if (!world.isRemote && !player.capabilities.isCreativeMode) {
 						if (held.getCount() == 1) {
 							if (!held.getItem().getContainerItem(held).isEmpty()) {
 								player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, held.getItem().getContainerItem(held));
@@ -161,21 +168,21 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> implements 
 						}
 					}
 					return true;
+				}
+
 				// Ignition
-				} else {
-					if (held.getItem() instanceof ItemFlintAndSteel || held.getItem() instanceof ILighter) {
-						int uses = ItemLighter.tryUse(held, player);
-						// 1 for ignition, -1 for a failed attempt, 0 for a null input or for an item that needs to bypass normal ignition
-						if (uses != 0 && firepit.fuel > 0) {
-							player.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
-							world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5D, pos.getY() - 0.5D, pos.getZ() + 0.5D, 0F, 0F, 0F);
-							if (uses == 1 && !world.isRemote) {
-								held.damageItem(1, player);
-								igniteBlock(world, pos, state);
-							}
+				if (held.getItem() instanceof ItemFlintAndSteel || held.getItem() instanceof ILighter) {
+					int uses = ItemLighter.tryUse(held, player);
+					// 1 for ignition, -1 for a failed attempt, 0 for a null input or for an item that needs to bypass normal ignition
+					if (uses != 0 && firepit.fuel > 0) {
+						player.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
+						world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + 0.5D, pos.getY() - 0.5D, pos.getZ() + 0.5D, 0F, 0F, 0F);
+						if (uses == 1 && !world.isRemote) {
+							held.damageItem(1, player);
+							igniteBlock(world, pos, state);
 						}
-						return true;
 					}
+					return true;
 				}
 			}
 		}

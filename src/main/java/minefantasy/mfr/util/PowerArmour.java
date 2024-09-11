@@ -2,9 +2,9 @@ package minefantasy.mfr.util;
 
 import minefantasy.mfr.api.armour.IPowerArmour;
 import minefantasy.mfr.api.heating.ForgeFuel;
-import minefantasy.mfr.api.heating.ForgeItemHandler;
 import minefantasy.mfr.block.BlockFrame;
 import minefantasy.mfr.block.BlockFrameHolder;
+import minefantasy.mfr.registry.ForgeFuelRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -48,9 +48,9 @@ public class PowerArmour {
 	}
 
 	public static float getFuelValue(ItemStack item) {
-		ForgeFuel stats = ForgeItemHandler.getStats(item);
+		ForgeFuel stats = ForgeFuelRegistry.getFuelStats(item);
 		if (stats != null && stats.isRefined) {
-			return stats.duration;
+			return stats.burnTime;
 		}
 		return 0;
 	}

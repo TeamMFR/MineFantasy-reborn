@@ -2,7 +2,6 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.crafting.IIgnitable;
 import minefantasy.mfr.api.heating.ForgeFuel;
-import minefantasy.mfr.api.heating.ForgeItemHandler;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.api.tool.ILighter;
@@ -11,6 +10,7 @@ import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemApron;
 import minefantasy.mfr.item.ItemLighter;
 import minefantasy.mfr.item.ItemTongs;
+import minefantasy.mfr.registry.ForgeFuelRegistry;
 import minefantasy.mfr.tile.TileEntityForge;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -212,7 +212,8 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> implements IIgn
 				}
 
 				// Adding fuel
-				ForgeFuel stats = ForgeItemHandler.getStats(held);
+				ForgeFuel stats = ForgeFuelRegistry.getFuelStats(held);
+
 				if (stats != null && forge.addFuel(stats, true)) {
 					if (player.capabilities.isCreativeMode) {
 						return true;
