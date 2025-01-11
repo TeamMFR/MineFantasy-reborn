@@ -45,7 +45,7 @@ public class CraftingManagerSalvage extends CraftingManagerBase<SalvageRecipeBas
 
 	public void addRecipe(SalvageRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getInput();
-		if (ConfigCrafting.isItemSalvageable(itemStack)) {
+		if (ConfigCrafting.isSalvageRecipeEnabled(key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

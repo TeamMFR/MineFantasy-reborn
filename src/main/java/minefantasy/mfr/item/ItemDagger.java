@@ -1,10 +1,10 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.WeaponClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
@@ -22,7 +22,7 @@ public class ItemDagger extends ItemWeaponMFR {
 	 * <p>
 	 * These are for the fast player
 	 */
-	public ItemDagger(String name, Item.ToolMaterial material, int rarity, float weight) {
+	public ItemDagger(String name, ToolMaterial material, Rarity rarity, float weight) {
 		super(material, name, rarity, weight);
 	}
 

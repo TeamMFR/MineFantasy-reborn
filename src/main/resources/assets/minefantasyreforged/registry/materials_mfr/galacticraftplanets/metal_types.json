@@ -6,7 +6,10 @@
     "metal_material": [
         {
             "name": "Desh",
-            "oreDictList": "ingotDesh",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotDesh"
+            },
             "properties": {
                 "tier": 4,
                 "durability": 8.0,
@@ -16,7 +19,7 @@
                 "resistance": 60,
                 "density": 2.5,
                 "melting_point": 1700,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "enchantability": 15,
                 "craft_tier": 4,
                 "craft_time_modifier": 13.0,
@@ -35,7 +38,10 @@
         },
         {
             "name": "titanium",
-            "oreDictList": "ingotTitanium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotTitanium"
+            },
             "properties": {
                 "tier": 5,
                 "durability": 9.5,
@@ -45,7 +51,7 @@
                 "resistance": 70,
                 "density": 3.0,
                 "melting_point": 2000,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "enchantability": 10,
                 "craft_tier": 5,
                 "craft_time_modifier": 15.0,

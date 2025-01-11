@@ -3,18 +3,26 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.recipe.factories.TransformationRecipeFactory;
 import minefantasy.mfr.recipe.types.TransformationRecipeType;
+import minefantasy.mfr.util.PlayerUtils;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public class CraftingManagerTransformation extends CraftingManagerBase<TransformationRecipeBase> {
 
@@ -45,16 +53,16 @@ public class CraftingManagerTransformation extends CraftingManagerBase<Transform
 	public void addRecipe(TransformationRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		recipe.setRegistryName(key);
 		if (recipe instanceof TransformationRecipeStandard) {
-			addStandardRecipe((TransformationRecipeStandard) recipe, checkForExistence);
+			addStandardRecipe((TransformationRecipeStandard) recipe, checkForExistence, key);
 		}
 		else if (recipe instanceof TransformationRecipeBlockState) {
-			addBlockStateRecipe((TransformationRecipeBlockState) recipe, checkForExistence);
+			addBlockStateRecipe((TransformationRecipeBlockState) recipe, checkForExistence, key);
 		}
 	}
 
-	private static void addBlockStateRecipe(TransformationRecipeBlockState recipe, boolean checkForExistence) {
+	private static void addBlockStateRecipe(TransformationRecipeBlockState recipe, boolean checkForExistence, ResourceLocation key) {
 		IBlockState state = recipe.getOutput();
-		if (ConfigCrafting.isBlockStateTransformable(state)) {
+		if (ConfigCrafting.isTransformationRecipeEnabled(key)) {
 			if (!checkForExistence || !TRANSFORMATION_RECIPES.containsKey(recipe.getRegistryName())) {
 				TRANSFORMATION_RECIPES.register(recipe);
 			}
@@ -68,9 +76,9 @@ public class CraftingManagerTransformation extends CraftingManagerBase<Transform
 		}
 	}
 
-	private static void addStandardRecipe(TransformationRecipeStandard recipe, boolean checkForExistence) {
+	private static void addStandardRecipe(TransformationRecipeStandard recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getOutput();
-		if (ConfigCrafting.isItemTransformable(itemStack)) {
+		if (ConfigCrafting.isTransformationRecipeEnabled(key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			itemStack.getItem().getSubItems(itemStack.getItem().getCreativeTab(), subItems);
@@ -81,15 +89,68 @@ public class CraftingManagerTransformation extends CraftingManagerBase<Transform
 		}
 	}
 
-	public static TransformationRecipeBase findMatchingRecipe(ItemStack tool, ItemStack input, IBlockState state) {
-		//// Normal, registered recipes.
+	public static TransformationRecipeBase findMatchingRecipe(
+			ItemStack tool,
+			ItemStack input,
+			IBlockState state,
+			BlockPos pos,
+			EntityPlayer player,
+			EnumFacing facing) {
 
+		List<TransformationRecipeBase> validRecipes = new ArrayList<>();
 		for (TransformationRecipeBase rec : getRecipes()) {
 			if (rec.matches(tool, input, state)) {
-				return rec;
+				validRecipes.add(rec);
 			}
 		}
-		return null;
+
+		if (validRecipes.isEmpty()) {
+			return null;
+		}
+
+		Optional<TransformationRecipeBase> optionalRecipe = validRecipes
+				.stream()
+				.filter(r -> validateTransformation(pos, tool, player, facing, r))
+				.findFirst();
+
+		return optionalRecipe.orElse(null);
+	}
+
+	/**
+	 * Makes all required checks to see if the transformation is valid:
+	 * Can Player edit, does Player have research, does Player have offhand stack, and does player have all consumable stacks
+	 *
+	 * @param pos 		The BlockPos of the block being transformed
+	 * @param tool		The ItemStack of the tool being used to perform the transformation
+	 * @param player	The EntityPlayer performing the action
+	 * @param facing	The EnumFacing of the action
+	 * @param recipe	The TransformationRecipe being validated
+	 * @return true if the recipe is valid, false if the recipe is invalid
+	 */
+	public static boolean validateTransformation(BlockPos pos, ItemStack tool, EntityPlayer player,
+			EnumFacing facing, TransformationRecipeBase recipe) {
+
+		// Check Player can change block and has Recipe Research unlocked
+		if (player.canPlayerEdit(pos, facing, tool)) {
+			String requiredResearch = recipe.getRequiredResearch();
+			if (requiredResearch.equals("none")
+					|| ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(requiredResearch))) {
+				Ingredient offhand = recipe.getOffhandStack();
+				// Check if the offhand stack is in the offhand slot or bypass if empty
+				if (offhand == Ingredient.EMPTY || offhand.apply(player.getHeldItemOffhand())) {
+
+					NonNullList<Ingredient> consumables = recipe.getConsumableStacks();
+					// Check if the consumable stack is present in player inventory or bypass if empty
+					return consumables.isEmpty() || consumables.stream()
+							.allMatch(i -> PlayerUtils.playerInventoryHasIngredient(player.inventory, i));
+				}
+			}
+			else {
+				player.sendMessage(new TextComponentTranslation("knowledge.unknownUse"));
+				return false;
+			}
+		}
+		return false;
 	}
 
 	public static TransformationRecipeBase getRecipeByName(String modId, String name) {

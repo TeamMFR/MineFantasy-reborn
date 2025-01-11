@@ -58,6 +58,10 @@ public class ToolHelper {
 		return CustomCrafterEntry.getEntryTier(tool);
 	}
 
+	public static boolean isStackValidWashTool(ItemStack stack) {
+		return ToolHelper.getToolTypeFromStack(stack) == Tool.WASH && stack.getItemDamage() != ToolHelper.getWashMaxUses(stack);
+	}
+
 	public static int getWashMaxUses(ItemStack stack) {
 		if (stack.isEmpty()) {
 			return 0;
@@ -70,7 +74,7 @@ public class ToolHelper {
 
 	/**
 	 * Conduct Block Transformation on {@link Item#onItemUse(EntityPlayer, World, BlockPos, EnumHand, EnumFacing, float, float, float)}
-	 * @param user The Player using the item
+	 * @param player The Player using the item
 	 * @param world The World
 	 * @param pos The Block Position of the block being transformed
 	 * @param hand The hand the Player is using the item with
@@ -78,13 +82,13 @@ public class ToolHelper {
 	 * @return The {@link EnumActionResult} which represents the result of the transformation
 	 */
 	public static EnumActionResult performBlockTransformation(
-			EntityPlayer user,
+			EntityPlayer player,
 			World world,
 			BlockPos pos,
 			EnumHand hand,
 			EnumFacing facing) {
 
-		ItemStack item = user.getHeldItem(hand);
+		ItemStack tool = player.getHeldItem(hand);
 		IBlockState oldState = world.getBlockState(pos);
 
 		// Find Recipe
@@ -92,18 +96,21 @@ public class ToolHelper {
 		if (input.getItem().getHasSubtypes()) {
 			input = new ItemStack(oldState.getBlock(), 1, oldState.getBlock().getMetaFromState(oldState));
 		}
-		TransformationRecipeBase recipe = CraftingManagerTransformation.findMatchingRecipe(item, input, oldState);
+		TransformationRecipeBase recipe = CraftingManagerTransformation
+				.findMatchingRecipe(tool, input, oldState, pos, player, facing);
+
 		if (recipe == null) {
 			return EnumActionResult.FAIL;
 		}
 
 		if (!world.isRemote) {
-			return recipe.onUsedWithBlock(world, pos, oldState, item, user, facing);
+			//We assume the recipe's transformation is valid
+			return recipe.onUsedWithBlock(world, pos, oldState, tool, player, facing);
 		}
 		else {
-			user.swingArm(hand);
+			player.swingArm(hand);
 			if (recipe.getSound() != null) {
-				world.playSound(user, pos, recipe.getSound(), SoundCategory.BLOCKS, 1F, 1F);
+				world.playSound(player, pos, recipe.getSound(), SoundCategory.BLOCKS, 1F, 1F);
 			}
 		}
 		return EnumActionResult.FAIL;

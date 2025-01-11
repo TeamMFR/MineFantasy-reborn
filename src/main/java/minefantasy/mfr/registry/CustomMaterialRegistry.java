@@ -8,15 +8,18 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.registry.factories.CustomMaterialFactory;
 import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.FileUtils;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
@@ -26,6 +29,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -48,13 +52,13 @@ public class CustomMaterialRegistry extends DataLoader {
 					.allowModification()
 					.create();
 
-	public static HashMap<CustomMaterialType, ArrayList<CustomMaterial>> TYPE_LIST = new HashMap<CustomMaterialType, ArrayList<CustomMaterial>>();
+	public static HashMap<CustomMaterialType, ArrayList<CustomMaterial>> TYPE_LIST = new HashMap<>();
+	public static HashMap<CustomMaterial, ImmutablePair<JsonElement, JsonContext>> INGREDIENT_JSON_MAP = new HashMap<>();
 
-	public static final CustomMaterial NONE = new CustomMaterial("none", CustomMaterialType.NONE, 0, 0, 0, 0, 0, 0, 0, 0);
+	public static final CustomMaterial NONE = new CustomMaterial("none", CustomMaterialType.NONE, Ingredient.EMPTY, new int[] {237, 237, 237}, 0, 0,0,0,0,0,0, Rarity.COMMON,0, 0, null, null, null, null, false);
 
 	private static final String NBT_BASE = "mf_custom_materials";
 	public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##");
-	public static final DecimalFormat DECIMAL_FORMAT_GRAMS = new DecimalFormat("#");
 
 	private static final String DEFAULT_MATERIAL_DIRECTORY = Constants.ASSET_DIRECTORY + "/materials_mfr";
 	private static final String CUSTOM_MATERIAL_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY +"/custom/registry";
@@ -96,21 +100,21 @@ public class CustomMaterialRegistry extends DataLoader {
 					JsonObject json = JsonUtils.fromJson(GSON, reader, JsonObject.class);
 
 					if (Loader.isModLoaded(mod.getModId())) {
-						if (CustomMaterialType.deserialize(type) != CustomMaterialType.NONE) {
-							parse(fileName, context, json, type);
+						if (materialType != CustomMaterialType.NONE) {
+							parse(fileName, context, json, materialType.getName());
 						} else {
-							MineFantasyReforged.LOG.info("Skipping Custom Material file of type {} because it's not a MFR Custom Material", type);
+							MineFantasyReforged.LOG.info("Skipping Custom Material file of type {} in {} because it's not a MFR Custom Material", materialType.getName(), file);
 						}
 					}
 					else {
-						MineFantasyReforged.LOG.info("Skipping Custom Material file of type {} because it the mod it depends on is not loaded", type);
+						MineFantasyReforged.LOG.info("Skipping Custom Material file of type {} in {} because it the mod it depends on is not loaded", materialType.getName(), file);
 					}
 				}
 				catch (JsonParseException e) {
-					MineFantasyReforged.LOG.error("Parsing error loading Custom Material in {}", fileName, e);
+					MineFantasyReforged.LOG.error("Parsing error loading Custom Material in {} in {}", fileName, file, e);
 				}
 				catch (IOException e) {
-					MineFantasyReforged.LOG.error("Couldn't read Custom Material in {} from {}", fileName, file, e);
+					MineFantasyReforged.LOG.error("Couldn't read Custom Material in {} in {}", fileName, file, e);
 				}
 				finally {
 					IOUtils.closeQuietly(reader);
@@ -138,6 +142,26 @@ public class CustomMaterialRegistry extends DataLoader {
 		getList(customMaterial.getType()).add(customMaterial);
 	}
 
+	/**
+	 * Custom Materials must be registered BEFORE Blocks and Items are registered.
+	 * But Custom Materials define Ingredients that contain Blocks and Items.
+	 * This creates a paradox.
+	 * This method populates the Custom Materials' Ingredients AFTER all the Blocks and Items are registered.
+	 * Paradox solved wooooo.
+	 */
+	public void addIngredients() {
+		for (CustomMaterial material : getValues()) {
+			if (material.getMaterialIngredient() == null) {
+				ImmutablePair<JsonElement, JsonContext> ingredientJsonInfo = INGREDIENT_JSON_MAP.get(material);
+
+				Ingredient ingredient = CraftingHelper.getIngredient(
+						ingredientJsonInfo.getLeft(),
+						ingredientJsonInfo.getRight());
+				material.setMaterialIngredient(ingredient);
+			}
+		}
+	}
+
 	public static Collection<CustomMaterial> getValues() {
 		return CUSTOM_MATERIALS.getValuesCollection();
 	}
@@ -150,7 +174,8 @@ public class CustomMaterialRegistry extends DataLoader {
 			return NONE;
 		}
 
-		CustomMaterial material = CUSTOM_MATERIALS.getValue(new ResourceLocation(MineFantasyReforged.MOD_ID, name.toLowerCase()));
+		ResourceLocation key = new ResourceLocation(MineFantasyReforged.MOD_ID, name.toLowerCase());
+		CustomMaterial material = CUSTOM_MATERIALS.getValue(key);
 		if (material == null){
 			return NONE;
 		}
@@ -159,11 +184,22 @@ public class CustomMaterialRegistry extends DataLoader {
 		}
 	}
 
+	/**
+	 * Gets the list of all Materials of the given type
+	 * @param type the Type of the Custom Materials
+	 * @return List of Custom Materials
+	 */
 	public static ArrayList<CustomMaterial> getList(CustomMaterialType type) {
 		TYPE_LIST.computeIfAbsent(type, k -> new ArrayList<>());
 		return TYPE_LIST.get(type);
 	}
 
+	/**
+	 * Adds a Custom Material to an ItemStack
+	 * @param item 		The ItemStack to add the Custom Material to
+	 * @param slot 		The 'position' of the Material
+	 * @param material	The CustomMaterial to add
+	 */
 	public static void addMaterial(ItemStack item, String slot, String material) {
 		if (material == null || material.isEmpty()) {
 			return;
@@ -171,6 +207,13 @@ public class CustomMaterialRegistry extends DataLoader {
 		NBTTagCompound nbt = getNBT(item, true);
 		nbt.setString(slot, material);
 	}
+
+	/**
+	 * Gets the Custom Material of an ItemStacl
+	 * @param item The ItemStack to get the Material of
+	 * @param slot The 'position' of the Material
+	 * @return The Custom Material
+	 */
 
 	public static CustomMaterial getMaterialFor(ItemStack item, String slot) {
 		NBTTagCompound nbt = getNBT(item, false);
@@ -196,13 +239,16 @@ public class CustomMaterialRegistry extends DataLoader {
 		return null;
 	}
 
+	/**
+	 * Gets the formatted weight string for a given mass
+	 * @param mass the mass to be formatted
+	 * @return the formatted string
+	 */
 	@SideOnly(Side.CLIENT)
 	public static String getWeightString(float mass) {
-		DecimalFormat df = DECIMAL_FORMAT;
 		String s = "attribute.weightKg.name";
 		if (mass > 0 && mass < 1.0F) {
 			s = "attribute.weightg.name";
-			df = DECIMAL_FORMAT_GRAMS;
 			mass = (int) (mass * 1000F);
 		} else if (mass > 1000) {
 			s = "attribute.weightt.name";

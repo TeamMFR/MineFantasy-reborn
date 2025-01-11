@@ -1,12 +1,12 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.init.MineFantasySounds;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -23,7 +23,7 @@ public class ItemMace extends ItemWeaponMFR {
 	 * <p>
 	 * These are for the player who just wants to hit stuff
 	 */
-	public ItemMace(String name, Item.ToolMaterial material, int rarity, float weight) {
+	public ItemMace(String name, ToolMaterial material, Rarity rarity, float weight) {
 		super(material, name, rarity, weight);
 		this.setMaxDamage((int) (getMaxDamage() * 2F));
 	}

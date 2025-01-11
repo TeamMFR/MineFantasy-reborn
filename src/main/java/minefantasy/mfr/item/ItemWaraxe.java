@@ -1,6 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.util.TacticalManager;
@@ -10,7 +11,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -28,7 +28,7 @@ public class ItemWaraxe extends ItemWeaponMFR {
 	 * <p>
 	 * These are for the brutal player
 	 */
-	public ItemWaraxe(String name, Item.ToolMaterial material, int rarity, float weight) {
+	public ItemWaraxe(String name, ToolMaterial material, Rarity rarity, float weight) {
 		super(material, name, rarity, weight);
 	}
 

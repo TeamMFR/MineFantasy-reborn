@@ -1,5 +1,6 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.constants.Rarity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
@@ -12,7 +13,7 @@ import javax.annotation.Nullable;
 
 public class ItemMultiFood extends ItemFoodMFR {
 
-	public ItemMultiFood(String name, int bites, int hunger, float saturation, boolean meat, int rarity) {
+	public ItemMultiFood(String name, int bites, int hunger, float saturation, boolean meat, Rarity rarity) {
 		super(name, hunger, saturation, meat, rarity);
 		setMaxStackSize(1);
 		setMaxDamage(bites - 1);

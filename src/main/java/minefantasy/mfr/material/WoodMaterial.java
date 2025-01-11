@@ -1,34 +1,23 @@
 package minefantasy.mfr.material;
 
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.registry.types.CustomMaterialType;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.item.crafting.Ingredient;
 
 public class WoodMaterial extends CustomMaterial {
 
-	public ResourceLocation inputItemResourceLocation;
-	public int inputItemMeta;
+	public WoodMaterial (String name, CustomMaterialType type, Ingredient materialIngredient,  int[] colourRGB, float hardness,
+			float durability, float flexibility, float sharpness, float resistance, float density, int tier, Rarity rarity,
+			int enchantability, int crafterTier, Float craftTimeModifier, boolean unbreakable) {
 
-	public WoodMaterial(String name, int tier, float hardness, float durability, float flexibility, float resistance, float density, int[] color, ResourceLocation inputItemResourceLocation, int inputItemMeta) {
-		super(name, CustomMaterialType.WOOD_MATERIAL, tier, hardness, durability, flexibility, resistance, 0F, density, color);
-		this.inputItemResourceLocation = inputItemResourceLocation;
-		this.inputItemMeta = inputItemMeta;
+		super(name, type, materialIngredient, colourRGB, hardness, durability, flexibility, sharpness, resistance, density,
+				tier, rarity, enchantability, crafterTier, null, craftTimeModifier,
+				null, null, unbreakable);
 	}
 
 	@Override
 	public String getMaterialString() {
 		return I18n.format("materialtype." + this.getType().getName() + ".name", this.getTier());
-	}
-
-	@Override
-	public ItemStack getItemStack() {
-		NonNullList<ItemStack> list = OreDictionary.getOres("plankWood");
-		if (list != null && !list.isEmpty()) {
-			return list.get(0);
-		}
-		return ItemStack.EMPTY;
 	}
 }

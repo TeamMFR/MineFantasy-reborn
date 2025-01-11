@@ -1,9 +1,8 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemFoodMFR;
-import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -15,8 +14,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -70,7 +67,7 @@ public class BlockCakeMFR extends BasicBlockMF {
 	}
 
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return CAKE_AABB[((Integer) state.getValue(BITES)).intValue()];
+		return CAKE_AABB[state.getValue(BITES)];
 	}
 
 	@Override
@@ -86,49 +83,6 @@ public class BlockCakeMFR extends BasicBlockMF {
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
-	}
-
-	/**
-	 * Called upon block activation (right click on the block.)
-	 */
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand,
-			EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand()) == Tool.KNIFE) {
-			this.cutSlice(world, state, pos, user);
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Called when a player hits the block. Args: world, x, y, z, player
-	 */
-	@Override
-	public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
-		if (ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand()) == Tool.KNIFE) {
-			IBlockState state = world.getBlockState(pos);
-			this.cutSlice(world, state, pos, user);
-		}
-	}
-
-	private void cutSlice(World world, IBlockState state, BlockPos pos, EntityPlayer user) {
-		if (cakeSlice != null) {
-			ItemStack slice = new ItemStack(cakeSlice);
-			if (!user.inventory.addItemStackToInventory(slice)) {
-				user.entityDropItem(slice, 1.0F);
-			}
-		}
-		int i = ((Integer) state.getValue(BITES)).intValue();
-
-		if (i >= 8) {
-			world.setBlockToAir(pos);
-		} else {
-			world.setBlockState(pos, state.withProperty(BITES, Integer.valueOf(i + 1)), 3);
-		}
-		if (!user.getHeldItemMainhand().isEmpty()) {
-			user.getHeldItemMainhand().damageItem(1, user);
-		}
 	}
 
 	/**
@@ -180,11 +134,11 @@ public class BlockCakeMFR extends BasicBlockMF {
 		return state.getValue(BITES);
 	}
 
-	public int getRarity() {
+	public Rarity getRarity() {
 		if (cakeSlice instanceof ItemFoodMFR) {
 			return ((ItemFoodMFR) cakeSlice).itemRarity;
 		}
-		return 0;
+		return Rarity.COMMON;
 	}
 
 	@Override

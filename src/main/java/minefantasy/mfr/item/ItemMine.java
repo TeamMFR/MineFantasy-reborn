@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import com.google.common.collect.Lists;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.entity.EntityMine;
 import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.block.BlockDispenser;
@@ -16,7 +17,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,6 +28,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -272,11 +273,11 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		if (getFilling(item).equals("fire") || getCasing(item).equals("obsidian") || getCasing(item).equals("crystal")) {
-			return EnumRarity.UNCOMMON;
+			return Rarity.UNCOMMON;
 		}
-		return EnumRarity.COMMON;
+		return Rarity.COMMON;
 	}
 
 	@Override

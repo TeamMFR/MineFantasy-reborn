@@ -1,6 +1,5 @@
 package minefantasy.mfr.recipe;
 
-import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.util.BlockUtils;
@@ -28,9 +27,10 @@ public class TransformationRecipeStandard extends TransformationRecipeBase {
 			Tool tool,
 			NonNullList<Ingredient> inputs,
 			ItemStack output,
-			List<ItemStack> consumableStacks,
-			ItemStack dropStack,
-			ItemStack offhandStack,
+			NonNullList<Ingredient> consumableStacks,
+			Ingredient dropStack,
+			boolean shouldDropOnProgress,
+			Ingredient offhandStack,
 			Skill skill,
 			String research,
 			int skillXp,
@@ -38,7 +38,7 @@ public class TransformationRecipeStandard extends TransformationRecipeBase {
 			int maxProgress,
 			String soundName,
 			List<String> blockStateProperties) {
-		super(tool, consumableStacks, dropStack, offhandStack, skill, research, skillXp, vanillaXp, maxProgress, soundName);
+		super(tool, consumableStacks, dropStack, shouldDropOnProgress, offhandStack, skill, research, skillXp, vanillaXp, maxProgress, soundName);
 		this.inputs = inputs;
 		this.output = output;
 		this.blockStateProperties = blockStateProperties;
@@ -56,32 +56,28 @@ public class TransformationRecipeStandard extends TransformationRecipeBase {
 			ItemStack item, EntityPlayer player, EnumFacing facing) {
 		TransformationRecipeStandard recipe = this;
 
-		// Makes all required checks to see if the transformation is valid
-		// Can Player edit, does Player have research, does Player have offhand stack,
-		// and does player have all consumable stacks
-		if (validateTransformation(pos, item, player, facing, recipe)) {
-			// Proceed with transformation
-			Block newBlock = null;
-			ItemStack output = recipe.getOutput().copy();
-			if (!output.isEmpty() && output.getItem() instanceof ItemBlock) {
-				newBlock = Block.getBlockFromItem(output.getItem());
-			}
-
-			if (newBlock != null) {
-				// Determine new BlockState, including migrating from old BlockState properties over to the new block
-				IBlockState newState = handleBlockStates(oldState, newBlock.getDefaultState(), recipe);
-
-				if (recipe.getMaxProgress() > 1) {
-					return handleProgressTransformation(world, pos, item, player, recipe,
-							consumableStacks, newState, oldState);
-				}
-				else {
-					return performTransformation(world, pos, item, player, consumableStacks, recipe, newState);
-				}
-			}
+		// Proceed with transformation
+		Block newBlock = null;
+		ItemStack output = recipe.getOutput().copy();
+		if (!output.isEmpty() && output.getItem() instanceof ItemBlock) {
+			newBlock = Block.getBlockFromItem(output.getItem());
 		}
 
-		return EnumActionResult.FAIL;
+		if (newBlock != null) {
+			// Determine new BlockState, including migrating from old BlockState properties over to the new block
+			IBlockState newState = handleBlockStates(oldState, newBlock.getDefaultState(), recipe);
+
+			if (recipe.getMaxProgress() > 1) {
+				return handleProgressTransformation(world, pos, item, player, recipe,
+						consumableStacks, newState, oldState);
+			}
+			else {
+				return performTransformation(world, pos, item, player, consumableStacks, recipe, newState);
+			}
+		}
+		else {
+			return EnumActionResult.FAIL;
+		}
 	}
 
 	private static IBlockState handleBlockStates(IBlockState oldState, IBlockState newState, TransformationRecipeStandard recipe) {

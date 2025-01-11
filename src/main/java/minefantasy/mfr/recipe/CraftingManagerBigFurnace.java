@@ -49,7 +49,7 @@ public class CraftingManagerBigFurnace extends CraftingManagerBase<BigFurnaceRec
 	@Override
 	public void addRecipe(BigFurnaceRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getBigFurnaceRecipeOutput();
-		if (ConfigCrafting.isBigFurnaceItemCraftable(itemStack)) {
+		if (ConfigCrafting.isBigFurnaceRecipeEnabled(key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

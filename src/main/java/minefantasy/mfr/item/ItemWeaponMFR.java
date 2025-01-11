@@ -20,6 +20,7 @@ import minefantasy.mfr.api.weapon.IWeaponClass;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigWeapon;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.init.MineFantasyItems;
@@ -51,10 +52,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
@@ -68,6 +69,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -124,7 +126,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	protected float maceStaminaCost = 1.50F;
 	protected float spearStaminaCost = 1.40F;
 	protected float heavyStaminaCost = 2.50F;
-	protected int itemRarity;
+	protected Rarity itemRarity;
 	/**
 	 * The damage of the weapon without material modifiers
 	 */
@@ -148,7 +150,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	 * Polearm: Ranged Defensive, Good against Heavy Armour
 	 * Lightblade: Fast Offensive, Better against Unarmoured
 	 */
-	public ItemWeaponMFR(ToolMaterial material, String named, int rarity, float weight) {
+	public ItemWeaponMFR(ToolMaterial material, String named, Rarity rarity, float weight) {
 		super(material);
 		materialWeight = weight;
 		itemRarity = rarity;
@@ -595,7 +597,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
 					items.add(this.construct(customMat.getName(), MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}
@@ -751,7 +753,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 

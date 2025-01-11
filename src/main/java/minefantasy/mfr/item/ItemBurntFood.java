@@ -1,5 +1,6 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -16,7 +17,7 @@ public class ItemBurntFood extends ItemComponentMFR {
 	private Random rand = new Random();
 
 	public ItemBurntFood(String name) {
-		super(name, -1);
+		super(name, Rarity.COMMON);
 	}
 
 	@Override

@@ -3,8 +3,10 @@
     "wood_material": [
         {
             "name": "scrap_wood",
-            "inputItem": "",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "stickWood"
+            },
             "properties": {
                 "tier": 0,
                 "hardness": 0.1,
@@ -12,7 +14,7 @@
                 "flexibility": 0.5,
                 "resistance": 10,
                 "density": 0.5,
-                "rarity": 0,
+                "rarity": "POOR",
                 "craft_tier": 0,
                 "craft_time_modifier": 2.0
             },
@@ -24,8 +26,10 @@
         },
         {
             "name": "oak_wood",
-            "inputItem": "minecraft:planks",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "minecraft:planks",
+                "data": 0
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 0.7,
@@ -33,7 +37,7 @@
                 "flexibility": 1.3,
                 "resistance": 40,
                 "density": 0.8,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 2.0
             },
@@ -45,8 +49,10 @@
         },
         {
             "name": "spruce_wood",
-            "inputItem": "minecraft:planks",
-            "inputItemMeta": 1,
+            "materialIngredient": {
+                "item": "minecraft:planks",
+                "data": 1
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 0.2,
@@ -54,7 +60,7 @@
                 "flexibility": 1.0,
                 "resistance": 20,
                 "density": 0.4,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 2.0
             },
@@ -66,8 +72,10 @@
         },
         {
             "name": "birch_wood",
-            "inputItem": "minecraft:planks",
-            "inputItemMeta": 2,
+            "materialIngredient": {
+                "item": "minecraft:planks",
+                "data": 2
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 0.5,
@@ -75,7 +83,7 @@
                 "flexibility": 1.3,
                 "resistance": 10,
                 "density": 0.7,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 2.0
             },
@@ -87,8 +95,10 @@
         },
         {
             "name": "jungle_wood",
-            "inputItem": "minecraft:planks",
-            "inputItemMeta": 3,
+            "materialIngredient": {
+                "item": "minecraft:planks",
+                "data": 3
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 0.4,
@@ -96,7 +106,7 @@
                 "flexibility": 1.2,
                 "resistance": 50,
                 "density": 0.6,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 2.0
             },
@@ -108,8 +118,10 @@
         },
         {
             "name": "acacia_wood",
-            "inputItem": "minecraft:planks",
-            "inputItemMeta": 4,
+            "materialIngredient": {
+                "item": "minecraft:planks",
+                "data": 4
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 0.5,
@@ -117,7 +129,7 @@
                 "flexibility": 1.0,
                 "resistance": 20,
                 "density": 0.6,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 2.0
             },
@@ -129,8 +141,10 @@
         },
         {
             "name": "dark_oak_wood",
-            "inputItem": "minecraft:planks",
-            "inputItemMeta": 5,
+            "materialIngredient": {
+                "item": "minecraft:planks",
+                "data": 5
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.2,
@@ -138,7 +152,7 @@
                 "flexibility": 1.3,
                 "resistance": 50,
                 "density": 1.0,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 2.0
             },
@@ -150,8 +164,9 @@
         },
         {
             "name": "refined_wood",
-            "inputItem": "minefantasyreforged:refined_planks",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "minefantasyreforged:refined_planks"
+            },
             "properties": {
                 "tier": 2,
                 "hardness": 0.8,
@@ -159,7 +174,7 @@
                 "flexibility": 1.3,
                 "resistance": 50,
                 "density": 0.8,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "craft_tier": 2,
                 "craft_time_modifier": 2.0
             },
@@ -171,8 +186,9 @@
         },
         {
             "name": "yew_wood",
-            "inputItem": "minefantasyreforged:yew_planks",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "minefantasyreforged:yew_planks"
+            },
             "properties": {
                 "tier": 2,
                 "hardness": 0.7,
@@ -180,7 +196,7 @@
                 "flexibility": 2.0,
                 "resistance": 40,
                 "density": 0.7,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "craft_tier": 2,
                 "craft_time_modifier": 2.0
             },
@@ -192,8 +208,9 @@
         },
         {
             "name": "ironbark_wood",
-            "inputItem": "minefantasyreforged:ironbark_planks",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "minefantasyreforged:ironbark_planks"
+            },
             "properties": {
                 "tier": 2,
                 "hardness": 0.9,
@@ -201,7 +218,7 @@
                 "flexibility": 1.1,
                 "resistance": 50,
                 "density": 0.9,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "craft_tier": 2,
                 "craft_time_modifier": 2.0
             },
@@ -213,8 +230,9 @@
         },
         {
             "name": "ebony_wood",
-            "inputItem": "minefantasyreforged:ebony_planks",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "minefantasyreforged:ebony_planks"
+            },
             "properties": {
                 "tier": 3,
                 "hardness": 1.3,
@@ -222,7 +240,7 @@
                 "flexibility": 1.6,
                 "resistance": 80,
                 "density": 1.0,
-                "rarity": 2,
+                "rarity": "RARE",
                 "craft_tier": 3,
                 "craft_time_modifier": 2.0
             },

@@ -1,8 +1,8 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.heating.TongsHelper;
-import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.config.ConfigStamina;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.StaminaBar;
@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -24,13 +25,46 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class ItemJug extends ItemComponentMFR {
-	private String type;
-	private Random rand = new Random();
+	private final String type;
+	private final boolean drinkable;
+	private final Random rand = new Random();
 
-	public ItemJug(String type) {
-		super("jug_" + type, 0);
+	public ItemJug(String type, boolean drinkable) {
+		super("jug_" + type, Rarity.COMMON);
 		setCreativeTab(MineFantasyTabs.tabFood);
 		this.type = type;
+		this.drinkable = drinkable;
+	}
+
+	@Override
+	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EnumHand hand) {
+		if (storageType == null) {
+			return EnumActionResult.FAIL;
+		}
+		if (canDrinkJug(player)) {
+			return EnumActionResult.FAIL;
+		}
+		if (world.getTileEntity(pos) != null && !(world.getTileEntity(pos) instanceof TileEntityComponent)){
+			return EnumActionResult.FAIL;
+		}
+
+		if (type.equalsIgnoreCase("empty")) {
+			return rightClickEmpty(player, world, pos, hand, facing, hitX, hitY, hitZ);
+		}
+
+		return super.onItemUseFirst(player, world, pos, facing, hitX, hitY, hitZ, hand);
+	}
+
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack itemstack = player.getHeldItem(hand);
+		if (canDrinkJug(player)) {
+			player.setActiveHand(hand);
+			return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+		}
+		else {
+			return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+		}
 	}
 
 	@Override
@@ -38,7 +72,7 @@ public class ItemJug extends ItemComponentMFR {
 		EntityPlayer user = (EntityPlayer) entityLiving;
 		if (!world.isRemote) {
 			if (type.equalsIgnoreCase("milk")) {
-				curePotionEffects(user);
+				user.clearActivePotions();
 			}
 			if (ConfigStamina.isSystemActive) {
 				StaminaBar.modifyStaminaValue(user, 10);
@@ -58,16 +92,12 @@ public class ItemJug extends ItemComponentMFR {
 		return container;
 	}
 
-	private void curePotionEffects(EntityPlayer user) {
-		user.clearActivePotions();
-	}
-
 	/**
 	 * How long it takes to use or consume an item
 	 */
 	@Override
 	public int getMaxItemUseDuration(ItemStack item) {
-		return 24;
+		return 32;
 	}
 
 	/**
@@ -77,6 +107,12 @@ public class ItemJug extends ItemComponentMFR {
 	@Override
 	public EnumAction getItemUseAction(ItemStack item) {
 		return EnumAction.DRINK;
+	}
+
+	private boolean canDrinkJug(EntityPlayer player) {
+		return drinkable
+				&& ((type.equalsIgnoreCase("milk") && !player.getActivePotionEffects().isEmpty())
+				|| !StaminaBar.isStaminaAtMax(player));
 	}
 
 	public EnumActionResult rightClickEmpty(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
@@ -117,43 +153,5 @@ public class ItemJug extends ItemComponentMFR {
 
 	private boolean isWaterSource(World world, BlockPos pos) {
 		return TongsHelper.getWaterSource(world, pos) >= 0;
-	}
-
-	@Override
-	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EnumHand hand) {
-		if (storageType == null) {
-			return EnumActionResult.FAIL;
-		}
-		if (world.getTileEntity(pos) != null && !(world.getTileEntity(pos) instanceof TileEntityComponent)){
-			return EnumActionResult.FAIL;
-		}
-
-		if (type.equalsIgnoreCase("uncooked")) {
-			return super.onItemUseFirst(player, world, pos, facing, hitX, hitY, hitZ, hand);
-		}
-		if (type.equalsIgnoreCase("empty")) {
-			return rightClickEmpty(player, world, pos, hand, facing, hitX, hitY, hitZ);
-		}
-
-		EnumFacing facingForPlacement = EnumFacing.getDirectionFromEntityLiving(pos, player);
-
-		if (facingForPlacement != EnumFacing.UP && world.getBlockState(pos).getBlock() instanceof BlockComponent){
-			return EnumActionResult.FAIL;
-		}
-		if (!(world.getBlockState(pos).getBlock() instanceof BlockComponent) && !world.isSideSolid(pos, facingForPlacement)) {
-			return EnumActionResult.FAIL;
-		}
-
-		ItemStack stack = player.getHeldItem(hand);
-
-		if (player.canPlayerEdit(pos.offset(facingForPlacement), facing, stack)) {
-			int size = BlockComponent.placeComponent(player, stack, world, pos.offset(facingForPlacement), facing, hitX, hitY, hitZ, player, hand, storageType, blockTexture);
-			if (!player.capabilities.isCreativeMode){
-				stack.shrink(size);
-				return EnumActionResult.SUCCESS;
-			}
-		}
-
-		return EnumActionResult.SUCCESS;
 	}
 }

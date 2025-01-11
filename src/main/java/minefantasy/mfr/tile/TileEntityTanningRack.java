@@ -39,7 +39,6 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 	public String tex = "";
 	public float acTime;
 	private final Random rand = new Random();
-	private int ticksExisted;
 	private Set<String> knownResearches = new HashSet<>();
 
 	public TileEntityTanningRack() {
@@ -86,17 +85,10 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 
 	@Override
 	public void update() {
-		++ticksExisted;
-
-		if (ticksExisted == 20 || ticksExisted % 120 == 0) {
-			sendUpdates();
-		}
-
 		if (isAutomated()) {
 			if (acTime > 0) {
 				acTime -= (1F / 20);
 			}
-			// syncAnimations();
 		}
 	}
 

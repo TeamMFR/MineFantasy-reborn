@@ -4,7 +4,6 @@ import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -13,7 +12,6 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class AnvilShapedCustomMaterialRecipe extends AnvilRecipeBase {
 	protected int width;
@@ -147,11 +145,9 @@ public class AnvilShapedCustomMaterialRecipe extends AnvilRecipeBase {
 				String component_metal = CustomToolHelper.getComponentMaterial(item, CustomMaterialType.METAL_MATERIAL);
 
 				for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)){
-					NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
-					for (ItemStack materialOreDictStack : materialOreDictStacks){
-						if (OreDictionary.itemMatches(ItemHeated.getStack(item), materialOreDictStack, true)){
-							component_metal = material.getName();
-						}
+					Ingredient materialIngredient = material.getMaterialIngredient();
+					if (materialIngredient.apply(ItemHeated.getStack(item))) {
+						component_metal = material.getName();
 					}
 				}
 

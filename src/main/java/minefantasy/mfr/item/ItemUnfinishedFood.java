@@ -1,21 +1,21 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyTabs;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.IRarity;
 
 /**
  * @author Anonymous Productions
  */
 public class ItemUnfinishedFood extends ItemBaseMFR {
-	private int itemRarity;
+	private final Rarity itemRarity;
 
 	public ItemUnfinishedFood(String name) {
-		this(name, 0);
+		this(name, Rarity.COMMON);
 	}
 
-	public ItemUnfinishedFood(String name, int rarity) {
+	public ItemUnfinishedFood(String name, Rarity rarity) {
 		super(name);
 		setMaxStackSize(1);
 		itemRarity = rarity;
@@ -24,19 +24,8 @@ public class ItemUnfinishedFood extends ItemBaseMFR {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		int lvl = itemRarity + 1;
-
-		if (item.isItemEnchanted()) {
-			if (lvl == 0) {
-				lvl++;
-			}
-			lvl++;
-		}
-		if (lvl >= MineFantasyItems.RARITY.length) {
-			lvl = MineFantasyItems.RARITY.length - 1;
-		}
-		return MineFantasyItems.RARITY[lvl];
+	public IRarity getForgeRarity(ItemStack item) {
+		return Rarity.getForgeRarity(item, itemRarity);
 	}
 
 }

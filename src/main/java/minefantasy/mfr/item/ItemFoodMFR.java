@@ -4,6 +4,7 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.ClientItemsMFR;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigStamina;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
 import minefantasy.mfr.data.PlayerData;
@@ -19,7 +20,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -32,6 +32,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -43,7 +44,7 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 	public static final IStoredVariable<Float> EAT_DELAY = IStoredVariable.StoredVariable.ofFloat("eatDelay", Persistence.RESPAWN);
 	public static final IStoredVariable<Float> FAT_ACCUMULATION = IStoredVariable.StoredVariable.ofFloat("fatAccumulation", Persistence.ALWAYS).setSynced();
 	public static final IStoredVariable<NBTTagCompound> REPEATED_FOOD_NBT = IStoredVariable.StoredVariable.ofNBT("repeatedFoodCount", Persistence.ALWAYS);
-	public int itemRarity;
+	public final Rarity itemRarity;
 	protected int hungerLevel;
 	private float staminaRestore = 0F;
 	private boolean hasEffect = false;
@@ -62,9 +63,15 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 	private Item returnItem;
 
 	public ItemFoodMFR(String name, int hunger, float saturation, boolean isMeat) {
+		this(name, hunger, saturation, isMeat, Rarity.COMMON);
+	}
+
+	public ItemFoodMFR(String name, int hunger, float saturation, boolean isMeat, Rarity rarity) {
 		super(hunger, saturation, isMeat);
 
 		hungerLevel = hunger;
+		this.itemRarity = rarity;
+
 		setRegistryName(name);
 		setTranslationKey(name);
 
@@ -75,11 +82,6 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 
 	static {
 		PlayerData.registerStoredVariables(EAT_DELAY, FAT_ACCUMULATION, REPEATED_FOOD_NBT);
-	}
-
-	public ItemFoodMFR(String name, int hunger, float saturation, boolean isMeat, int rarity) {
-		this(name, hunger, saturation, isMeat);
-		itemRarity = rarity;
 	}
 
 	public ItemFoodMFR setReturnItem(Item item) {
@@ -227,11 +229,6 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 		setFatAccumulation(consumer, fatAccumulation + getFatAccumulation(consumer));
 	}
 
-	public ItemFoodMFR setRarity(int i) {
-		itemRarity = i;
-		return this;
-	}
-
 	public ItemFoodMFR setStaminaRestore(float f) {
 		staminaRestore = f;
 		hasEffect = true;
@@ -338,19 +335,8 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		int lvl = itemRarity + 1;
-
-		if (item.isItemEnchanted()) {
-			if (lvl == 0) {
-				lvl++;
-			}
-			lvl++;
-		}
-		if (lvl >= MineFantasyItems.RARITY.length) {
-			lvl = MineFantasyItems.RARITY.length - 1;
-		}
-		return MineFantasyItems.RARITY[lvl];
+	public IRarity getForgeRarity(ItemStack item) {
+		return Rarity.getForgeRarity(item, itemRarity);
 	}
 
 	@Override

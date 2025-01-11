@@ -17,8 +17,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -48,6 +50,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 	public float progress;
 	private ContainerCarpenter syncCarpenter;
 	private CarpenterCraftMatrix craftMatrix;
+	private ItemStack resultStack = ItemStack.EMPTY;
 	private String lastPlayerHit = "";
 	private int requiredToolTier;
 	private int requiredCarpenterTier;
@@ -291,17 +294,19 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 			craftMatrix.setInventorySlotContents(a, getInventory().getStackInSlot(a));
 		}
 
-		return CraftingManagerCarpenter.findMatchingRecipe(this, craftMatrix, world);
+		CarpenterRecipeBase recipe = CraftingManagerCarpenter.findMatchingRecipe(this, craftMatrix, world);
+
+		resultStack = recipe != null
+				? recipe.getCraftingResult(craftMatrix)
+				: ItemStack.EMPTY;
+
+		return recipe;
 	}
 
 	public String getResultName() {
-		if (!(getResult() instanceof CarpenterRecipeBase)) {
-			return I18n.format("gui.no_project_set");
-		}
-		else {
-			CarpenterRecipeBase carpenterRecipe = getResult();
-			return carpenterRecipe.getCraftingResult(craftMatrix).getDisplayName();
-		}
+		return resultStack.isEmpty() || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR)
+				? I18n.format("gui.no_project_set")
+				: resultStack.getDisplayName();
 	}
 
 	public void updateCraftingData() {
@@ -380,6 +385,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 		requiredToolTier = nbt.getInteger(TOOL_TIER_REQUIRED_TAG);
 		ResourceLocation resourceLocation = new ResourceLocation(nbt.getString(RECIPE_RESOURCE_LOCATION_TAG));
 		this.setRecipe(CraftingManagerCarpenter.getRecipeByResourceLocation(resourceLocation));
+		resultStack = new ItemStack(nbt.getCompoundTag(RESULT_STACK_TAG));
 	}
 
 	@Override
@@ -396,6 +402,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 		else {
 			nbt.setString(RECIPE_RESOURCE_LOCATION_TAG, "");
 		}
+		nbt.setTag(RESULT_STACK_TAG, resultStack.writeToNBT(new NBTTagCompound()));
 		return nbt;
 	}
 

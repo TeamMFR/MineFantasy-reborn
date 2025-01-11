@@ -142,7 +142,6 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 					}
 				}
 			}
-			sendUpdates();
 		}
 
 		if (!isLit() && !world.isRemote) {

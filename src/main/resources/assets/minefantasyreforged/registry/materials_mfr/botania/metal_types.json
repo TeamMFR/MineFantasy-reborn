@@ -6,7 +6,10 @@
     "metal_material": [
         {
             "name": "elven_elementium",
-            "oreDictList": "ingotElvenElementium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotElvenElementium"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 4.0,
@@ -16,7 +19,7 @@
                 "resistance": 40,
                 "density": 2.5,
                 "melting_point": 1800,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 30,
                 "craft_tier": 2,
                 "craft_time_modifier": 1.0,
@@ -35,7 +38,10 @@
         },
         {
             "name": "terrasteel",
-            "oreDictList": "ingotTerrasteel",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotTerrasteel"
+            },
             "properties": {
                 "tier": 4,
                 "durability": 6.0,
@@ -45,7 +51,7 @@
                 "resistance": 40,
                 "density": 2.5,
                 "melting_point": 1500,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 40,
                 "craft_tier": 3,
                 "craft_time_modifier": 1.0,

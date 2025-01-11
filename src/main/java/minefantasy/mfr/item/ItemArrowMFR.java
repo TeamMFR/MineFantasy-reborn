@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.archery.IArrowMFR;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.BaseMaterial;
@@ -23,12 +24,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -44,18 +46,18 @@ public class ItemArrowMFR extends ItemArrow implements IArrowMFR, IAmmo, IClient
 	protected float damage;
 	protected String arrowName;
 	protected ArrowType design;
-	protected int itemRarity;
+	protected Rarity itemRarity;
 	private String ammoType = "arrow";
 	// ===================================================== CUSTOM START
 	// =============================================================\\
 	private boolean isCustom = false;
 
 	public ItemArrowMFR(String name, ArrowType type, int stackSize) {
-		this(name, 0, type);
+		this(name, Rarity.COMMON, type);
 		setMaxStackSize(stackSize);
 	}
 
-	public ItemArrowMFR(String name, int rarity, ArrowType type) {
+	public ItemArrowMFR(String name, Rarity rarity, ArrowType type) {
 		name = convertName(name);
 
 		super.setTranslationKey((type == ArrowType.EXPLOSIVE || type == ArrowType.EXPLOSIVEBOLT) ? name : type == ArrowType.BOLT ? (name + "_bolt") : (name + "_arrow"));
@@ -170,7 +172,7 @@ public class ItemArrowMFR extends ItemArrow implements IArrowMFR, IAmmo, IClient
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
@@ -194,7 +196,7 @@ public class ItemArrowMFR extends ItemArrow implements IArrowMFR, IAmmo, IClient
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
 					items.add(this.construct(customMat.getName()));
 				}
 			}

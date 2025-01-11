@@ -128,13 +128,8 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 					craftItem(user, kitchenBenchRecipe);
 				}
 			} else {
-				if (tool == Tool.WASH && held.getItemDamage() != ToolHelper.getWashMaxUses(held)) {
-					if (dirtyProgress > 0) {
-						dirtyProgress -= efficiency;
-						if (dirtyProgress < 0) {
-							dirtyProgress = 0;
-						}
-					}
+				if (ToolHelper.isStackValidWashTool(held)) {
+					cleanBench(held);
 				}
 				world.playSound(null, pos, SoundEvents.BLOCK_STONE_STEP, SoundCategory.BLOCKS, 1.25F, 1.5F);
 			}
@@ -144,6 +139,17 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 		}
 		updateCraftingData();
 		return false;
+	}
+
+	public void cleanBench(ItemStack stack) {
+		if (dirtyProgress > 0) {
+			float efficiency = ToolHelper.getCrafterEfficiency(stack);
+			dirtyProgress -= efficiency;
+			if (dirtyProgress < 0) {
+				dirtyProgress = 0;
+			}
+			updateCraftingData();
+		}
 	}
 
 	private SoundEvent getUseSound(KitchenBenchRecipeBase kitchenBenchRecipe) {

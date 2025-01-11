@@ -4,9 +4,9 @@ import minefantasy.mfr.block.BlockSalvage;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class ItemBlockSalvage extends ItemBlockBase {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		return super.getRarity(item);
+	public IRarity getForgeRarity(ItemStack item) {
+		return super.getForgeRarity(item);
 	}
 }

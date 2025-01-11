@@ -16,10 +16,13 @@ import minefantasy.mfr.recipe.TransformationRecipeBlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -80,9 +83,9 @@ public class JEITransformationRecipeCategory implements IRecipeCategory<JEITrans
 
 		List<ItemStack> inputs = recipeWrapper.getInputs();
 		List<ItemStack> outputs = recipeWrapper.getOutputs();
-		List<ItemStack> consumableStacks = recipeWrapper.getConsumableStacks();
-		ItemStack offhandStack = recipeWrapper.getOffhandStack();
-		ItemStack dropStack = recipeWrapper.getDropStack();
+		NonNullList<Ingredient> consumableStacks = recipeWrapper.getConsumableStacks();
+		Ingredient offhandStack = recipeWrapper.getOffhandStack();
+		Ingredient dropStack = recipeWrapper.getDropStack();
 
 		// Init consumableStacks slots
 		for (int x = 0; x < 2; x++) {
@@ -108,7 +111,7 @@ public class JEITransformationRecipeCategory implements IRecipeCategory<JEITrans
 
 		// Assign consumableStacks to slots
 		for (int j = 0; j < consumableStacks.size(); j++) {
-			slots.set(j, consumableStacks.get(j));
+			slots.set(j, Arrays.asList(consumableStacks.get(j).getMatchingStacks()));
 		}
 
 		// Assign inputs to slot
@@ -118,10 +121,10 @@ public class JEITransformationRecipeCategory implements IRecipeCategory<JEITrans
 		slots.set(7, outputs);
 
 		// Assign offhandStack to slot
-		slots.set(8, offhandStack);
+		slots.set(8, Arrays.asList(offhandStack.getMatchingStacks()));
 
 		// Assign dropStack to slot
-		slots.set(9, dropStack);
+		slots.set(9, Arrays.asList(dropStack.getMatchingStacks()));
 	}
 
 	/**

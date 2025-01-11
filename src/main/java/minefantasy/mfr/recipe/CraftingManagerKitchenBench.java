@@ -45,7 +45,7 @@ public class CraftingManagerKitchenBench extends CraftingManagerBase<KitchenBenc
 
 	public void addRecipe(KitchenBenchRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getKitchenBenchRecipeOutput();
-		if (ConfigCrafting.isKitchenBenchItemCraftable(itemStack)) {
+		if (ConfigCrafting.isKitchenBenchRecipeEnabled(key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);
@@ -58,8 +58,6 @@ public class CraftingManagerKitchenBench extends CraftingManagerBase<KitchenBenc
 	}
 
 	public static KitchenBenchRecipeBase findMatchingRecipe(IKitchenBench kitchenBench, KitchenBenchCraftMatrix matrix, World world) {
-		int time;
-
 		Iterator<KitchenBenchRecipeBase> recipeIterator = getRecipes().iterator();
 		KitchenBenchRecipeBase kitchenBenchRecipeBase = null;
 

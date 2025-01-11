@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import com.google.common.collect.Multimap;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.tier.IToolMaterial;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -23,9 +24,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -34,6 +35,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -47,12 +49,12 @@ import static minefantasy.mfr.registry.CustomMaterialRegistry.DECIMAL_FORMAT;
  * @author Anonymous Productions
  */
 public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRegister {
-	protected int itemRarity;
+	protected Rarity itemRarity;
 	private float baseDamage = 1.0F;
 	private boolean isCustom = false;
 	private float efficiencyMod = 1.0F;
 
-	public ItemMattock(String name, ToolMaterial material, int rarity) {
+	public ItemMattock(String name, ToolMaterial material, Rarity rarity) {
 		super(material);
 		itemRarity = rarity;
 		setRegistryName(name);
@@ -166,7 +168,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
@@ -199,7 +201,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
 					items.add(this.construct(customMat.getName(), MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}

@@ -6,7 +6,10 @@
     "metal_material": [
         {
             "name": "netherite",
-            "oreDictList": "ingotNetherite",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotNetherite"
+            },
             "properties": {
                 "tier": 7,
                 "durability": 10.0,
@@ -16,7 +19,7 @@
                 "resistance": 95,
                 "density": 3.0,
                 "melting_point": 4950,
-                "rarity": 2,
+                "rarity": "RARE",
                 "enchantability": 25,
                 "craft_tier": 6,
                 "craft_time_modifier": 18.0,

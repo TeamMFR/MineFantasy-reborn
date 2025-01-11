@@ -12,9 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AnvilDynamicRecipe extends AnvilRecipeBase {
@@ -116,13 +116,9 @@ public class AnvilDynamicRecipe extends AnvilRecipeBase {
 
 					//ingot to bar material matching
 					for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)){
-						NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
-						for (ItemStack materialOreDictStack : materialOreDictStacks){
-							if (OreDictionary.itemMatches(materialOreDictStack, inputItem, true)){
-								if (ingredient.apply(materialOreDictStack)) {
-									metal = material.getName();
-								}
-							}
+						Ingredient materialIngredient = material.getMaterialIngredient();
+						if (materialIngredient.apply(ItemHeated.getStack(inputItem))) {
+							metal = material.getName();
 						}
 					}
 
@@ -171,19 +167,18 @@ public class AnvilDynamicRecipe extends AnvilRecipeBase {
 				for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)){
 					if (material instanceof MetalMaterial) {
 						if (material.getName().equals(metal)){
-							NonNullList<ItemStack> oreDictItemStacks = OreDictionary.getOres(((MetalMaterial) material).oreDictList);
-							result = oreDictItemStacks.get(0);
+							ItemStack[] oreDictItemStacks = material.getMaterialIngredient().getMatchingStacks();
+							result = oreDictItemStacks[0];
+							metal = null;
 						}
 					}
 				}
 			}
 			else {
 				for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)){
-					NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
-					for (ItemStack materialOreDictStack : materialOreDictStacks){
-						if (OreDictionary.itemMatches(ItemHeated.getStack(inputItem), materialOreDictStack, true)){
-							metal = material.getName();
-						}
+					Ingredient materialIngredient = material.getMaterialIngredient();
+					if (materialIngredient.apply(ItemHeated.getStack(inputItem))) {
+						metal = material.getName();
 					}
 				}
 			}
@@ -210,8 +205,7 @@ public class AnvilDynamicRecipe extends AnvilRecipeBase {
 		if (modifyOutput){
 			for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)) {
 				if (material instanceof MetalMaterial) {
-					NonNullList<ItemStack> oreDictItemStacks = OreDictionary.getOres(((MetalMaterial) material).oreDictList);
-					outputs.addAll(oreDictItemStacks);
+					outputs.addAll(Arrays.asList(material.getMaterialIngredient().getMatchingStacks()));
 				}
 			}
 		}
@@ -229,11 +223,9 @@ public class AnvilDynamicRecipe extends AnvilRecipeBase {
 
 					//ingot to bar material matching
 					for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)){
-						NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
-						for (ItemStack materialOreDictStack : materialOreDictStacks){
-							if (OreDictionary.itemMatches(inputItem, materialOreDictStack, true)){
-								metal = material.getName();
-							}
+						Ingredient materialIngredient = material.getMaterialIngredient();
+						if (materialIngredient.apply(ItemHeated.getStack(inputItem))) {
+							metal = material.getName();
 						}
 					}
 
@@ -263,8 +255,7 @@ public class AnvilDynamicRecipe extends AnvilRecipeBase {
 		if (modifyOutput){
 			for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)) {
 				if (material instanceof MetalMaterial) {
-					NonNullList<ItemStack> oreDictItemStacks = OreDictionary.getOres(((MetalMaterial) material).oreDictList);
-					outputs.addAll(oreDictItemStacks);
+					outputs.addAll(Arrays.asList(material.getMaterialIngredient().getMatchingStacks()));
 				}
 			}
 		}
@@ -281,11 +272,9 @@ public class AnvilDynamicRecipe extends AnvilRecipeBase {
 
 					//ingot to bar material matching
 					for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)){
-						NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
-						for (ItemStack materialOreDictStack : materialOreDictStacks){
-							if (OreDictionary.itemMatches(ItemHeated.getStack(stack), materialOreDictStack, true)){
-								metal = material.getName();
-							}
+						Ingredient materialIngredient = material.getMaterialIngredient();
+						if (materialIngredient.apply(ItemHeated.getStack(stack))) {
+							metal = material.getName();
 						}
 					}
 

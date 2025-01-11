@@ -1,9 +1,9 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasySounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -22,7 +22,7 @@ public class ItemHalbeard extends ItemSpear {
 	 * Halbeards use a swinging attack rather than a stab, but will still stab when
 	 * sprinting
 	 */
-	public ItemHalbeard(String name, Item.ToolMaterial material, int rarity, float weight) {
+	public ItemHalbeard(String name, ToolMaterial material, Rarity rarity, float weight) {
 		super(name, material, rarity, weight);
 		setMaxDamage(getMaxDamage() * 2);
 	}

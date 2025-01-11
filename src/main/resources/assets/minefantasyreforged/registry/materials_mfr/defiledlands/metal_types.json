@@ -6,7 +6,10 @@
     "metal_material": [
         {
             "name": "umbrium",
-            "oreDictList": "ingotUmbrium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotUmbrium"
+            },
             "properties": {
                 "tier": 2,
                 "durability": 2.1,
@@ -16,7 +19,7 @@
                 "resistance": 21,
                 "density": 2.5,
                 "melting_point": 1200,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 7,
                 "craft_tier": 2,
                 "craft_time_modifier": 6.0,

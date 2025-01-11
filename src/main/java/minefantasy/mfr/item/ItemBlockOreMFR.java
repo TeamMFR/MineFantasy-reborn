@@ -1,10 +1,10 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.block.BlockOreMF;
-import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.constants.Rarity;
 import net.minecraft.block.Block;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.IRarity;
 
 public class ItemBlockOreMFR extends ItemBlockBase {
 	private BlockOreMF ore;
@@ -16,18 +16,7 @@ public class ItemBlockOreMFR extends ItemBlockBase {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		int lvl = ore.rarity + 1;
-
-		if (item.isItemEnchanted()) {
-			if (lvl == 0) {
-				lvl++;
-			}
-			lvl++;
-		}
-		if (lvl >= MineFantasyItems.RARITY.length) {
-			lvl = MineFantasyItems.RARITY.length - 1;
-		}
-		return MineFantasyItems.RARITY[lvl];
+	public IRarity getForgeRarity(ItemStack item) {
+		return Rarity.getForgeRarity(item, ore.rarity);
 	}
 }

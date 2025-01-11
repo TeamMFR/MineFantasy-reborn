@@ -47,7 +47,7 @@ public class CraftingManagerBlastFurnace extends CraftingManagerBase<BlastFurnac
 
 	public void addRecipe(BlastFurnaceRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getBlastFurnaceRecipeOutput();
-		if (ConfigCrafting.isBlastFurnaceItemCraftable(itemStack)) {
+		if (ConfigCrafting.isBlastFurnaceRecipeEnabled(key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

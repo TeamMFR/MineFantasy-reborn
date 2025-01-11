@@ -1,13 +1,14 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.mechanics.knowledge.IArtefact;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -26,8 +27,8 @@ public class ItemSchematic extends ItemBlock implements IArtefact, IClientRegist
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack stack) {
-		return EnumRarity.RARE;
+	public IRarity getForgeRarity(ItemStack stack) {
+		return Rarity.RARE;
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import com.google.common.collect.Multimap;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.config.ConfigItemRegistry;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.BaseMaterial;
@@ -22,9 +23,9 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
@@ -32,6 +33,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -46,14 +48,14 @@ import static minefantasy.mfr.registry.CustomMaterialRegistry.DECIMAL_FORMAT;
  * @author Anonymous Productions
  */
 public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRegister {
-	protected int itemRarity;
+	protected Rarity itemRarity;
 	private float baseDamage = 2F;
 	// ===================================================== CUSTOM START
 	// =============================================================\\
 	private boolean isCustom = false;
 	private float efficiencyMod = 1.0F;
 
-	public ItemPickMFR(String name, ToolMaterial material, int rarity) {
+	public ItemPickMFR(String name, ToolMaterial material, Rarity rarity) {
 		super(material);
 		itemRarity = rarity;
 		setCreativeTab(MineFantasyTabs.tabOldTools);
@@ -159,7 +161,7 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
@@ -197,7 +199,7 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
 					items.add(this.construct(customMat.getName(), MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}

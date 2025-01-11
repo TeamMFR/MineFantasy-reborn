@@ -1,8 +1,10 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.TileEntityKitchenBench;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -11,6 +13,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -76,9 +79,16 @@ public class BlockKitchenBench extends BlockTileEntity<TileEntityKitchenBench> {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityKitchenBench tile = (TileEntityKitchenBench) getTile(world, pos);
+		ItemStack stack = player.getHeldItem(hand);
 		if (tile != null && (world.isAirBlock(pos.add(0, 1, 0)) || !world.isSideSolid(pos.add(0, 1, 0), EnumFacing.DOWN))) {
 			if (facing != EnumFacing.UP || (!tile.tryCraft(player) && !world.isRemote)) {
-				tile.openGUI(world, player);
+				if (!world.isRemote && ToolHelper.isStackValidWashTool(stack)) {
+					tile.cleanBench(stack);
+					stack.damageItem(1, player);
+				}
+				else {
+					tile.openGUI(world, player);
+				}
 			}
 		}
 		if (!world.isRemote) {

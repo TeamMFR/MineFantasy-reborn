@@ -6,8 +6,9 @@
     "wood_material": [
         {
             "name": "rowan_wood",
-            "inputItem": "witchery:rowan_planks",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "witchery:rowan_planks"
+            },
             "properties": {
                 "tier": 2,
                 "hardness": 1.2,
@@ -15,7 +16,7 @@
                 "flexibility": 0.8,
                 "resistance": 50,
                 "density": 1.5,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "craft_tier": 2,
                 "craft_time_modifier": 2.0
             },
@@ -27,8 +28,11 @@
         },
         {
             "name": "alder_wood",
-            "inputItem": "witchery:alder_planks",
+            "inputItem": "",
             "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "witchery:alder_planks"
+            },
             "properties": {
                 "tier": 2,
                 "hardness": 1.2,
@@ -36,7 +40,7 @@
                 "flexibility": 0.9,
                 "resistance": 50,
                 "density": 1.3,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "craft_tier": 2,
                 "craft_time_modifier": 2.0
             },
@@ -48,8 +52,9 @@
         },
         {
             "name": "hawthorn_wood",
-            "inputItem": "thaumcraft:hawthorn_planks",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "witchery:hawthorn_planks"
+            },
             "properties": {
                 "tier": 2,
                 "hardness": 1.5,
@@ -57,7 +62,7 @@
                 "flexibility": 0.9,
                 "resistance": 50,
                 "density": 1.2,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "craft_tier": 2,
                 "craft_time_modifier": 2.0
             },

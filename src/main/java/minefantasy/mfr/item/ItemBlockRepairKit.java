@@ -1,12 +1,13 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.block.BlockRepairKit;
+import minefantasy.mfr.constants.Rarity;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 
 import java.util.List;
 
@@ -38,12 +39,12 @@ public class ItemBlockRepairKit extends ItemBlockBase {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		if (kit.isOrnate) {
-			return EnumRarity.RARE;
+			return Rarity.RARE;
 		}
 		if (kit.repairLevel >= 1.0F) {
-			return EnumRarity.UNCOMMON;
+			return Rarity.UNCOMMON;
 		}
 		return super.getRarity(item);
 	}

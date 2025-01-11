@@ -1,6 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.client.render.item.RenderBigTool;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -9,7 +10,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -26,7 +26,7 @@ public class ItemKatana extends ItemHeavyWeapon {
 	 * Katanas are heavy counterparts to Tantos, unlike most heavy weapons: these
 	 * act more like light-weapons
 	 */
-	public ItemKatana(String name, Item.ToolMaterial material, int rarity, float weight) {
+	public ItemKatana(String name, ToolMaterial material, Rarity rarity, float weight) {
 		super(material, name, rarity, weight);
 	}
 

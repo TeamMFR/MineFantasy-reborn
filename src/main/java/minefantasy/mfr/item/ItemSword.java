@@ -1,9 +1,9 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.WeaponClass;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
@@ -11,7 +11,7 @@ import net.minecraft.util.DamageSource;
  * @author Anonymous Productions
  */
 public class ItemSword extends ItemWeaponMFR {
-	public ItemSword(String name, Item.ToolMaterial material, int rarity, float weight) {
+	public ItemSword(String name, ToolMaterial material, Rarity rarity, float weight) {
 		super(material, name, rarity, weight);
 	}
 

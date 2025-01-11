@@ -1,6 +1,7 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.config.ConfigSpecials;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.util.EntityUtils;
 import net.minecraft.block.state.IBlockState;
@@ -19,7 +20,7 @@ public class BlockMythicOre extends BlockOreMF {
 	private boolean isPure;
 
 	public BlockMythicOre(String name, boolean pure) {
-		super(name, 4, pure ? 3 : 2);
+		super(name, 4, pure ? Rarity.EPIC : Rarity.RARE);
 		isPure = pure;
 		setTickRandomly(true);
 	}

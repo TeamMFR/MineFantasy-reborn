@@ -2,18 +2,18 @@ package minefantasy.mfr.util;
 
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.registry.types.CustomMaterialType;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
-import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -24,8 +24,6 @@ import java.util.List;
 public class CustomToolHelper {
 	public static final String slot_main = "main_material";
 	public static final String slot_haft = "haft_material";
-	public static EnumRarity poor = EnumHelper.addRarity("poor", TextFormatting.DARK_GRAY, "poor");
-	public static EnumRarity[] rarity = new EnumRarity[] {poor, EnumRarity.COMMON, EnumRarity.UNCOMMON, EnumRarity.RARE, EnumRarity.EPIC};
 	/**
 	 * A bit of the new system, gets custom materials for the head
 	 */
@@ -72,11 +70,11 @@ public class CustomToolHelper {
 	 *
 	 * @param itemRarity is the default id
 	 */
-	public static EnumRarity getRarity(ItemStack item, int itemRarity) {
-		int lvl = itemRarity + 1;
+	public static IRarity getRarity(ItemStack item, Rarity itemRarity) {
+		int lvl = itemRarity.getRarityValue();
 		CustomMaterial material = CustomMaterialRegistry.getMaterialFor(item, slot_main);
 		if (material != null) {
-			lvl = material.getRarityID() + 1;
+			lvl = material.getRarity().getRarityValue();
 		}
 
 		if (item.isItemEnchanted()) {
@@ -85,10 +83,10 @@ public class CustomToolHelper {
 			}
 			lvl++;
 		}
-		if (lvl >= rarity.length) {
-			lvl = rarity.length - 1;
+		if (lvl >= Rarity.values().length) {
+			lvl = Rarity.values().length - 1;
 		}
-		return rarity[lvl];
+		return Rarity.getRarityByValue(lvl);
 	}
 
 	/**

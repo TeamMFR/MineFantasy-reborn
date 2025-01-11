@@ -54,7 +54,7 @@ public class CraftingManagerRoast extends CraftingManagerBase<RoastRecipeBase> {
 
 	public void addRecipe(RoastRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getRoastRecipeOutput();
-		if (ConfigCrafting.isRoastItemCraftable(itemStack)) {
+		if (ConfigCrafting.isRoastRecipeEnabled(key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

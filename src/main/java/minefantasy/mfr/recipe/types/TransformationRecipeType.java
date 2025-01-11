@@ -5,6 +5,7 @@ import net.minecraft.util.IStringSerializable;
 public enum TransformationRecipeType implements IStringSerializable, IRecipeMFRType {
 	TRANSFORMATION_RECIPE,
 	TRANSFORMATION_RECIPE_BLOCKSTATE,
+	TRANSFORMATION_RECIPE_PROGRESSIVE,
 	NONE;
 
 	@Override

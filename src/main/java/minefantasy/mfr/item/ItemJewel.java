@@ -2,8 +2,8 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.IArtefact;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.IRarity;
 
 public class ItemJewel extends ItemBaseMFR implements IArtefact {
 	public static final String MYTHIC = "mythic_artefacts";
@@ -11,16 +11,16 @@ public class ItemJewel extends ItemBaseMFR implements IArtefact {
 	public static final String GNOMISH = "gnomish_artefacts";
 
 	public final int studyTime;
-	public final EnumRarity rarity;
+	public final IRarity rarity;
 	public final String[] researches;
 	public final String lootType;
 	public final int dropWeight;
 
-	public ItemJewel(String name, EnumRarity rarity, String lootType, int dropChance) {
+	public ItemJewel(String name, IRarity rarity, String lootType, int dropChance) {
 		this(name, 0, rarity, lootType, dropChance);
 	}
 
-	public ItemJewel(String name, int studyTime, EnumRarity rarity, String lootType, int dropChance, String... researches) {
+	public ItemJewel(String name, int studyTime, IRarity rarity, String lootType, int dropChance, String... researches) {
 		super(name);
 		this.studyTime = studyTime;
 		this.rarity = rarity;
@@ -32,7 +32,7 @@ public class ItemJewel extends ItemBaseMFR implements IArtefact {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack stack) {
+	public IRarity getForgeRarity(ItemStack stack) {
 		return rarity;
 	}
 

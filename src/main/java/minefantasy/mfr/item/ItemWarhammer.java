@@ -1,6 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.client.render.item.RenderBigTool;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -10,7 +11,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -30,7 +30,7 @@ public class ItemWarhammer extends ItemHeavyWeapon {
 	 * <p>
 	 * They can also strike heavy forces, being rather satisfying
 	 */
-	public ItemWarhammer(String name, Item.ToolMaterial material, int rarity, float weight) {
+	public ItemWarhammer(String name, ToolMaterial material, Rarity rarity, float weight) {
 		super(material, name, rarity, weight);
 		this.setMaxDamage((int) (getMaxDamage() * 2F));
 	}

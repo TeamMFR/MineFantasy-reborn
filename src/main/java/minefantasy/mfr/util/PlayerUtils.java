@@ -4,6 +4,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class PlayerUtils {
 
@@ -36,6 +40,22 @@ public class PlayerUtils {
 		}
 
 		return -1;
+	}
+
+	public static boolean playerInventoryHasIngredient(InventoryPlayer playerInventory, Ingredient ingredient) {
+		List<List<ItemStack>> inventories = Arrays.asList(
+				playerInventory.mainInventory,
+				playerInventory.offHandInventory,
+				playerInventory.armorInventory);
+
+		for (List<ItemStack> inventory : inventories) {
+			for (ItemStack stack : inventory) {
+				if (ingredient.apply(stack)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	private static boolean areStackSameIgnoreNBT(ItemStack stack1, ItemStack stack2) {

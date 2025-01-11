@@ -1,6 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.client.render.item.RenderBigTool;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -8,7 +9,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
@@ -24,7 +24,7 @@ public class ItemGreatsword extends ItemHeavyWeapon {
 	 * Greatswords are heavy counterparts to swords, with added damage, knockback
 	 * and parrying arc
 	 */
-	public ItemGreatsword(String name, Item.ToolMaterial material, int rarity, float weight) {
+	public ItemGreatsword(String name, ToolMaterial material, Rarity rarity, float weight) {
 		super(material, name, rarity, weight);
 	}
 

@@ -657,6 +657,7 @@ public class MineFantasyReforgedAPI {
 	 * @param output					The output Block ItemStack
 	 * @param consumableStacks			The List of ItemStacks in the player inventory that must be present, and will be consumed, for this recipe
 	 * @param dropStack					The ItemStack dropped as a result of the block transformation
+	 * @param shouldDropOnProgress 		If the dropStack should be dropped on each progression
 	 * @param offhandStack				The ItemStack that is required in the player's offhand
 	 * @param skill 					The Skill to grant xp to
 	 * @param research  				The required research for this recipe
@@ -669,11 +670,12 @@ public class MineFantasyReforgedAPI {
 	 * @param name						The name of this recipe
 	 */
 	public static void addStandardTransformationRecipe(
-			Tool tool, NonNullList<Ingredient> inputs, ItemStack output, List<ItemStack> consumableStacks, ItemStack dropStack,
-			ItemStack offhandStack, Skill skill, String research, int skillXp, float vanillaXp, int maxProgress, String soundName,
+			Tool tool, NonNullList<Ingredient> inputs, ItemStack output, NonNullList<Ingredient> consumableStacks,
+			boolean shouldDropOnProgress, Ingredient dropStack,
+			Ingredient offhandStack, Skill skill, String research, int skillXp, float vanillaXp, int maxProgress, String soundName,
 			List<String> blockStateProperties, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_TRANSFORMATION.addRecipe(new TransformationRecipeStandard(tool, inputs, output,
-				consumableStacks, dropStack, offhandStack, skill, research, skillXp, vanillaXp, maxProgress, soundName,
+				consumableStacks, dropStack, shouldDropOnProgress,  offhandStack, skill, research, skillXp, vanillaXp, maxProgress, soundName,
 				blockStateProperties), true, new ResourceLocation(modId, name));
 	}
 
@@ -685,6 +687,7 @@ public class MineFantasyReforgedAPI {
 	 * @param tool						The Tool that this Recipe is created with
 	 * @param consumableStacks			The List of ItemStacks in the player inventory that must be present, and will be consumed, for this recipe
 	 * @param dropStack					The ItemStack dropped as a result of the block transformation
+	 * @param shouldDropOnProgress 		If the dropStack should be dropped on each progression
 	 * @param offhandStack				The ItemStack that is required in the player's offhand
 	 * @param skill 					The Skill to grant xp to
 	 * @param research  				The required research for this recipe
@@ -696,11 +699,12 @@ public class MineFantasyReforgedAPI {
 	 * @param name						The name of this recipe
 	 */
 	public static void addBlockStateTransformationRecipe(
-			IBlockState input, IBlockState output, Tool tool, List<ItemStack> consumableStacks, ItemStack dropStack,
-			ItemStack offhandStack, Skill skill, String research, int skillXp, float vanillaXp, int progressMax,
+			IBlockState input, IBlockState output, Tool tool, NonNullList<Ingredient> consumableStacks,
+			Ingredient dropStack, boolean shouldDropOnProgress, Ingredient offhandStack, Skill skill, String research,
+			int skillXp, float vanillaXp, int progressMax,
 			String soundName, String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_TRANSFORMATION.addRecipe(new TransformationRecipeBlockState(input, output, tool,
-				consumableStacks, dropStack, offhandStack, skill, research, skillXp, vanillaXp, progressMax, soundName),
+				consumableStacks, dropStack, shouldDropOnProgress, offhandStack, skill, research, skillXp, vanillaXp, progressMax, soundName),
 				true, new ResourceLocation(modId, name));
 	}
 
@@ -743,6 +747,12 @@ public class MineFantasyReforgedAPI {
 	public static void setHeatableStats(String oredict, int min, int unstable, int max) {
 		for (ItemStack item : OreDictionary.getOres(oredict)) {
 			setHeatableStats(item, min, unstable, max);
+		}
+	}
+
+	public static void setHeatableStats(Ingredient ingredient, int min, int unstable, int max) {
+		for (ItemStack itemStack : ingredient.getMatchingStacks()) {
+			setHeatableStats(itemStack, min, unstable, max);
 		}
 	}
 

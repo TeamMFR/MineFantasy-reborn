@@ -2,6 +2,7 @@ package minefantasy.mfr.init;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.armour.ArmourDesign;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.item.ItemApron;
 import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.material.ArmorMaterialMFR;
@@ -57,12 +58,12 @@ public class LeatherArmourListMFR {
 		LEATHER_MAT = new ArmorMaterialMFR("leather", 5, 0.30F, 18, 1.00F);
 		APRON = new ArmorMaterialMFR("apron", 6, 0.30F, 0, 1.00F);
 		LEATHER = new ItemArmourMFR[LEATHER_ARMOR_TYPES.length * 4];
-		LEATHER_APRON = new ItemApron("leather_apron", MineFantasyMaterials.LEATHER_APRON, "leatherapron_layer_1", 0);
+		LEATHER_APRON = new ItemApron("leather_apron", MineFantasyMaterials.LEATHER_APRON, "leatherapron_layer_1", Rarity.COMMON);
 
 		for (int a = 0; a < LEATHER_ARMOR_TYPES.length; a++) {
 			BaseMaterial baseMat = BaseMaterial.getMaterial(LEATHER_ARMOR_TYPES[a]);
 			String matName = baseMat.name;
-			int rarity = baseMat.rarity;
+			Rarity rarity = baseMat.rarity;
 			int id = a * 4;
 			float bulk = baseMat.weight;
 			ArmourDesign design = baseMat == MineFantasyMaterials.PADDING ? ArmourDesign.PADDING : ArmourDesign.LEATHER;

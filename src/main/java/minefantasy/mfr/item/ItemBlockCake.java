@@ -1,11 +1,11 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.block.BlockCakeMFR;
-import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.constants.Rarity;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.IRarity;
 
 public class ItemBlockCake extends ItemBlockBase {
 	private BlockCakeMFR cake;
@@ -25,11 +25,11 @@ public class ItemBlockCake extends ItemBlockBase {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		int lvl = cake.getRarity() + 1;
-		if (lvl >= MineFantasyItems.RARITY.length) {
-			lvl = MineFantasyItems.RARITY.length - 1;
+	public IRarity getForgeRarity(ItemStack item) {
+		int lvl = cake.getRarity().getRarityValue();
+		if (lvl >= Rarity.values().length) {
+			lvl = Rarity.values().length - 1;
 		}
-		return MineFantasyItems.RARITY[lvl];
+		return Rarity.getRarityByValue(lvl);
 	}
 }

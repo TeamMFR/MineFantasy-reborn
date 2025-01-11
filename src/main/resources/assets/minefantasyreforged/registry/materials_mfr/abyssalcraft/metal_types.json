@@ -6,7 +6,10 @@
     "metal_material": [
         {
             "name": "abyssalnite",
-            "oreDictList": "ingotAbyssalnite",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotAbyssalnite"
+            },
             "properties": {
                 "tier": 4,
                 "durability": 7.0,
@@ -16,7 +19,7 @@
                 "resistance": 50,
                 "density": 2.5,
                 "melting_point": 1600,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "enchantability": 7,
                 "craft_tier": 4,
                 "craft_time_modifier": 10.0,
@@ -35,7 +38,10 @@
         },
         {
             "name": "refined_coralium",
-            "oreDictList": "ingotLiquifiedCoralium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotLiquifiedCoralium"
+            },
             "properties": {
                 "tier": 5,
                 "durability": 8.0,
@@ -45,7 +51,7 @@
                 "resistance": 65,
                 "density": 2.5,
                 "melting_point": 1700,
-                "rarity": 2,
+                "rarity": "RARE",
                 "enchantability": 8,
                 "craft_tier": 5,
                 "craft_time_modifier": 2.0,
@@ -64,7 +70,10 @@
         },
         {
             "name": "dreadium",
-            "oreDictList": "ingotDreadium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotDreadium"
+            },
             "properties": {
                 "tier": 6,
                 "durability": 9.5,
@@ -75,7 +84,7 @@
                 "density": 3.0,
                 "melting_point": 1600,
                 "enchantability": 6,
-                "rarity": 5,
+                "rarity": "EPIC",
                 "craft_tier": 6,
                 "craft_time_modifier": 15.0,
                 "unbreakable": false
@@ -93,7 +102,10 @@
         },
         {
             "name": "ethaxium",
-            "oreDictList": "ingotEthaxium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotEthaxium"
+            },
             "properties": {
                 "tier": 8,
                 "durability": 14.0,
@@ -103,7 +115,7 @@
                 "resistance": 90,
                 "density": 2.5,
                 "melting_point": 3200,
-                "rarity": 2,
+                "rarity": "RARE",
                 "enchantability": 9,
                 "craft_tier": 8,
                 "craft_time_modifier": 6.0,

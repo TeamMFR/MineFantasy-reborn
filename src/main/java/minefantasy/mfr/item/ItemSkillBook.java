@@ -1,5 +1,6 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -7,7 +8,6 @@ import minefantasy.mfr.mechanics.RPGElements;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -15,6 +15,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -71,7 +72,7 @@ public class ItemSkillBook extends ItemBaseMFR {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		return isMax ? EnumRarity.EPIC : EnumRarity.COMMON;
+	public IRarity getForgeRarity(ItemStack item) {
+		return isMax ? Rarity.EPIC : Rarity.COMMON;
 	}
 }

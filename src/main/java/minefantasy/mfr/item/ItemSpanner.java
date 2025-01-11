@@ -8,6 +8,7 @@ import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.block.BlockRack;
 import minefantasy.mfr.block.BlockRepairKit;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -32,10 +33,10 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -43,6 +44,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -57,7 +59,7 @@ import java.util.Set;
  */
 
 public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
-	protected int itemRarity;
+	protected Rarity itemRarity;
 	private final ToolMaterial material;
 	private final int tier;
 	private float baseDamage;
@@ -67,7 +69,7 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 	private final Set<Class<? extends Block>> shiftRotations = new HashSet<Class<? extends Block>>();
 	private final Set<Class<? extends Block>> blacklistedRotations = new HashSet<Class<? extends Block>>();
 
-	public ItemSpanner(String name, int rarity, int tier) {
+	public ItemSpanner(String name, Rarity rarity, int tier) {
 		super(2.0F, 1.0F, ToolMaterial.IRON, Sets.newHashSet(new Block[] {}));
 		this.material = ToolMaterial.IRON;
 		itemRarity = rarity;
@@ -213,7 +215,7 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
@@ -265,7 +267,7 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
 					items.add(this.construct(customMat.getName(), MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}

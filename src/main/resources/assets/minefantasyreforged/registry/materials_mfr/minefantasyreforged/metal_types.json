@@ -3,7 +3,10 @@
     "metal_material": [
         {
             "name": "tin",
-            "oreDictList": "ingotTin",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotTin"
+            },
             "properties": {
                 "tier": 0,
                 "durability": 1.0,
@@ -13,7 +16,7 @@
                 "resistance": 10,
                 "density": 2.0,
                 "melting_point": 900,
-                "rarity": -1,
+                "rarity": "COMMON",
                 "enchantability": 5,
                 "craft_tier": -1,
                 "craft_time_modifier": 2.0,
@@ -32,7 +35,10 @@
         },
         {
             "name": "copper",
-            "oreDictList": "ingotCopper",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotCopper"
+            },
             "properties": {
                 "tier": 0,
                 "durability": 1.0,
@@ -42,7 +48,7 @@
                 "resistance": 50,
                 "density": 3.0,
                 "melting_point": 1000,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 5,
                 "craft_tier": 0,
                 "craft_time_modifier": 2.0,
@@ -61,7 +67,10 @@
         },
         {
             "name": "bronze",
-            "oreDictList": "ingotBronze",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotBronze"
+            },
             "properties": {
                 "tier": 1,
                 "durability": 1.5,
@@ -71,7 +80,7 @@
                 "resistance": 20,
                 "density": 3.0,
                 "melting_point": 1200,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 5,
                 "craft_tier": 1,
                 "craft_time_modifier": 5.0,
@@ -90,7 +99,10 @@
         },
         {
             "name": "iron",
-            "oreDictList": "ingotIron",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotIron"
+            },
             "properties": {
                 "tier": 2,
                 "durability": 2.0,
@@ -100,7 +112,7 @@
                 "resistance": 20,
                 "density": 2.5,
                 "melting_point": 1200,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 5,
                 "craft_tier": 2,
                 "craft_time_modifier": 6.0,
@@ -119,7 +131,10 @@
         },
         {
             "name": "pig_iron",
-            "oreDictList": "ingotPigIron",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotPigIron"
+            },
             "properties": {
                 "tier": 2,
                 "durability": 2.0,
@@ -129,7 +144,7 @@
                 "resistance": 20,
                 "density": 2.5,
                 "melting_point": 1200,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 3,
                 "craft_tier": 2,
                 "craft_time_modifier": 6.0,
@@ -148,7 +163,10 @@
         },
         {
             "name": "steel",
-            "oreDictList": "ingotSteel",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotSteel"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 3.0,
@@ -158,7 +176,7 @@
                 "resistance": 30,
                 "density": 2.5,
                 "melting_point": 1500,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 10,
                 "craft_tier": 3,
                 "craft_time_modifier": 7.0,
@@ -177,7 +195,10 @@
         },
         {
             "name": "encrusted",
-            "oreDictList": "ingotDiamond",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotDiamond"
+            },
             "properties": {
                 "tier": 4,
                 "durability": 8.0,
@@ -187,7 +208,7 @@
                 "resistance": 35,
                 "density": 3.0,
                 "melting_point": 1800,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 25,
                 "craft_tier": 3,
                 "craft_time_modifier": 8.0,
@@ -206,7 +227,10 @@
         },
         {
             "name": "obsidian",
-            "oreDictList": "ingotObsidian",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotObsidian"
+            },
             "properties": {
                 "tier": 4,
                 "durability": 8.0,
@@ -216,7 +240,7 @@
                 "resistance": 35,
                 "density": 3.0,
                 "melting_point": 2000,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 25,
                 "craft_tier": 3,
                 "craft_time_modifier": 8.0,
@@ -235,7 +259,10 @@
         },
         {
             "name": "tungsten",
-            "oreDictList": "ingotTungsten",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotTungsten"
+            },
             "properties": {
                 "tier": 4,
                 "durability": 8.0,
@@ -245,7 +272,7 @@
                 "resistance": 35,
                 "density": 4.0,
                 "melting_point": 2000,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 5,
                 "craft_tier": 3,
                 "craft_time_modifier": 8.0,
@@ -264,7 +291,10 @@
         },
         {
             "name": "black_steel",
-            "oreDictList": "ingotBlackSteel",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotBlackSteel"
+            },
             "properties": {
                 "tier": 5,
                 "durability": 6.0,
@@ -274,7 +304,7 @@
                 "resistance": 50,
                 "density": 3.0,
                 "melting_point": 2000,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 12,
                 "craft_tier": 4,
                 "craft_time_modifier": 10.0,
@@ -293,7 +323,10 @@
         },
         {
             "name": "blue_steel",
-            "oreDictList": "ingotBlueSteel",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotBlueSteel"
+            },
             "properties": {
                 "tier": 6,
                 "durability": 7.0,
@@ -303,7 +336,7 @@
                 "resistance": 65,
                 "density": 2.0,
                 "melting_point": 2000,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 20,
                 "craft_tier": 5,
                 "craft_time_modifier": 12.0,
@@ -322,7 +355,10 @@
         },
         {
             "name": "red_steel",
-            "oreDictList": "ingotRedSteel",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotRedSteel"
+            },
             "properties": {
                 "tier": 6,
                 "durability": 8.0,
@@ -332,7 +368,7 @@
                 "resistance": 50,
                 "density": 3.5,
                 "melting_point": 2000,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 1,
                 "craft_tier": 5,
                 "craft_time_modifier": 14.0,
@@ -351,7 +387,10 @@
         },
         {
             "name": "silver",
-            "oreDictList": "ingotSilver",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotSilver"
+            },
             "properties": {
                 "tier": 0,
                 "durability": 2.5,
@@ -361,7 +400,7 @@
                 "resistance": 40,
                 "density": 3.5,
                 "melting_point": 1200,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 10,
                 "craft_tier": 0,
                 "craft_time_modifier": 2.0,
@@ -380,7 +419,10 @@
         },
         {
             "name": "gold",
-            "oreDictList": "ingotGold",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotGold"
+            },
             "properties": {
                 "tier": 0,
                 "durability": 2.0,
@@ -390,7 +432,7 @@
                 "resistance": 40,
                 "density": 3.5,
                 "melting_point": 1200,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 25,
                 "craft_tier": 0,
                 "craft_time_modifier": 2.0,
@@ -409,7 +451,10 @@
         },
         {
             "name": "mithril",
-            "oreDictList": "ingotMithril",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotMithril"
+            },
             "properties": {
                 "tier": 7,
                 "durability": 10.0,
@@ -419,7 +464,7 @@
                 "resistance": 90,
                 "density": 2.0,
                 "melting_point": 2500,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "enchantability": 30,
                 "craft_tier": 6,
                 "craft_time_modifier": 16.0,
@@ -438,7 +483,10 @@
         },
         {
             "name": "adamantium",
-            "oreDictList": "ingotAdamantium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotAdamantium"
+            },
             "properties": {
                 "tier": 7,
                 "durability": 12.0,
@@ -448,7 +496,7 @@
                 "resistance": 80,
                 "density": 3.5,
                 "melting_point": 2500,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "enchantability": 10,
                 "craft_tier": 6,
                 "craft_time_modifier": 18.0,
@@ -467,7 +515,10 @@
         },
         {
             "name": "mithium",
-            "oreDictList": "ingotMithium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotMithium"
+            },
             "properties": {
                 "tier": 8,
                 "durability": 15.0,
@@ -477,7 +528,7 @@
                 "resistance": 95,
                 "density": 2.0,
                 "melting_point": 2500,
-                "rarity": 2,
+                "rarity": "RARE",
                 "enchantability": 40,
                 "craft_tier": 7,
                 "craft_time_modifier": 22.0,
@@ -496,7 +547,10 @@
         },
         {
             "name": "ignotumite",
-            "oreDictList": "ingotIgnotumite",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotIgnotumite"
+            },
             "properties": {
                 "tier": 8,
                 "durability": 15.0,
@@ -506,7 +560,7 @@
                 "resistance": 85,
                 "density": 3.5,
                 "melting_point": 3000,
-                "rarity": 2,
+                "rarity": "RARE",
                 "enchantability": 20,
                 "craft_tier": 7,
                 "craft_time_modifier": 30.0,
@@ -525,7 +579,10 @@
         },
         {
             "name": "ender",
-            "oreDictList": "ingotEnder",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotEnder"
+            },
             "properties": {
                 "tier": 8,
                 "durability": 15.0,
@@ -535,7 +592,7 @@
                 "resistance": 90,
                 "density": 3.0,
                 "melting_point": 3000,
-                "rarity": 2,
+                "rarity": "RARE",
                 "enchantability": 20,
                 "craft_tier": 7,
                 "craft_time_modifier": 26.0,
@@ -554,7 +611,10 @@
         },
         {
             "name": "composite_alloy",
-            "oreDictList": "ingotCompositeAlloy",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotCompositeAlloy"
+            },
             "properties": {
                 "tier": 4,
                 "durability": 10,
@@ -564,7 +624,7 @@
                 "resistance": 75,
                 "density": 4.0,
                 "melting_point": 2500,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "enchantability": 10,
                 "craft_tier": 3,
                 "craft_time_modifier": 7.0,

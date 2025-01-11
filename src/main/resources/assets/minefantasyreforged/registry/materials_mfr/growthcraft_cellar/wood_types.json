@@ -6,8 +6,9 @@
     "wood_material": [
         {
             "name": "cork_log_wood",
-            "inputItem": "growthcraft_cellar:cork_log_stripped",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "growthcraft_cellar:cork_log_stripped"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.2,
@@ -15,7 +16,7 @@
                 "flexibility": 1.3,
                 "resistance": 50,
                 "density": 1.0,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 2.0
             },
@@ -27,8 +28,9 @@
         },
         {
             "name": "cork_bark_wood",
-            "inputItem": "growthcraft_cellar:cork_bark",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "growthcraft_cellar:cork_bark"
+            },
             "properties": {
                 "tier": 0,
                 "hardness": 0.1,
@@ -36,7 +38,7 @@
                 "flexibility": 0.5,
                 "resistance": 10,
                 "density": 0.5,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 0,
                 "craft_time_modifier": 2.0
             },

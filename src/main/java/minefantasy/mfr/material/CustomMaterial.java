@@ -1,23 +1,24 @@
 package minefantasy.mfr.material;
 
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.registry.types.CustomMaterialType;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class CustomMaterial extends IForgeRegistryEntry.Impl<CustomMaterial>{
-	/**
-	 * Min and Max workable temps
-	 */
 	private static final int[] flameResistArray = new int[] {100, 300};
+
 	private final String name;
 	private final CustomMaterialType type;
+
+	protected Ingredient materialIngredient;
 	/**
 	 * The material colour
 	 */
-	private int[] colourRGB = new int[] {237, 237, 237};
+	private final int[] colourRGB;
 	/**
 	 * Base threshold for armour rating
 	 */
@@ -43,61 +44,38 @@ public class CustomMaterial extends IForgeRegistryEntry.Impl<CustomMaterial>{
 	 */
 	private final float density;
 	private final int tier;
-	private int rarityID = 0;
-	private int enchantability;
-	private int crafterTier = 0;
-	private int crafterAnvilTier = 0;
-	private float craftTimeModifier = 1.0F;
-	private float meltingPoint;
-	private float[] armourProtection = new float[] {1.0F, 1.0F, 1.0F}; // TODO: consider making this property into a typed class
-	private boolean unbreakable = false;
+	private final Rarity rarity;
+	private final int enchantability;
+	private final int crafterTier;
+	private final Integer crafterAnvilTier;
+	private final Float craftTimeModifier;
+	private final Integer meltingPoint;
+	private Float[] armourProtection; // TODO: consider making this property into a typed class
+	private final boolean unbreakable;
 
-	public CustomMaterial(String name, CustomMaterialType type, int tier, float hardness, float durability,
-			float flexibility, float resistance, float sharpness, float density, int enchantability) {
+	public CustomMaterial(String name, CustomMaterialType type, Ingredient materialIngredient, int[] colourRGB, float hardness,
+			float durability, float flexibility, float sharpness, float resistance, float density, int tier, Rarity rarity,
+			int enchantability, int crafterTier, Integer crafterAnvilTier, Float craftTimeModifier, Integer meltingPoint,
+			Float[] armourProtection, boolean unbreakable) {
 		this.name = name;
 		this.type = type;
-		this.tier = tier;
+		this.materialIngredient = materialIngredient;
+		this.colourRGB = colourRGB;
 		this.hardness = hardness;
 		this.durability = durability;
 		this.flexibility = flexibility;
 		this.sharpness = sharpness;
-		this.density = density;
 		this.resistance = resistance;
-		this.enchantability = enchantability;
-		this.craftTimeModifier = 2F + (sharpness * 2F);
-	}
-
-	public CustomMaterial(String name, CustomMaterialType type, int tier, float hardness, float durability,
-			float flexibility, float resistance, float sharpness, float density, int enchantability,
-			float[] armourProtection, int[] color) {
-		this.name = name;
-		this.type = type;
+		this.density = density;
 		this.tier = tier;
-		this.hardness = hardness;
-		this.durability = durability;
-		this.flexibility = flexibility;
-		this.sharpness = sharpness;
-		this.density = density;
+		this.rarity = rarity;
 		this.enchantability = enchantability;
-		this.resistance = resistance;
-		this.craftTimeModifier = 2F + (sharpness * 2F);
+		this.crafterTier = crafterTier;
+		this.crafterAnvilTier = crafterAnvilTier;
+		this.craftTimeModifier = craftTimeModifier;
+		this.meltingPoint = meltingPoint;
 		this.armourProtection = armourProtection;
-		this.colourRGB = color;
-	}
-
-	public CustomMaterial(String name, CustomMaterialType type, int tier, float hardness, float durability,
-			float flexibility, float resistance, float sharpness, float density, int[] color) {
-		this.name = name;
-		this.type = type;
-		this.tier = tier;
-		this.hardness = hardness;
-		this.durability = durability;
-		this.flexibility = flexibility;
-		this.sharpness = sharpness;
-		this.density = density;
-		this.resistance = resistance;
-		this.craftTimeModifier = 2F + (sharpness * 2F);
-		this.colourRGB = color;
+		this.unbreakable = unbreakable;
 	}
 
 	/**
@@ -114,9 +92,12 @@ public class CustomMaterial extends IForgeRegistryEntry.Impl<CustomMaterial>{
 		return type;
 	}
 
-	public CustomMaterial setColour(int red, int green, int blue) {
-		colourRGB = new int[] {red, green, blue};
-		return this;
+	public void setMaterialIngredient(Ingredient materialIngredient) {
+		this.materialIngredient = materialIngredient;
+	}
+
+	public Ingredient getMaterialIngredient() {
+		return materialIngredient;
 	}
 
 	public int[] getColourRGB() {
@@ -155,23 +136,12 @@ public class CustomMaterial extends IForgeRegistryEntry.Impl<CustomMaterial>{
 		return tier;
 	}
 
-	public CustomMaterial setRarity(int id) {
-		rarityID = id;
-		return this;
-	}
-
-	public int getRarityID() {
-		return rarityID;
+	public Rarity getRarity() {
+		return rarity;
 	}
 
 	public int getEnchantability() {
 		return enchantability;
-	}
-
-	public CustomMaterial setCrafterTiers(int tier) {
-		this.crafterTier = tier;
-		this.crafterAnvilTier = Math.min(tier, 4);
-		return this;
 	}
 
 	public int getCrafterTier() {
@@ -182,36 +152,20 @@ public class CustomMaterial extends IForgeRegistryEntry.Impl<CustomMaterial>{
 		return crafterAnvilTier;
 	}
 
-	public CustomMaterial modifyCraftTime(float time) {
-		this.craftTimeModifier *= time;
-		return this;
-	}
-
 	public float getCraftTimeModifier() {
 		return craftTimeModifier;
-	}
-
-	public CustomMaterial setMeltingPoint(float heat) {
-		meltingPoint = heat;
-		return this;
 	}
 
 	public float getMeltingPoint() {
 		return meltingPoint;
 	}
 
-	public CustomMaterial setArmourStats(float cutting, float blunt, float piercing) {
-		armourProtection = new float[] {cutting, blunt, piercing};
-		return this;
+	public void setArmourStats(float cutting, float blunt, float piercing) {
+		armourProtection = new Float[] {cutting, blunt, piercing};
 	}
 
-	public float[] getArmourProtection() {
+	public Float[] getArmourProtection() {
 		return armourProtection;
-	}
-
-	public CustomMaterial setUnbreakable(boolean unbreakable) {
-		this.unbreakable = unbreakable;
-		return this;
 	}
 
 	public boolean isUnbreakable() {
@@ -225,10 +179,6 @@ public class CustomMaterial extends IForgeRegistryEntry.Impl<CustomMaterial>{
 
 	public float getArmourProtection(int id) {
 		return armourProtection[id];
-	}
-
-	public ItemStack getItemStack() {
-		return ItemStack.EMPTY;
 	}
 
 	public float getFireResistance() {
@@ -246,13 +196,13 @@ public class CustomMaterial extends IForgeRegistryEntry.Impl<CustomMaterial>{
 	// FUNCTIONS----------------------------------------\\
 
 	public int[] getHeatableStats() {
-		int workableTemp = (int) meltingPoint;
+		int workableTemp = meltingPoint;
 		int unstableTemp = (int) (workableTemp * 1.5F);
 		int maxTemp = (int) (workableTemp * 2F);
 		return new int[] {workableTemp, unstableTemp, maxTemp};
 	}
 
 	public boolean isHeatable() {
-		return this instanceof MetalMaterial;
+		return false;
 	}
 }

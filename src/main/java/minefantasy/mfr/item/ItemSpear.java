@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.weapon.IExtendedReachWeapon;
 import minefantasy.mfr.client.render.item.RenderSpear;
 import minefantasy.mfr.config.ConfigWeapon;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -38,7 +39,7 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
 	 * <p>
 	 * These are for the defensive player
 	 */
-	public ItemSpear(String name, Item.ToolMaterial material, int rarity, float weight) {
+	public ItemSpear(String name, ToolMaterial material, Rarity rarity, float weight) {
 		super(material, name, rarity, weight);
 	}
 

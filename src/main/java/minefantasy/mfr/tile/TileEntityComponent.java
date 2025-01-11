@@ -27,7 +27,6 @@ public class TileEntityComponent extends TileEntityBase {
 	public String type = "bar";
 	public String tex = "bar";
 	public CustomMaterial material;
-	private int ticksExisted;
 
 	public ItemStackHandler inventory = createInventory();
 
@@ -93,7 +92,6 @@ public class TileEntityComponent extends TileEntityBase {
 		this.type = type;
 		this.tex = tex;
 		this.material = CustomToolHelper.getCustomPrimaryMaterial(item);
-		this.ticksExisted = 19;
 	}
 
 	public void interact(EntityPlayer user, ItemStack held, boolean leftClick) {
@@ -171,15 +169,6 @@ public class TileEntityComponent extends TileEntityBase {
 					Constants.StorageTextures.PERSIST_FLAG,
 					Constants.StorageTextures.PERSIST_FLAG,
 					0);
-		}
-	}
-
-	@Override
-	public void markDirty() {
-		++ticksExisted;
-
-		if (ticksExisted == 20 || ticksExisted % 120 == 0) {
-			sendUpdates();
 		}
 	}
 

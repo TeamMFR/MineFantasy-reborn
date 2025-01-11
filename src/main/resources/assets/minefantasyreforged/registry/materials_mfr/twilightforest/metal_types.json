@@ -6,7 +6,10 @@
     "metal_material": [
         {
             "name": "ironwood",
-            "oreDictList": "ingotIronwood",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotIronwood"
+            },
             "properties": {
                 "tier": 2,
                 "durability": 3.0,
@@ -16,7 +19,7 @@
                 "resistance": 25,
                 "density": 2.0,
                 "melting_point": 1300,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "enchantability": 15,
                 "craft_tier": 2,
                 "craft_time_modifier": 7.0,
@@ -35,7 +38,10 @@
         },
         {
             "name": "fiery",
-            "oreDictList": "ingotFiery",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotFiery"
+            },
             "properties": {
                 "tier": 4,
                 "durability": 2.0,
@@ -45,7 +51,7 @@
                 "resistance": 60,
                 "density": 2.5,
                 "melting_point": 2800,
-                "rarity": 2,
+                "rarity": "RARE",
                 "enchantability": 16,
                 "craft_tier": 4,
                 "craft_time_modifier": 14.0,
@@ -64,7 +70,10 @@
         },
         {
             "name": "steeleaf",
-            "oreDictList": "ingotSteeleaf",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotSteeleaf"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 3.5,
@@ -74,7 +83,7 @@
                 "resistance": 35,
                 "density": 2.0,
                 "melting_point": 1500,
-                "rarity": 3,
+                "rarity": "EPIC",
                 "enchantability": 14,
                 "craft_tier": 3,
                 "craft_time_modifier": 10.0,
@@ -93,7 +102,10 @@
         },
         {
             "name": "knightmetal",
-            "oreDictList": "ingotKnightmetal",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotKnightmetal"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 4.0,
@@ -103,7 +115,7 @@
                 "resistance": 40,
                 "density": 3.0,
                 "melting_point": 1800,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 17,
                 "craft_tier": 3,
                 "craft_time_modifier": 10.0,

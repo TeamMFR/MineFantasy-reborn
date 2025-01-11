@@ -301,7 +301,7 @@ public final class MFREventHandler {
 									ArrayList<CustomMaterial> metalMaterials = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 									for (CustomMaterial metal : metalMaterials){
 										if (metal instanceof MetalMaterial) {
-											if (((MetalMaterial) metal).oreDictList.equals(s)){
+											if (metal.getMaterialIngredient().apply(event.getItemStack())){
 												material = metal;
 												if (material != CustomMaterialRegistry.NONE){
 													break;

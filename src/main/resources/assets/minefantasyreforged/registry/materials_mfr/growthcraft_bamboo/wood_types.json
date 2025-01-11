@@ -6,8 +6,9 @@
     "wood_material": [
         {
             "name": "thick_bamboo_wood",
-            "inputItem": "growthcraft_bamboo:bamboo_plank",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "growthcraft_bamboo:bamboo_plank"
+            },
             "properties": {
                 "tier": 2,
                 "hardness": 1.7,
@@ -15,7 +16,7 @@
                 "flexibility": 1.8,
                 "resistance": 40,
                 "density": 1.0,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 2,
                 "craft_time_modifier": 2.0
             },

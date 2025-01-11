@@ -48,7 +48,7 @@ public class CraftingManagerAnvil extends CraftingManagerBase<AnvilRecipeBase> {
 	@Override
 	public void addRecipe(AnvilRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getAnvilRecipeOutput();
-		if (ConfigCrafting.isAnvilItemCraftable(itemStack)) {
+		if (ConfigCrafting.isAnvilRecipeEnabled(key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

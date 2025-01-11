@@ -2,6 +2,7 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.Lists;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -21,7 +22,7 @@ import java.util.List;
 public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage {
 
 	public ItemExplodingArrow() {
-		super("exploding_arrow", 1, ArrowType.EXPLOSIVE);
+		super("exploding_arrow", Rarity.UNCOMMON, ArrowType.EXPLOSIVE);
 		setCreativeTab(MineFantasyTabs.tabGadget);
 		setMaxStackSize(16);
 	}

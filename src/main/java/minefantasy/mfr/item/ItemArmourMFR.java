@@ -5,8 +5,8 @@ import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.IElementalResistance;
 import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigClient;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.LeatherArmourListMFR;
-import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.material.CustomMaterial;
@@ -22,11 +22,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -36,9 +36,10 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	@SideOnly(Side.CLIENT)
 	private static Object fullplate;
 	protected BaseMaterial baseMaterial;
-	private final int itemRarity;
+	private final Rarity itemRarity;
 
-	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign armourDesign, EntityEquipmentSlot slot, String tex, int rarity) {
+	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign armourDesign, EntityEquipmentSlot slot,
+			String tex, Rarity rarity) {
 		super(name, material.getArmourConversion(), armourDesign, slot, tex);
 		baseMaterial = material;
 		setRegistryName(name);
@@ -49,7 +50,8 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 		itemRarity = rarity;
 	}
 
-	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign armourDesign, EntityEquipmentSlot slot, String tex, int rarity, float customBulk) {
+	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign armourDesign, EntityEquipmentSlot slot,
+			String tex, Rarity rarity, float customBulk) {
 		this(name, material, armourDesign, slot, tex, rarity);
 		this.suitBulk = customBulk;
 	}
@@ -102,12 +104,12 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		int lvl = itemRarity + 1;
+	public IRarity getForgeRarity(ItemStack item) {
+		int lvl = itemRarity.getRarityValue();
 
 		CustomMaterial material = CustomMaterialRegistry.getMaterialFor(item, "main_material");
 		if (material != null) {
-			lvl = material.getRarityID() + 1;
+			lvl = material.getRarity().getRarityValue();
 		}
 
 		if (item.isItemEnchanted()) {
@@ -119,10 +121,10 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 		if (design == ArmourDesign.PLATE) {
 			lvl++;
 		}
-		if (lvl >= MineFantasyItems.RARITY.length) {
-			lvl = MineFantasyItems.RARITY.length - 1;
+		if (lvl >= Rarity.values().length) {
+			lvl = Rarity.values().length - 1;
 		}
-		return MineFantasyItems.RARITY[lvl];
+		return Rarity.getRarityByValue(lvl);
 	}
 
 	@Override

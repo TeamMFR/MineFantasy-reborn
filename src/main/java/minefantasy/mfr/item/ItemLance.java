@@ -2,6 +2,7 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.client.render.item.RenderLance;
 import minefantasy.mfr.config.ConfigStamina;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -11,7 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
@@ -28,7 +28,7 @@ import java.util.List;
  */
 @Optional.Interface(iface = "net.shadowmage.ancientwarfare.npc.item.IExtendedReachWeapon", modid = "ancientwarfarenpc")
 public class ItemLance extends ItemSpear {
-	public ItemLance(String name, Item.ToolMaterial material, int rarity, float weight) {
+	public ItemLance(String name, ToolMaterial material, Rarity rarity, float weight) {
 		super(name, material, rarity, weight);
 		setMaxDamage(getMaxDamage(new ItemStack(this)) * 2);
 	}

@@ -2,10 +2,10 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.MFREventHandler;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
 import minefantasy.mfr.data.PlayerData;
-import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import net.minecraft.client.resources.I18n;
@@ -14,13 +14,13 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -44,11 +44,11 @@ public class ItemBandage extends ItemBaseMFR {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		if (healPower <= 5) {
-			return MineFantasyItems.POOR;
+			return Rarity.POOR;
 		}
-		return super.getRarity(item);
+		return super.getForgeRarity(item);
 	}
 
 	/**

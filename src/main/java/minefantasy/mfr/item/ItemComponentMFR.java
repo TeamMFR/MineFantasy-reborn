@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.registry.types.CustomMaterialType;
@@ -10,7 +11,6 @@ import minefantasy.mfr.tile.TileEntityComponent;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -19,6 +19,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -29,7 +30,7 @@ import java.util.List;
  */
 public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 	protected String name;
-	protected int itemRarity;
+	protected Rarity itemRarity;
 	// STORAGE
 	String blockTexture;
 	String storageType;
@@ -39,10 +40,10 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 	CustomMaterialType materialType = CustomMaterialRegistry.NONE.getType();
 
 	public ItemComponentMFR(String name) {
-		this(name, 0);
+		this(name, Rarity.COMMON);
 	}
 
-	public ItemComponentMFR(String name, int rarity) {
+	public ItemComponentMFR(String name, Rarity rarity) {
 		super(name);
 		itemRarity = rarity;
 		this.name = name;
@@ -82,7 +83,7 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 

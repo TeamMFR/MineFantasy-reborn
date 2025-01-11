@@ -1,10 +1,10 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -13,6 +13,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
+import net.minecraftforge.common.IRarity;
 
 import java.util.List;
 import java.util.Random;
@@ -57,7 +58,7 @@ public class ItemLootSack extends ItemBaseMFR {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		return tier == 0 ? EnumRarity.COMMON : tier == 1 ? EnumRarity.UNCOMMON : EnumRarity.EPIC;
+	public IRarity getForgeRarity(ItemStack item) {
+		return tier == 0 ? Rarity.COMMON : tier == 1 ? Rarity.UNCOMMON : Rarity.EPIC;
 	}
 }

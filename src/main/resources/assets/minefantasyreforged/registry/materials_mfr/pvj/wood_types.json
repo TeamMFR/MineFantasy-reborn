@@ -6,8 +6,9 @@
     "wood_material": [
         {
             "name": "willow_wood",
-            "inputItem": "pvj:planks_willow",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "pvj:planks_willow"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -15,7 +16,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
@@ -27,8 +28,9 @@
         },
         {
             "name": "mangrove_wood",
-            "inputItem": "pvj:planks_mangrove",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "pvj:planks_mangrove"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -36,7 +38,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
@@ -48,8 +50,9 @@
         },
         {
             "name": "palm_wood",
-            "inputItem": "pvj:planks_palm",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "pvj:planks_palm"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -57,7 +60,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
@@ -69,8 +72,9 @@
         },
         {
             "name": "redwood_wood",
-            "inputItem": "pvj:planks_redwood",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "pvj:planks_redwood"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -78,7 +82,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
@@ -90,8 +94,9 @@
         },
         {
             "name": "fir_wood",
-            "inputItem": "pvj:planks_fir",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "pvj:planks_fir"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -99,7 +104,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
@@ -111,8 +116,9 @@
         },
         {
             "name": "pine_wood",
-            "inputItem": "pvj:planks_pine",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "pvj:planks_pine"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -120,7 +126,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
@@ -132,8 +138,9 @@
         },
         {
             "name": "aspen_wood",
-            "inputItem": "pvj:planks_aspen",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "pvj:planks_aspen"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -141,7 +148,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
@@ -153,8 +160,9 @@
         },
         {
             "name": "maple_wood",
-            "inputItem": "pvj:planks_maple",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "pvj:planks_maple"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -162,7 +170,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
@@ -174,8 +182,9 @@
         },
         {
             "name": "baobab_wood",
-            "inputItem": "pvj:planks_baobab",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "pvj:planks_baobab"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -183,7 +192,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
@@ -195,8 +204,9 @@
         },
         {
             "name": "cottonwood_wood",
-            "inputItem": "pvj:planks_cottonwood",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "pvj:planks_cottonwood"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -204,7 +214,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
@@ -216,8 +226,9 @@
         },
         {
             "name": "pale_juniper_wood",
-            "inputItem": "pvj:planks_juniper",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "pvj:planks_juniper"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -225,7 +236,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
@@ -237,8 +248,9 @@
         },
         {
             "name": "pale_cherry_wood",
-            "inputItem": "pvj:planks_cherry_blossom",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "pvj:planks_cherry_blossom"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -246,7 +258,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
@@ -258,8 +270,9 @@
         },
         {
             "name": "jacaranda_wood",
-            "inputItem": "pvj:planks_jacaranda",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "pvj:planks_jacaranda"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -267,7 +280,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },

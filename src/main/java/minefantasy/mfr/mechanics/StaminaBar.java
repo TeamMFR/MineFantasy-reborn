@@ -51,6 +51,10 @@ public class StaminaBar {
 		return getBaseMaxStamina(user) + getBonusStamina(user);
 	}
 
+	public static boolean isStaminaAtMax(EntityLivingBase user) {
+		return StaminaBar.getStaminaValue(user) == StaminaBar.getTotalMaxStamina(user);
+	}
+
 	public static float getBaseMaxStamina(EntityLivingBase user) {
 		float bonus = getStaminaLevelBoost(user);
 		if (user instanceof EntityPlayer) {

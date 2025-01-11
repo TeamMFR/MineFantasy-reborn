@@ -6,7 +6,10 @@
     "metal_material": [
         {
             "name": "demon_metal",
-            "oreDictList": "ingotDemonicMetal",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotDemonicMetal"
+            },
             "properties": {
                 "tier": 4,
                 "durability": 6.0,
@@ -16,7 +19,7 @@
                 "resistance": 40,
                 "density": 2.5,
                 "melting_point": 2500,
-                "rarity": 2,
+                "rarity": "RARE",
                 "enchantability": 25,
                 "craft_tier": 4,
                 "craft_time_modifier": 12.0,
@@ -35,7 +38,10 @@
         },
         {
             "name": "enchanted_metal",
-            "oreDictList": "ingotEnchantedMetal",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotEnchantedMetal"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 3.0,
@@ -45,7 +51,7 @@
                 "resistance": 50,
                 "density": 1.5,
                 "melting_point": 1500,
-                "rarity": 1,
+                "rarity": "UNCOMMON",
                 "enchantability": 35,
                 "craft_tier": 3,
                 "craft_time_modifier": 6.0,
@@ -64,7 +70,10 @@
         },
         {
             "name": "evil_infused_iron",
-            "oreDictList": "ingotEvilMetal",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotEvilMetal"
+            },
             "properties": {
                 "tier": 7,
                 "durability": 4.5,
@@ -74,7 +83,7 @@
                 "resistance": 70,
                 "density": 3.0,
                 "melting_point": 1700,
-                "rarity": 3,
+                "rarity": "EPIC",
                 "enchantability": 40,
                 "craft_tier": 7,
                 "craft_time_modifier": 15.0,

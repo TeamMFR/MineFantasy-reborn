@@ -96,11 +96,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -115,11 +113,6 @@ public class MineFantasyItems {
 
 	public static Item.ToolMaterial ORNATE = EnumHelper.addToolMaterial("ornate", 2, 250, 6.0F, 2.0F, 100);
 	public static Item.ToolMaterial DRAGONFORGED = EnumHelper.addToolMaterial("dragonforged", 2, 250, 6.0F, 2.0F, 15);
-
-	public static EnumRarity POOR;
-	public static EnumRarity UNIQUE;
-	public static EnumRarity RARE;
-	public static EnumRarity[] RARITY;
 
 	// COMPONENTS
 	public static Item PIE_TRAY_UNCOOKED = Utils.nullValue();
@@ -586,64 +579,64 @@ public class MineFantasyItems {
 		GENERIC_MEAT_CHUNK_COOKED = new ItemFoodMFR("generic_meat_chunk_cooked", 5, 0.5F, true);
 		GENERIC_MEAT_MINCE_UNCOOKED = new ItemFoodMFR("generic_meat_mince_uncooked", 2, 0.2F, true).setContainerItem(CLAY_POT);
 		GENERIC_MEAT_MINCE_COOKED = new ItemFoodMFR("generic_meat_mince_cooked", 5, 0.5F, true).setContainerItem(CLAY_POT);
-		FLOUR = new ItemComponentMFR("flour", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		BREADCRUMBS = new ItemComponentMFR("breadcrumbs", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		GUTS = new ItemComponentMFR("guts", 0).setCreativeTab(MineFantasyTabs.tabFood);
+		FLOUR = new ItemComponentMFR("flour", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		BREADCRUMBS = new ItemComponentMFR("breadcrumbs", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		GUTS = new ItemComponentMFR("guts", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood);
 		BREADROLL = new ItemFoodMFR("breadroll", 5, 1.0F, false);
 		BREAD_SLICE = new ItemFoodMFR("bread_slice", 2, 1.0F, false);
 		CURDS = new ItemUnfinishedFood("curds");
 		CHEESE_POT = new ItemUnfinishedFood("cheese_pot").setContainerItem(CLAY_POT);
-		CHEESE_SLICE = new ItemFoodMFR("cheese_slice", 4, 1.0F, false, 0).setFoodStats(1, 0.0F, 0.0F, 1.0F);
+		CHEESE_SLICE = new ItemFoodMFR("cheese_slice", 4, 1.0F, false).setFoodStats(1, 0.0F, 0.0F, 1.0F);
 
 		// T1 (basic mixing)
 		// Util: Roast, Prep Block (Stone-Bronze Age)
-		STEW = new ItemFoodMFR("stew", 5, 0.7F, false, 0).setFoodStats(1, 0.0F, 0.0F, 1.0F).setReturnItem(Items.BOWL).setMaxStackSize(1);
-		OATS = new ItemFoodMFR("oats", 5, 0.7F, false, 0).setFoodStats(1, 0.0F, 0.8F, 0.2F).setReturnItem(Items.BOWL).setMaxStackSize(1);
+		STEW = new ItemFoodMFR("stew", 5, 0.7F, false).setFoodStats(1, 0.0F, 0.0F, 1.0F).setReturnItem(Items.BOWL).setMaxStackSize(1);
+		OATS = new ItemFoodMFR("oats", 5, 0.7F, false).setFoodStats(1, 0.0F, 0.8F, 0.2F).setReturnItem(Items.BOWL).setMaxStackSize(1);
 
 		// T2 (Basic baking, stone oven, processed mixing)
 		// Util: Stone Oven, Prep Block (Bronze Age - Early Iron Age)
-		CHEESE_ROLL = new ItemFoodMFR("cheese_roll", 6, 0.8F, false, 0).setFoodStats(2, 0.0F, 0.4F, 0.6F).setMaxStackSize(4);
-		JERKY = new ItemFoodMFR("jerky", 6, 0.8F, true, 0).setFoodStats(2, 0.0F, 0.0F, 1.0F).setMaxStackSize(8);
-		SAUSAGE_RAW = new ItemFoodMFR("saussage_raw", 4, 0.8F, true, 0).setFoodStats(2, 0.0F, 0.1F, 0.6F).setMaxStackSize(16);
-		SAUSAGE_COOKED = new ItemFoodMFR("saussage_cooked", 8, 0.8F, true, 0).setFoodStats(2, 0.0F, 0.2F, 0.8F).setMaxStackSize(16);
-		SWEETROLL_UNICED = new ItemFoodMFR("sweetroll_uniced", 5, 0.8F, false, 0).setFoodStats(2, 0.5F, 0.0F, 0.2F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
-		SWEETROLL = new ItemMultiFood("sweetroll", 2, 3, 0.8F, false, 0).setFoodStats(2, 1.0F, 0.0F, 0.2F).setEatTime(16).setAlwaysEdible();
-		SANDWITCH_MEAT = new ItemMultiFood("sandwitch_meat", 2, 6, 0.8F, false, 0).setFoodStats(2, 0.0F, 0.5F, 0.5F).setTranslationKey("sandwitch");
-		SANDWITCH_BIG = new ItemMultiFood("sandwitch_big", 4, 6, 0.8F, false, 1).setFoodStats(2, 0.0F, 0.5F, 0.5F);
+		CHEESE_ROLL = new ItemFoodMFR("cheese_roll", 6, 0.8F, false).setFoodStats(2, 0.0F, 0.4F, 0.6F).setMaxStackSize(4);
+		JERKY = new ItemFoodMFR("jerky", 6, 0.8F, true).setFoodStats(2, 0.0F, 0.0F, 1.0F).setMaxStackSize(8);
+		SAUSAGE_RAW = new ItemFoodMFR("saussage_raw", 4, 0.8F, true).setFoodStats(2, 0.0F, 0.1F, 0.6F).setMaxStackSize(16);
+		SAUSAGE_COOKED = new ItemFoodMFR("saussage_cooked", 8, 0.8F, true).setFoodStats(2, 0.0F, 0.2F, 0.8F).setMaxStackSize(16);
+		SWEETROLL_UNICED = new ItemFoodMFR("sweetroll_uniced", 5, 0.8F, false).setFoodStats(2, 0.5F, 0.0F, 0.2F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
+		SWEETROLL = new ItemMultiFood("sweetroll", 2, 3, 0.8F, false, Rarity.COMMON).setFoodStats(2, 1.0F, 0.0F, 0.2F).setEatTime(16).setAlwaysEdible();
+		SANDWITCH_MEAT = new ItemMultiFood("sandwitch_meat", 2, 6, 0.8F, false, Rarity.COMMON).setFoodStats(2, 0.0F, 0.5F, 0.5F).setTranslationKey("sandwitch");
+		SANDWITCH_BIG = new ItemMultiFood("sandwitch_big", 4, 6, 0.8F, false, Rarity.UNCOMMON).setFoodStats(2, 0.0F, 0.5F, 0.5F);
 
 		// T3 (Quality baking, metal oven)
 		// Util: Metal Oven, Prep Block, Steel Tools (Mid Iron Age)
-		MEATPIE_SLICE = new ItemFoodMFR("meatpie_slice", 8, 1.0F, false, 0).setFoodStats(3, 0.0F, 0.2F, 0.8F).setMaxStackSize(16);
-		PIESLICE_APPLE = new ItemFoodMFR("pieslice_apple", 5, 1.0F, false, 0).setFoodStats(3, 0.8F, 0.2F, 0.5F).setEatTime(16).setAlwaysEdible().setAlwaysEdible();
-		PIESLICE_BERRY = new ItemFoodMFR("pieslice_berry", 5, 1.0F, false, 0).setFoodStats(3, 1.0F, 0.0F, 0.5F).setEatTime(16).setAlwaysEdible().setAlwaysEdible();
+		MEATPIE_SLICE = new ItemFoodMFR("meatpie_slice", 8, 1.0F, false).setFoodStats(3, 0.0F, 0.2F, 0.8F).setMaxStackSize(16);
+		PIESLICE_APPLE = new ItemFoodMFR("pieslice_apple", 5, 1.0F, false).setFoodStats(3, 0.8F, 0.2F, 0.5F).setEatTime(16).setAlwaysEdible().setAlwaysEdible();
+		PIESLICE_BERRY = new ItemFoodMFR("pieslice_berry", 5, 1.0F, false).setFoodStats(3, 1.0F, 0.0F, 0.5F).setEatTime(16).setAlwaysEdible().setAlwaysEdible();
 
 		// T4 (Advanced baking, multiple processes, temperature regulation)
 		// Util : Metal Oven, Prep Block, Full tool set, Proper kitchen setup (Mid Iron
 		// Age)
-		PIESLICE_SHEPARDS = new ItemFoodMFR("pieslice_shepards", 10, 1.0F, false, 1).setFoodStats(4, 0.0F, 0.5F, 0.7F);
-		CAKE_SLICE = new ItemFoodMFR("cake_slice", 5, 0.8F, false, 0).setFoodStats(3, 1.0F, 0.0F, 1.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(4);
-		CARROTCAKE_SLICE = new ItemFoodMFR("carrotcake_slice", 6, 0.8F, false, 0).setFoodStats(4, 1.0F, 0.0F, 0.8F).setEatTime(16).setAlwaysEdible().setMaxStackSize(4);
+		PIESLICE_SHEPARDS = new ItemFoodMFR("pieslice_shepards", 10, 1.0F, false, Rarity.UNCOMMON).setFoodStats(4, 0.0F, 0.5F, 0.7F);
+		CAKE_SLICE = new ItemFoodMFR("cake_slice", 5, 0.8F, false).setFoodStats(3, 1.0F, 0.0F, 1.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(4);
+		CARROTCAKE_SLICE = new ItemFoodMFR("carrotcake_slice", 6, 0.8F, false).setFoodStats(4, 1.0F, 0.0F, 0.8F).setEatTime(16).setAlwaysEdible().setMaxStackSize(4);
 
 		// T5 (Advanced baking, multiple process, temperature regulation, many
 		// ingredients)
-		CHOCCAKE_SLICE = new ItemFoodMFR("choccake_slice", 6, 0.8F, false, 0).setFoodStats(4, 1.0F, 0.0F, 1.2F).setEatTime(16).setAlwaysEdible().setMaxStackSize(4);
+		CHOCCAKE_SLICE = new ItemFoodMFR("choccake_slice", 6, 0.8F, false, Rarity.COMMON).setFoodStats(4, 1.0F, 0.0F, 1.2F).setEatTime(16).setAlwaysEdible().setMaxStackSize(4);
 
 		// T6 (Perfected meals, extremely difficult to create)
-		BFCAKE_SLICE = new ItemFoodMFR("bfcake_slice", 7, 1.0F, false, 1).setFoodStats(5, 1.0F, 0.0F, 1.3F).setEatTime(16).setAlwaysEdible().setMaxStackSize(4);
-		ECLAIR_UNICED = new ItemFoodMFR("eclair_uniced", 5, 1.0F, false, 0).setFoodStats(5, 0.3F, 0.0F, 0.4F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
-		ECLAIR_EMPTY = new ItemFoodMFR("eclair_empty", 5, 1.0F, false, 0).setFoodStats(5, 0.5F, 0.0F, 0.6F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
-		ECLAIR = new ItemMultiFood("eclair", 4, 7, 1.0F, false, 1).setFoodStats(5, 1.0F, 0.0F, 1.5F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
+		BFCAKE_SLICE = new ItemFoodMFR("bfcake_slice", 7, 1.0F, false, Rarity.UNCOMMON).setFoodStats(5, 1.0F, 0.0F, 1.3F).setEatTime(16).setAlwaysEdible().setMaxStackSize(4);
+		ECLAIR_UNICED = new ItemFoodMFR("eclair_uniced", 5, 1.0F, false).setFoodStats(5, 0.3F, 0.0F, 0.4F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
+		ECLAIR_EMPTY = new ItemFoodMFR("eclair_empty", 5, 1.0F, false).setFoodStats(5, 0.5F, 0.0F, 0.6F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
+		ECLAIR = new ItemMultiFood("eclair", 4, 7, 1.0F, false, Rarity.UNCOMMON).setFoodStats(5, 1.0F, 0.0F, 1.5F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
 
 		// MISC
-		CAKE_TIN = new ItemComponentMFR("cake_tin", 0).setCreativeTab(MineFantasyTabs.tabFood);
-		PIE_TRAY = new ItemComponentMFR("pie_tray", 0).setStoragePlacement(Constants.StorageTextures.BIGPLATE, Constants.StorageTextures.TRAY).setCreativeTab(MineFantasyTabs.tabFood);
-		ICING = new ItemComponentMFR("icing", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		CUSTARD = new ItemComponentMFR("custard", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		COCA_POWDER = new ItemComponentMFR("coca_powder", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		CHOCOLATE = new ItemComponentMFR("chocolate", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		CHOC_CHIPS = new ItemComponentMFR("choc_chips", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		CAKE_TIN = new ItemComponentMFR("cake_tin", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood);
+		PIE_TRAY = new ItemComponentMFR("pie_tray", Rarity.COMMON).setStoragePlacement(Constants.StorageTextures.BIGPLATE, Constants.StorageTextures.TRAY).setCreativeTab(MineFantasyTabs.tabFood);
+		ICING = new ItemComponentMFR("icing", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		CUSTARD = new ItemComponentMFR("custard", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		COCA_POWDER = new ItemComponentMFR("coca_powder", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		CHOCOLATE = new ItemComponentMFR("chocolate", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		CHOC_CHIPS = new ItemComponentMFR("choc_chips", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
 		BERRIES = new ItemFoodMFR("berries", 2, 0.5F, false).setEatTime(10).setStaminaRestore(10F).setShouldRepeatPenaltyCheck().setAlwaysEdible();
-		BERRIES_JUICY = new ItemFoodMFR("berries_juicy", 3, 0.5F, false).setEatTime(10).setStaminaRestore(25F).setRarity(1).setShouldRepeatPenaltyCheck().setAlwaysEdible();
+		BERRIES_JUICY = new ItemFoodMFR("berries_juicy", 3, 0.5F, false, Rarity.UNCOMMON).setEatTime(10).setStaminaRestore(25F).setShouldRepeatPenaltyCheck().setAlwaysEdible();
 		SWEETROLL_RAW = new ItemUnfinishedFood("sweetroll_raw").setMaxStackSize(64);
 		ECLAIR_RAW = new ItemUnfinishedFood("eclair_raw").setMaxStackSize(64);
 		CAKE_RAW = new ItemUnfinishedFood("cake_raw");
@@ -666,15 +659,15 @@ public class MineFantasyItems {
 		PIE_BERRY_COOKED = new ItemUnfinishedFood("pie_berry_cooked").setContainerItem(PIE_TRAY);
 		PIE_SHEPARD_COOKED = new ItemUnfinishedFood("pie_shepard_cooked").setContainerItem(PIE_TRAY);
 		PIE_PUMPKIN_COOKED = new ItemUnfinishedFood("pie_pumpkin_cooked").setContainerItem(PIE_TRAY);
-		SALT = new ItemComponentMFR("salt", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		SUGAR_POT = new ItemComponentMFR("sugar_pot", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		BOWL_WATER_SALT = new ItemComponentMFR("bowl_water_salt", 0).setCreativeTab(MineFantasyTabs.tabFood);
+		SALT = new ItemComponentMFR("salt", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		SUGAR_POT = new ItemComponentMFR("sugar_pot", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		BOWL_WATER_SALT = new ItemComponentMFR("bowl_water_salt", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood);
 		DOUGH = new ItemUnfinishedFood("dough").setMaxStackSize(64);
 		PASTRY = new ItemUnfinishedFood("pastry").setMaxStackSize(64);
 		RAW_BREAD = new ItemUnfinishedFood("raw_bread").setMaxStackSize(64);
-		JUG_UNCOOKED = new ItemJug("uncooked");
-		JUG_WATER = new ItemJug("water").setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_WATER).setContainerItem(JUG_EMPTY);
-		JUG_MILK = new ItemJug("milk").setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_MILK).setContainerItem(JUG_EMPTY);
+		JUG_UNCOOKED = new ItemJug("uncooked", false);
+		JUG_WATER = new ItemJug("water", true).setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_WATER).setContainerItem(JUG_EMPTY);
+		JUG_MILK = new ItemJug("milk", true).setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_MILK).setContainerItem(JUG_EMPTY);
 		BURNT_FOOD = new ItemBurntFood("burnt_food");
 		BURNT_POT = new ItemBurntFood("burnt_pot").setContainerItem(CLAY_POT);
 		BURNT_PIE = new ItemBurntFood("burnt_pie").setContainerItem(PIE_TRAY);
@@ -687,25 +680,25 @@ public class MineFantasyItems {
 		String standard = "standard";
 		CreativeTabs tab = MineFantasyTabs.tabArmour;
 
-		STANDARD_SCALE_HELMET = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_helmet", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.HEAD, "scale_layer_1", 0).setCreativeTab(tab);
-		STANDARD_SCALE_CHESTPLATE = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_chestplate", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", 0).setCreativeTab(tab);
-		STANDARD_SCALE_LEGGINGS = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_leggings", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.LEGS, "scale_layer_2", 0).setCreativeTab(tab);
-		STANDARD_SCALE_BOOTS = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_boots", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.FEET, "scale_layer_1", 0).setCreativeTab(tab);
+		STANDARD_SCALE_HELMET = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_helmet", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.HEAD, "scale_layer_1", Rarity.COMMON).setCreativeTab(tab);
+		STANDARD_SCALE_CHESTPLATE = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_chestplate", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", Rarity.COMMON).setCreativeTab(tab);
+		STANDARD_SCALE_LEGGINGS = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_leggings", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.LEGS, "scale_layer_2", Rarity.COMMON).setCreativeTab(tab);
+		STANDARD_SCALE_BOOTS = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_boots", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.FEET, "scale_layer_1", Rarity.COMMON).setCreativeTab(tab);
 
-		STANDARD_CHAIN_HELMET = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_helmet", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.HEAD, "chain_layer_1", 0).setCreativeTab(tab);
-		STANDARD_CHAIN_CHESTPLATE = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_chestplate", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", 0).setCreativeTab(tab);
-		STANDARD_CHAIN_LEGGINGS = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_leggings", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", 0).setCreativeTab(tab);
-		STANDARD_CHAIN_BOOTS = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_boots", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.FEET, "chain_layer_1", 0).setCreativeTab(tab);
+		STANDARD_CHAIN_HELMET = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_helmet", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.HEAD, "chain_layer_1", Rarity.COMMON).setCreativeTab(tab);
+		STANDARD_CHAIN_CHESTPLATE = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_chestplate", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", Rarity.COMMON).setCreativeTab(tab);
+		STANDARD_CHAIN_LEGGINGS = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_leggings", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", Rarity.COMMON).setCreativeTab(tab);
+		STANDARD_CHAIN_BOOTS = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_boots", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.FEET, "chain_layer_1", Rarity.COMMON).setCreativeTab(tab);
 
-		STANDARD_SPLINT_HELMET = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_helmet", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.HEAD, "splint_layer_1", 0).setCreativeTab(tab);
-		STANDARD_SPLINT_CHESTPLATE = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_chestplate", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", 0).setCreativeTab(tab);
-		STANDARD_SPLINT_LEGGINGS = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_leggings", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", 0).setCreativeTab(tab);
-		STANDARD_SPLINT_BOOTS = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_boots", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.FEET, "splint_layer_1", 0).setCreativeTab(tab);
+		STANDARD_SPLINT_HELMET = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_helmet", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.HEAD, "splint_layer_1", Rarity.COMMON).setCreativeTab(tab);
+		STANDARD_SPLINT_CHESTPLATE = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_chestplate", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", Rarity.COMMON).setCreativeTab(tab);
+		STANDARD_SPLINT_LEGGINGS = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_leggings", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", Rarity.COMMON).setCreativeTab(tab);
+		STANDARD_SPLINT_BOOTS = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_boots", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.FEET, "splint_layer_1", Rarity.COMMON).setCreativeTab(tab);
 
-		STANDARD_PLATE_HELMET = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_helmet", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.HEAD, "plate_layer_1", 0).setCreativeTab(tab);
-		STANDARD_PLATE_CHESTPLATE = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_chestplate", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", 0).setCreativeTab(tab);
-		STANDARD_PLATE_LEGGINGS = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_leggings", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", 0).setCreativeTab(tab);
-		STANDARD_PLATE_BOOTS = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_boots", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.FEET, "plate_layer_1", 0).setCreativeTab(tab);
+		STANDARD_PLATE_HELMET = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_helmet", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.HEAD, "plate_layer_1", Rarity.COMMON).setCreativeTab(tab);
+		STANDARD_PLATE_CHESTPLATE = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_chestplate", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", Rarity.COMMON).setCreativeTab(tab);
+		STANDARD_PLATE_LEGGINGS = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_leggings", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", Rarity.COMMON).setCreativeTab(tab);
+		STANDARD_PLATE_BOOTS = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_boots", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.FEET, "plate_layer_1", Rarity.COMMON).setCreativeTab(tab);
 	}
 
 	@SubscribeEvent
@@ -1213,7 +1206,7 @@ public class MineFantasyItems {
 		CLAY_POT_UNCOOKED = new ItemBaseMFR("clay_pot_uncooked").setCreativeTab(MineFantasyTabs.tabMaterials);
 		INGOT_MOULD = new ItemComponentMFR("ingot_mould").setStoragePlacement(Constants.StorageTextures.BAR, Constants.StorageTextures.MOULD);
 		INGOT_MOULD_UNCOOKED = new ItemBaseMFR("ingot_mould_uncooked").setCreativeTab(MineFantasyTabs.tabMaterials);
-		PIE_TRAY_UNCOOKED = new ItemComponentMFR("pie_tray_uncooked", 0);
+		PIE_TRAY_UNCOOKED = new ItemComponentMFR("pie_tray_uncooked", Rarity.COMMON);
 
 		VINE = new ItemBaseMFR("vine").setCreativeTab(MineFantasyTabs.tabMaterials);
 		SHARP_ROCK = new ItemBaseMFR("sharp_rock").setCreativeTab(MineFantasyTabs.tabMaterials);
@@ -1260,7 +1253,7 @@ public class MineFantasyItems {
 		KAOLINITE_DUST = new ItemBaseMFR("kaolinite_dust").setCreativeTab(MineFantasyTabs.tabMaterials).setContainerItem(CLAY_POT);
 		FIRECLAY = new ItemBaseMFR("fireclay").setCreativeTab(MineFantasyTabs.tabMaterials);
 		FIRECLAY_BRICK = new ItemBaseMFR("fireclay_brick").setCreativeTab(MineFantasyTabs.tabMaterials);
-		STRONG_BRICK = new ItemComponentMFR("strong_brick", 0).setStoragePlacement(Constants.StorageTextures.BAR, Constants.StorageTextures.FIREBRICK);
+		STRONG_BRICK = new ItemComponentMFR("strong_brick", Rarity.COMMON).setStoragePlacement(Constants.StorageTextures.BAR, Constants.StorageTextures.FIREBRICK);
 
 		HIDE_SMALL = new ItemBaseMFR("hide_small").setCreativeTab(MineFantasyTabs.tabMaterials);
 		HIDE_MEDIUM = new ItemBaseMFR("hide_medium").setCreativeTab(MineFantasyTabs.tabMaterials);
@@ -1286,8 +1279,8 @@ public class MineFantasyItems {
 
 		HOT_ITEM = new ItemHeated();
 		
-		JUG_EMPTY = new ItemJug("empty").setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG);
-		JUG_PLANT_OIL = new ItemComponentMFR("jug_plant_oil", 0).setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_OIL).setContainerItem(JUG_EMPTY);
+		JUG_EMPTY = new ItemJug("empty", false).setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG);
+		JUG_PLANT_OIL = new ItemComponentMFR("jug_plant_oil", Rarity.COMMON).setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_OIL).setContainerItem(JUG_EMPTY);
 
 		TALISMAN_LESSER = new ItemBaseMFR("talisman_lesser", Rarity.RARE).setCreativeTab(MineFantasyTabs.tabMaterials);
 		TALISMAN_GREATER = new ItemBaseMFR("talisman_greater", Rarity.EPIC).setCreativeTab(MineFantasyTabs.tabMaterials);
@@ -1344,10 +1337,10 @@ public class MineFantasyItems {
 		HINGE = new ItemBaseMFR("hinge").setCreativeTab(MineFantasyTabs.tabMaterials);
 		COGWORK_PULLEY = new ItemBaseMFR("cogwork_pulley", Rarity.UNCOMMON).setCreativeTab(MineFantasyTabs.tabGadget);
 
-		ANCIENT_JEWEL_MITHRIL = new ItemJewel("ancient_jewel_mithril", 20, EnumRarity.RARE, ItemJewel.MYTHIC, 2, "smelt_mithril", "smelt_master");
-		ANCIENT_JEWEL_ADAMANT = new ItemJewel("ancient_jewel_adamant", 20, EnumRarity.RARE, ItemJewel.MYTHIC, 2, "smelt_adamantium", "smelt_master");
-		ANCIENT_JEWEL_MASTER = new ItemJewel("ancient_jewel_master", 30, EnumRarity.EPIC, ItemJewel.MYTHIC, 1, "smelt_master");
-		TRILOGY_JEWEL = new ItemJewel("trilogy_jewel", EnumRarity.EPIC, null, 1);
+		ANCIENT_JEWEL_MITHRIL = new ItemJewel("ancient_jewel_mithril", 20, Rarity.RARE, ItemJewel.MYTHIC, 2, "smelt_mithril", "smelt_master");
+		ANCIENT_JEWEL_ADAMANT = new ItemJewel("ancient_jewel_adamant", 20, Rarity.RARE, ItemJewel.MYTHIC, 2, "smelt_adamantium", "smelt_master");
+		ANCIENT_JEWEL_MASTER = new ItemJewel("ancient_jewel_master", 30, Rarity.EPIC, ItemJewel.MYTHIC, 1, "smelt_master");
+		TRILOGY_JEWEL = new ItemJewel("trilogy_jewel", Rarity.EPIC, null, 1);
 
 		ORNATE_ITEMS = new ItemSpecialDesign("ornate_items", Rarity.UNCOMMON, "ornate").setCreativeTab(MineFantasyTabs.tabMaterials);
 	}
@@ -1427,47 +1420,47 @@ public class MineFantasyItems {
 		CreativeTabs tab = MineFantasyTabs.tabWeapon;
 
 		// Standard Weapons
-		STANDARD_SWORD = new ItemSword(standard + "_sword", Item.ToolMaterial.IRON, 0, 1F).setCustom(standard).setTab(tab);
-		STANDARD_WARAXE = new ItemWaraxe(standard + "_waraxe", Item.ToolMaterial.IRON, 0, 1F).setCustom(standard).setTab(tab);
-		STANDARD_MACE = new ItemMace(standard + "_mace", Item.ToolMaterial.IRON, 0, 1F).setCustom(standard).setTab(tab);
-		STANDARD_DAGGER = new ItemDagger(standard + "_dagger", Item.ToolMaterial.IRON, 0, 1F).setCustom(standard).setTab(tab);
-		STANDARD_SPEAR = new ItemSpear(standard + "_spear", Item.ToolMaterial.IRON, 0, 1F).setCustom(standard).setTab(tab);
-		STANDARD_GREATSWORD = new ItemGreatsword(standard + "_greatsword", Item.ToolMaterial.IRON, 0, 1F).setCustom(standard).setTab(tab);
-		STANDARD_BATTLEAXE = new ItemBattleaxe(standard + "_battleaxe", Item.ToolMaterial.IRON, 0, 1F).setCustom(standard).setTab(tab);
-		STANDARD_WARHAMMER = new ItemWarhammer(standard + "_warhammer", Item.ToolMaterial.IRON, 0, 1F).setCustom(standard).setTab(tab);
-		STANDARD_KATANA = new ItemKatana(standard + "_katana", Item.ToolMaterial.IRON, 0, 1F).setCustom(standard).setTab(tab);
-		STANDARD_HALBEARD = new ItemHalbeard(standard + "_halbeard", Item.ToolMaterial.IRON, 0, 1F).setCustom(standard).setTab(tab);
-		STANDARD_LANCE = new ItemLance(standard + "_lance", Item.ToolMaterial.IRON, 0, 1F).setCustom(standard).setTab(tab);
+		STANDARD_SWORD = new ItemSword(standard + "_sword", Item.ToolMaterial.IRON, Rarity.COMMON, 1F).setCustom(standard).setTab(tab);
+		STANDARD_WARAXE = new ItemWaraxe(standard + "_waraxe", Item.ToolMaterial.IRON, Rarity.COMMON, 1F).setCustom(standard).setTab(tab);
+		STANDARD_MACE = new ItemMace(standard + "_mace", Item.ToolMaterial.IRON, Rarity.COMMON, 1F).setCustom(standard).setTab(tab);
+		STANDARD_DAGGER = new ItemDagger(standard + "_dagger", Item.ToolMaterial.IRON, Rarity.COMMON, 1F).setCustom(standard).setTab(tab);
+		STANDARD_SPEAR = new ItemSpear(standard + "_spear", Item.ToolMaterial.IRON, Rarity.COMMON, 1F).setCustom(standard).setTab(tab);
+		STANDARD_GREATSWORD = new ItemGreatsword(standard + "_greatsword", Item.ToolMaterial.IRON, Rarity.COMMON, 1F).setCustom(standard).setTab(tab);
+		STANDARD_BATTLEAXE = new ItemBattleaxe(standard + "_battleaxe", Item.ToolMaterial.IRON, Rarity.COMMON, 1F).setCustom(standard).setTab(tab);
+		STANDARD_WARHAMMER = new ItemWarhammer(standard + "_warhammer", Item.ToolMaterial.IRON, Rarity.COMMON, 1F).setCustom(standard).setTab(tab);
+		STANDARD_KATANA = new ItemKatana(standard + "_katana", Item.ToolMaterial.IRON, Rarity.COMMON, 1F).setCustom(standard).setTab(tab);
+		STANDARD_HALBEARD = new ItemHalbeard(standard + "_halbeard", Item.ToolMaterial.IRON, Rarity.COMMON, 1F).setCustom(standard).setTab(tab);
+		STANDARD_LANCE = new ItemLance(standard + "_lance", Item.ToolMaterial.IRON, Rarity.COMMON, 1F).setCustom(standard).setTab(tab);
 
 		// Standard Tools
 		tab = MineFantasyTabs.tabTool;
-		STANDARD_PICK = (ItemPickMFR) new ItemPickMFR(standard + "_pick", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_AXE = (ItemAxeMFR) new ItemAxeMFR(standard + "_axe", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_SPADE = (ItemSpade) new ItemSpade(standard + "_spade", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_HOE = (ItemHoeMFR) new ItemHoeMFR(standard + "_hoe", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
+		STANDARD_PICK = (ItemPickMFR) new ItemPickMFR(standard + "_pick", Item.ToolMaterial.IRON, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
+		STANDARD_AXE = (ItemAxeMFR) new ItemAxeMFR(standard + "_axe", Item.ToolMaterial.IRON, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
+		STANDARD_SPADE = (ItemSpade) new ItemSpade(standard + "_spade", Item.ToolMaterial.IRON, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
+		STANDARD_HOE = (ItemHoeMFR) new ItemHoeMFR(standard + "_hoe", Item.ToolMaterial.IRON, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
 
 		tab = MineFantasyTabs.tabToolAdvanced;
-		STANDARD_HEAVY_PICK = (ItemHeavyPick) new ItemHeavyPick(standard + "_heavy_pick", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_HEAVY_SHOVEL = (ItemHeavyShovel) new ItemHeavyShovel(standard + "_heavy_shovel", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_HANDPICK = (ItemHandpick) new ItemHandpick(standard + "_handpick", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_TROW = (ItemTrow) new ItemTrow(standard + "_trow", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_SCYTHE = (ItemScythe) new ItemScythe(standard + "_scythe", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_MATTOCK = (ItemMattock) new ItemMattock(standard + "_mattock", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_LUMBER = (ItemLumberAxe) new ItemLumberAxe(standard + "_lumber", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
+		STANDARD_HEAVY_PICK = (ItemHeavyPick) new ItemHeavyPick(standard + "_heavy_pick", Item.ToolMaterial.IRON, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
+		STANDARD_HEAVY_SHOVEL = (ItemHeavyShovel) new ItemHeavyShovel(standard + "_heavy_shovel", Item.ToolMaterial.IRON, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
+		STANDARD_HANDPICK = (ItemHandpick) new ItemHandpick(standard + "_handpick", Item.ToolMaterial.IRON, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
+		STANDARD_TROW = (ItemTrow) new ItemTrow(standard + "_trow", Item.ToolMaterial.IRON, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
+		STANDARD_SCYTHE = (ItemScythe) new ItemScythe(standard + "_scythe", Item.ToolMaterial.IRON, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
+		STANDARD_MATTOCK = (ItemMattock) new ItemMattock(standard + "_mattock", Item.ToolMaterial.IRON, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
+		STANDARD_LUMBER = (ItemLumberAxe) new ItemLumberAxe(standard + "_lumber", Item.ToolMaterial.IRON, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
 
 		// Standard Crafters
 		tab = MineFantasyTabs.tabCraftTool;
-		STANDARD_HAMMER = (ItemHammer) new ItemHammer(standard + "_hammer", Item.ToolMaterial.IRON, false, 0, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_HEAVY_HAMMER = (ItemHammer) new ItemHammer(standard + "_heavy_hammer", Item.ToolMaterial.IRON, true, 0, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_TONGS = (ItemTongs) new ItemTongs(standard + "_tongs", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_SHEARS = (ItemShearsMFR) new ItemShearsMFR(standard + "_shears", Item.ToolMaterial.IRON, 0, 0).setCustom().setCreativeTab(tab);
-		STANDARD_KNIFE = (ItemKnife) new ItemKnife(standard + "_knife", Item.ToolMaterial.IRON, 0, 1F, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_NEEDLE = (ItemNeedle) new ItemNeedle(standard + "_needle", Item.ToolMaterial.IRON, 0, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_SAW = (ItemSaw) new ItemSaw(standard + "_saw", Item.ToolMaterial.IRON, 0, 0).setCustom(standard).setCreativeTab(tab);
+		STANDARD_HAMMER = (ItemHammer) new ItemHammer(standard + "_hammer", Item.ToolMaterial.IRON, false, 0, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
+		STANDARD_HEAVY_HAMMER = (ItemHammer) new ItemHammer(standard + "_heavy_hammer", Item.ToolMaterial.IRON, true, 0, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
+		STANDARD_TONGS = (ItemTongs) new ItemTongs(standard + "_tongs", Item.ToolMaterial.IRON, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
+		STANDARD_SHEARS = (ItemShearsMFR) new ItemShearsMFR(standard + "_shears", Item.ToolMaterial.IRON, Rarity.COMMON, 0).setCustom().setCreativeTab(tab);
+		STANDARD_KNIFE = (ItemKnife) new ItemKnife(standard + "_knife", Item.ToolMaterial.IRON, Rarity.COMMON, 1F, 0).setCustom(standard).setCreativeTab(tab);
+		STANDARD_NEEDLE = (ItemNeedle) new ItemNeedle(standard + "_needle", Item.ToolMaterial.IRON, 0, Rarity.COMMON).setCustom(standard).setCreativeTab(tab);
+		STANDARD_SAW = (ItemSaw) new ItemSaw(standard + "_saw", Item.ToolMaterial.IRON, Rarity.COMMON, 0).setCustom(standard).setCreativeTab(tab);
 
 		STANDARD_SPOON = (ItemBasicCraftTool) new ItemBasicCraftTool(standard + "_spoon", Tool.SPOON, 0, 64).setCustom(standard).setCreativeTab(tab);
 		STANDARD_MALLET = (ItemBasicCraftTool) new ItemBasicCraftTool(standard + "_mallet", Tool.MALLET, 0, 64).setCustom(standard).setCreativeTab(tab);
-		STANDARD_SPANNER = (ItemSpanner) new ItemSpanner(standard + "_spanner", 0, 0).setCustom(standard).setCreativeTab(tab);
+		STANDARD_SPANNER = (ItemSpanner) new ItemSpanner(standard + "_spanner", Rarity.COMMON, 0).setCustom(standard).setCreativeTab(tab);
 
 		WASH_CLOTH_WOOL = new ItemWashCloth("wash_cloth_wool", 1).setMaxUses(6);
 
@@ -1485,64 +1478,65 @@ public class MineFantasyItems {
 		float ratingMod = 0.8F;
 
 		// Weapons
-		ORNATE_SWORD = new ItemSword(ornate + "_sword", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
-		ORNATE_WARAXE = new ItemWaraxe(ornate + "_waraxe", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
-		ORNATE_MACE = new ItemMace(ornate + "_mace", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
-		ORNATE_DAGGER = new ItemDagger(ornate + "_dagger", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
-		ORNATE_SPEAR = new ItemSpear(ornate + "_spear", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
-		ORNATE_GREATSWORD = new ItemGreatsword(ornate + "_greatsword", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
-		ORNATE_BATTLEAXE = new ItemBattleaxe(ornate + "_battleaxe", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
-		ORNATE_WARHAMMER = new ItemWarhammer(ornate + "_warhammer", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
-		ORNATE_KATANA = new ItemKatana(ornate + "_katana", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
-		ORNATE_HALBEARD = new ItemHalbeard(ornate + "_halbeard", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
-		ORNATE_LANCE = new ItemLance(ornate + "_lance", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_SWORD = new ItemSword(ornate + "_sword", ORNATE, Rarity.COMMON, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_WARAXE = new ItemWaraxe(ornate + "_waraxe", ORNATE, Rarity.COMMON, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_MACE = new ItemMace(ornate + "_mace", ORNATE, Rarity.COMMON, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_DAGGER = new ItemDagger(ornate + "_dagger", ORNATE, Rarity.COMMON, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_SPEAR = new ItemSpear(ornate + "_spear", ORNATE, Rarity.COMMON, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_GREATSWORD = new ItemGreatsword(ornate + "_greatsword", ORNATE, Rarity.COMMON, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_BATTLEAXE = new ItemBattleaxe(ornate + "_battleaxe", ORNATE, Rarity.COMMON, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_WARHAMMER = new ItemWarhammer(ornate + "_warhammer", ORNATE, Rarity.COMMON, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_KATANA = new ItemKatana(ornate + "_katana", ORNATE, Rarity.COMMON, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_HALBEARD = new ItemHalbeard(ornate + "_halbeard", ORNATE, Rarity.COMMON, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_LANCE = new ItemLance(ornate + "_lance", ORNATE, Rarity.COMMON, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
 
-		ORNATE_BOW = (ItemBowMFR) new ItemBowMFR(ornate + "_bow", ORNATE, EnumBowType.SHORTBOW, 1).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_BOW = (ItemBowMFR) new ItemBowMFR(ornate + "_bow", ORNATE, EnumBowType.SHORTBOW, Rarity.UNCOMMON).setCustom(ornate).setCreativeTab(tab);
+
 
 		// Tools
-		ORNATE_PICK = (ItemPickMFR) new ItemPickMFR(ornate + "_pick", ORNATE, 0).setEfficiencyMod(1.25F).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_AXE = (ItemAxeMFR) new ItemAxeMFR(ornate + "_axe", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_SPADE = (ItemSpade) new ItemSpade(ornate + "_spade", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_HOE = (ItemHoeMFR) new ItemHoeMFR(ornate + "_hoe", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_PICK = (ItemPickMFR) new ItemPickMFR(ornate + "_pick", ORNATE, Rarity.COMMON).setEfficiencyMod(1.25F).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_AXE = (ItemAxeMFR) new ItemAxeMFR(ornate + "_axe", ORNATE, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_SPADE = (ItemSpade) new ItemSpade(ornate + "_spade", ORNATE, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_HOE = (ItemHoeMFR) new ItemHoeMFR(ornate + "_hoe", ORNATE, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
 
-		ORNATE_HEAVY_PICK = (ItemHeavyPick) new ItemHeavyPick(ornate + "_heavy_pick", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_HEAVY_SHOVEL = (ItemHeavyShovel) new ItemHeavyShovel(ornate + "_heavy_shovel", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_HANDPICK = (ItemHandpick) new ItemHandpick(ornate + "_handpick", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_TROW = (ItemTrow) new ItemTrow(ornate + "_trow", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_SCYTHE = (ItemScythe) new ItemScythe(ornate + "_scythe", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_MATTOCK = (ItemMattock) new ItemMattock(ornate + "_mattock", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_LUMBER = (ItemLumberAxe) new ItemLumberAxe(ornate + "_lumber", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_HAMMER = (ItemHammer) new ItemHammer(ornate + "_hammer", ORNATE, false, 0, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_HEAVY_HAMMER = (ItemHammer) new ItemHammer(ornate + "_heavy_hammer", ORNATE, true, 0, 0).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_HEAVY_PICK = (ItemHeavyPick) new ItemHeavyPick(ornate + "_heavy_pick", ORNATE, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_HEAVY_SHOVEL = (ItemHeavyShovel) new ItemHeavyShovel(ornate + "_heavy_shovel", ORNATE, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_HANDPICK = (ItemHandpick) new ItemHandpick(ornate + "_handpick", ORNATE, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_TROW = (ItemTrow) new ItemTrow(ornate + "_trow", ORNATE, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_SCYTHE = (ItemScythe) new ItemScythe(ornate + "_scythe", ORNATE, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_MATTOCK = (ItemMattock) new ItemMattock(ornate + "_mattock", ORNATE, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_LUMBER = (ItemLumberAxe) new ItemLumberAxe(ornate + "_lumber", ORNATE, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_HAMMER = (ItemHammer) new ItemHammer(ornate + "_hammer", ORNATE, false, 0, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_HEAVY_HAMMER = (ItemHammer) new ItemHammer(ornate + "_heavy_hammer", ORNATE, true, 0, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
 
 		// Crafters
-		ORNATE_TONGS = (ItemTongs) new ItemTongs(ornate + "_tongs", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_SHEARS = (ItemShearsMFR) new ItemShearsMFR(ornate + "_shears", ORNATE, 0, 0).setCustom().setCreativeTab(tab);
-		ORNATE_KNIFE = (ItemKnife) new ItemKnife(ornate + "_knife", ORNATE, 0, 1F, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_NEEDLE = (ItemNeedle) new ItemNeedle(ornate + "_needle", ORNATE, 0, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_SAW = (ItemSaw) new ItemSaw(ornate + "_saw", ORNATE, 0, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_SPANNER = (ItemSpanner) new ItemSpanner(ornate + "_spanner", 0, 0).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_TONGS = (ItemTongs) new ItemTongs(ornate + "_tongs", ORNATE, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_SHEARS = (ItemShearsMFR) new ItemShearsMFR(ornate + "_shears", ORNATE, Rarity.COMMON, 0).setCustom().setCreativeTab(tab);
+		ORNATE_KNIFE = (ItemKnife) new ItemKnife(ornate + "_knife", ORNATE, Rarity.COMMON, 1F, 0).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_NEEDLE = (ItemNeedle) new ItemNeedle(ornate + "_needle", ORNATE, 0, Rarity.COMMON).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_SAW = (ItemSaw) new ItemSaw(ornate + "_saw", ORNATE, Rarity.COMMON, 0).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_SPANNER = (ItemSpanner) new ItemSpanner(ornate + "_spanner", Rarity.COMMON, 0).setCustom(ornate).setCreativeTab(tab);
 
 		// Armours
-		ORNATE_SCALE_HELMET = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_helmet", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.HEAD, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_SCALE_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_chestplate", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_SCALE_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_leggings", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.LEGS, "scale_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_SCALE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_boots", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.FEET, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_SCALE_HELMET = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_helmet", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.HEAD, "scale_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_SCALE_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_chestplate", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_SCALE_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_leggings", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.LEGS, "scale_layer_2", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_SCALE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_boots", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.FEET, "scale_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
 
-		ORNATE_CHAIN_HELMET = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_helmet", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.HEAD, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_CHAIN_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_chestplate", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_CHAIN_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_leggings", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_CHAIN_BOOTS = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_boots", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.FEET, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_CHAIN_HELMET = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_helmet", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.HEAD, "chain_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_CHAIN_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_chestplate", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_CHAIN_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_leggings", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_CHAIN_BOOTS = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_boots", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.FEET, "chain_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
 
-		ORNATE_SPLINT_HELMET = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_helmet", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.HEAD, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_SPLINT_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_chestplate", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_SPLINT_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_leggings", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_SPLINT_BOOTS = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_boots", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.FEET, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_SPLINT_HELMET = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_helmet", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.HEAD, "splint_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_SPLINT_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_chestplate", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_SPLINT_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_leggings", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_SPLINT_BOOTS = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_boots", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.FEET, "splint_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
 
-		ORNATE_PLATE_HELMET = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_helmet", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.HEAD, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_PLATE_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_chestplate", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_PLATE_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_leggings", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_PLATE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_boots", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.FEET, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_PLATE_HELMET = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_helmet", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.HEAD, "plate_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_PLATE_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_chestplate", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_PLATE_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_leggings", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_PLATE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_boots", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.FEET, "plate_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
 	}
 
 	public static void initDragonforged() {
@@ -1551,84 +1545,84 @@ public class MineFantasyItems {
 		float ratingMod = 1.2F;
 
 		// Weapons
-		DRAGONFORGED_SWORD = new ItemSword(dragonforged + "_sword", DRAGONFORGED, 0, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
-		DRAGONFORGED_WARAXE = new ItemWaraxe(dragonforged + "_waraxe", DRAGONFORGED, 0, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
-		DRAGONFORGED_MACE = new ItemMace(dragonforged + "_mace", DRAGONFORGED, 0, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
-		DRAGONFORGED_DAGGER = new ItemDagger(dragonforged + "_dagger", DRAGONFORGED, 0, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
-		DRAGONFORGED_SPEAR = new ItemSpear(dragonforged + "_spear", DRAGONFORGED, 0, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
-		DRAGONFORGED_GREATSWORD = new ItemGreatsword(dragonforged + "_greatsword", DRAGONFORGED, 0, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
-		DRAGONFORGED_BATTLEAXE = new ItemBattleaxe(dragonforged + "_battleaxe", DRAGONFORGED, 0, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
-		DRAGONFORGED_WARHAMMER = new ItemWarhammer(dragonforged + "_warhammer", DRAGONFORGED, 0, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
-		DRAGONFORGED_KATANA = new ItemKatana(dragonforged + "_katana", DRAGONFORGED, 0, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
-		DRAGONFORGED_HALBEARD = new ItemHalbeard(dragonforged + "_halbeard", DRAGONFORGED, 0, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
-		DRAGONFORGED_LANCE = new ItemLance(dragonforged + "_lance", DRAGONFORGED, 0, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
+		DRAGONFORGED_SWORD = new ItemSword(dragonforged + "_sword", DRAGONFORGED, Rarity.COMMON, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
+		DRAGONFORGED_WARAXE = new ItemWaraxe(dragonforged + "_waraxe", DRAGONFORGED, Rarity.COMMON, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
+		DRAGONFORGED_MACE = new ItemMace(dragonforged + "_mace", DRAGONFORGED, Rarity.COMMON, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
+		DRAGONFORGED_DAGGER = new ItemDagger(dragonforged + "_dagger", DRAGONFORGED, Rarity.COMMON, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
+		DRAGONFORGED_SPEAR = new ItemSpear(dragonforged + "_spear", DRAGONFORGED, Rarity.COMMON, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
+		DRAGONFORGED_GREATSWORD = new ItemGreatsword(dragonforged + "_greatsword", DRAGONFORGED, Rarity.COMMON, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
+		DRAGONFORGED_BATTLEAXE = new ItemBattleaxe(dragonforged + "_battleaxe", DRAGONFORGED, Rarity.COMMON, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
+		DRAGONFORGED_WARHAMMER = new ItemWarhammer(dragonforged + "_warhammer", DRAGONFORGED, Rarity.COMMON, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
+		DRAGONFORGED_KATANA = new ItemKatana(dragonforged + "_katana", DRAGONFORGED, Rarity.COMMON, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
+		DRAGONFORGED_HALBEARD = new ItemHalbeard(dragonforged + "_halbeard", DRAGONFORGED, Rarity.COMMON, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
+		DRAGONFORGED_LANCE = new ItemLance(dragonforged + "_lance", DRAGONFORGED, Rarity.COMMON, 1F).setCustom(dragonforged).setTab(tab).modifyBaseDamage(1);
 
-		DRAGONFORGED_BOW = (ItemBowMFR) new ItemBowMFR(dragonforged + "_bow", DRAGONFORGED, EnumBowType.SHORTBOW, 1).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_BOW = (ItemBowMFR) new ItemBowMFR(dragonforged + "_bow", DRAGONFORGED, EnumBowType.SHORTBOW, Rarity.UNCOMMON).setCustom(dragonforged).setCreativeTab(tab);
 
 		// Tools
-		DRAGONFORGED_PICK = (ItemPickMFR) new ItemPickMFR(dragonforged + "_pick", DRAGONFORGED, 0).setEfficiencyMod(1.25F).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_AXE = (ItemAxeMFR) new ItemAxeMFR(dragonforged + "_axe", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_SPADE = (ItemSpade) new ItemSpade(dragonforged + "_spade", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_HOE = (ItemHoeMFR) new ItemHoeMFR(dragonforged + "_hoe", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_PICK = (ItemPickMFR) new ItemPickMFR(dragonforged + "_pick", DRAGONFORGED, Rarity.COMMON).setEfficiencyMod(1.25F).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_AXE = (ItemAxeMFR) new ItemAxeMFR(dragonforged + "_axe", DRAGONFORGED, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_SPADE = (ItemSpade) new ItemSpade(dragonforged + "_spade", DRAGONFORGED, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_HOE = (ItemHoeMFR) new ItemHoeMFR(dragonforged + "_hoe", DRAGONFORGED, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
 
-		DRAGONFORGED_HEAVY_PICK = (ItemHeavyPick) new ItemHeavyPick(dragonforged + "_heavy_pick", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_HEAVY_SHOVEL = (ItemHeavyShovel) new ItemHeavyShovel(dragonforged + "_heavy_shovel", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_HANDPICK = (ItemHandpick) new ItemHandpick(dragonforged + "_handpick", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_TROW = (ItemTrow) new ItemTrow(dragonforged + "_trow", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_SCYTHE = (ItemScythe) new ItemScythe(dragonforged + "_scythe", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_MATTOCK = (ItemMattock) new ItemMattock(dragonforged + "_mattock", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_LUMBER = (ItemLumberAxe) new ItemLumberAxe(dragonforged + "_lumber", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_HAMMER = (ItemHammer) new ItemHammer(dragonforged + "_hammer", DRAGONFORGED, false, 0, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_HEAVY_HAMMER = (ItemHammer) new ItemHammer(dragonforged + "_heavy_hammer", DRAGONFORGED, true, 0, 0).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_HEAVY_PICK = (ItemHeavyPick) new ItemHeavyPick(dragonforged + "_heavy_pick", DRAGONFORGED, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_HEAVY_SHOVEL = (ItemHeavyShovel) new ItemHeavyShovel(dragonforged + "_heavy_shovel", DRAGONFORGED, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_HANDPICK = (ItemHandpick) new ItemHandpick(dragonforged + "_handpick", DRAGONFORGED, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_TROW = (ItemTrow) new ItemTrow(dragonforged + "_trow", DRAGONFORGED, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_SCYTHE = (ItemScythe) new ItemScythe(dragonforged + "_scythe", DRAGONFORGED, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_MATTOCK = (ItemMattock) new ItemMattock(dragonforged + "_mattock", DRAGONFORGED, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_LUMBER = (ItemLumberAxe) new ItemLumberAxe(dragonforged + "_lumber", DRAGONFORGED, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_HAMMER = (ItemHammer) new ItemHammer(dragonforged + "_hammer", DRAGONFORGED, false, 0, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_HEAVY_HAMMER = (ItemHammer) new ItemHammer(dragonforged + "_heavy_hammer", DRAGONFORGED, true, 0, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
 
 		// Crafters
-		DRAGONFORGED_TONGS = (ItemTongs) new ItemTongs(dragonforged + "_tongs", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_SHEARS = (ItemShearsMFR) new ItemShearsMFR(dragonforged + "_shears", DRAGONFORGED, 0, 0).setCustom().setCreativeTab(tab);
-		DRAGONFORGED_KNIFE = (ItemKnife) new ItemKnife(dragonforged + "_knife", DRAGONFORGED, 0, 1F, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_NEEDLE = (ItemNeedle) new ItemNeedle(dragonforged + "_needle", DRAGONFORGED, 0, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_SAW = (ItemSaw) new ItemSaw(dragonforged + "_saw", DRAGONFORGED, 0, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_SPANNER = (ItemSpanner) new ItemSpanner(dragonforged + "_spanner", 0, 0).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_TONGS = (ItemTongs) new ItemTongs(dragonforged + "_tongs", DRAGONFORGED, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_SHEARS = (ItemShearsMFR) new ItemShearsMFR(dragonforged + "_shears", DRAGONFORGED, Rarity.COMMON, 0).setCustom().setCreativeTab(tab);
+		DRAGONFORGED_KNIFE = (ItemKnife) new ItemKnife(dragonforged + "_knife", DRAGONFORGED, Rarity.COMMON, 1F, 0).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_NEEDLE = (ItemNeedle) new ItemNeedle(dragonforged + "_needle", DRAGONFORGED, 0, Rarity.COMMON).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_SAW = (ItemSaw) new ItemSaw(dragonforged + "_saw", DRAGONFORGED, Rarity.COMMON, 0).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_SPANNER = (ItemSpanner) new ItemSpanner(dragonforged + "_spanner", Rarity.COMMON, 0).setCustom(dragonforged).setCreativeTab(tab);
 
 		// Armours
-		DRAGONFORGED_SCALE_HELMET = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_helmet", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.HEAD, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_SCALE_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_chestplate", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_SCALE_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_leggings", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.LEGS, "scale_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_SCALE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_boots", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.FEET, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_SCALE_HELMET = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_helmet", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.HEAD, "scale_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_SCALE_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_chestplate", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_SCALE_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_leggings", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.LEGS, "scale_layer_2", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_SCALE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_boots", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.FEET, "scale_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
 
-		DRAGONFORGED_CHAIN_HELMET = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_helmet", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.HEAD, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_CHAIN_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_chestplate", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_CHAIN_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_leggings", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_CHAIN_BOOTS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_boots", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.FEET, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_CHAIN_HELMET = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_helmet", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.HEAD, "chain_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_CHAIN_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_chestplate", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_CHAIN_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_leggings", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_CHAIN_BOOTS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_boots", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.FEET, "chain_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
 
-		DRAGONFORGED_SPLINT_HELMET = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_helmet", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.HEAD, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_SPLINT_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_chestplate", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_SPLINT_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_leggings", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_SPLINT_BOOTS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_boots", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.FEET, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_SPLINT_HELMET = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_helmet", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.HEAD, "splint_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_SPLINT_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_chestplate", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_SPLINT_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_leggings", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_SPLINT_BOOTS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_boots", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.FEET, "splint_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
 
-		DRAGONFORGED_PLATE_HELMET = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_helmet", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.HEAD, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_PLATE_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_chestplate", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_PLATE_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_leggings", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_PLATE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_boots", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.FEET, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_PLATE_HELMET = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_helmet", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.HEAD, "plate_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_PLATE_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_chestplate", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_PLATE_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_leggings", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_PLATE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_boots", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.FEET, "plate_layer_1", Rarity.COMMON).modifyRating(ratingMod).setCreativeTab(tab);
 	}
 
 	public static void initTool() {
-		TRAINING_SWORD = new ItemSword("training_sword", Item.ToolMaterial.WOOD, -1, 0.8F);
-		TRAINING_WARAXE = new ItemWaraxe("training_waraxe", Item.ToolMaterial.WOOD, -1, 0.8F);
-		TRAINING_MACE = new ItemMace("training_mace", Item.ToolMaterial.WOOD, -1, 0.8F);
-		TRAINING_SPEAR = new ItemSpear("training_spear", Item.ToolMaterial.WOOD, -1, 0.8F);
+		TRAINING_SWORD = new ItemSword("training_sword", Item.ToolMaterial.WOOD, Rarity.POOR, 0.8F);
+		TRAINING_WARAXE = new ItemWaraxe("training_waraxe", Item.ToolMaterial.WOOD, Rarity.POOR, 0.8F);
+		TRAINING_MACE = new ItemMace("training_mace", Item.ToolMaterial.WOOD, Rarity.POOR, 0.8F);
+		TRAINING_SPEAR = new ItemSpear("training_spear", Item.ToolMaterial.WOOD, Rarity.POOR, 0.8F);
 
-		STONE_KNIFE = new ItemKnife("stone_knife", BaseMaterial.getMaterial("stone").getToolMaterial(), -1, 3.5F, 0);
-		STONE_HAMMER = new ItemHammer("stone_hammer", BaseMaterial.getMaterial("stone").getToolMaterial(), false, -1, 0);
-		STONE_TONGS = new ItemTongs("stone_tongs", BaseMaterial.getMaterial("stone").getToolMaterial(), -1);
-		BONE_NEEDLE = new ItemNeedle("bone_needle", BaseMaterial.getMaterial("stone").getToolMaterial(), -1, 0);
-		STONE_PICK = new ItemPickMFR("stone_pick", BaseMaterial.getMaterial("stone").getToolMaterial(), -1);
-		STONE_AXE = new ItemAxeMFR("stone_axe", BaseMaterial.getMaterial("stone").getToolMaterial(), -1);
-		STONE_SPADE = new ItemSpade("stone_spade", BaseMaterial.getMaterial("stone").getToolMaterial(), -1);
-		STONE_HOE = new ItemHoeMFR("stone_hoe", BaseMaterial.getMaterial("stone").getToolMaterial(), -1);
-		STONE_SWORD = new ItemSword("stone_sword", BaseMaterial.getMaterial("stone").getToolMaterial(), -1, 2.0F);
-		STONE_MACE = new ItemMace("stone_mace", BaseMaterial.getMaterial("stone").getToolMaterial(), -1, 2.0F);
-		STONE_WARAXE = new ItemWaraxe("stone_waraxe", BaseMaterial.getMaterial("stone").getToolMaterial(), -1, 2.0F);
-		STONE_SPEAR = new ItemSpear("stone_spear", BaseMaterial.getMaterial("stone").getToolMaterial(), -1, 2.0F);
+		STONE_KNIFE = new ItemKnife("stone_knife", BaseMaterial.getMaterial("stone").getToolMaterial(), Rarity.POOR, 3.5F, 0);
+		STONE_HAMMER = new ItemHammer("stone_hammer", BaseMaterial.getMaterial("stone").getToolMaterial(), false, 0, Rarity.POOR);
+		STONE_TONGS = new ItemTongs("stone_tongs", BaseMaterial.getMaterial("stone").getToolMaterial(), Rarity.POOR);
+		BONE_NEEDLE = new ItemNeedle("bone_needle", BaseMaterial.getMaterial("stone").getToolMaterial(), 0, Rarity.POOR);
+		STONE_PICK = new ItemPickMFR("stone_pick", BaseMaterial.getMaterial("stone").getToolMaterial(), Rarity.POOR);
+		STONE_AXE = new ItemAxeMFR("stone_axe", BaseMaterial.getMaterial("stone").getToolMaterial(), Rarity.POOR);
+		STONE_SPADE = new ItemSpade("stone_spade", BaseMaterial.getMaterial("stone").getToolMaterial(), Rarity.POOR);
+		STONE_HOE = new ItemHoeMFR("stone_hoe", BaseMaterial.getMaterial("stone").getToolMaterial(), Rarity.POOR);
+		STONE_SWORD = new ItemSword("stone_sword", BaseMaterial.getMaterial("stone").getToolMaterial(), Rarity.POOR, 2.0F);
+		STONE_MACE = new ItemMace("stone_mace", BaseMaterial.getMaterial("stone").getToolMaterial(), Rarity.POOR, 2.0F);
+		STONE_WARAXE = new ItemWaraxe("stone_waraxe", BaseMaterial.getMaterial("stone").getToolMaterial(), Rarity.POOR, 2.0F);
+		STONE_SPEAR = new ItemSpear("stone_spear", BaseMaterial.getMaterial("stone").getToolMaterial(), Rarity.POOR, 2.0F);
 
 		BANDAGE_CRUDE = new ItemBandage("bandage_crude", 5F);
 		BANDAGE_WOOL = new ItemBandage("bandage_wool", 8F);
@@ -1659,7 +1653,7 @@ public class MineFantasyItems {
 
 		EXPLODING_ARROW = new ItemExplodingArrow();
 		SPYGLASS = new ItemSpyglass();
-		CLIMBING_PICK_BASIC = new ItemClimbingPick("climbing_pick_basic", Item.ToolMaterial.IRON, 0);
+		CLIMBING_PICK_BASIC = new ItemClimbingPick("climbing_pick_basic", Item.ToolMaterial.IRON, Rarity.COMMON);
 		PARACHUTE = new ItemParachute();
 
 		SYRINGE = new ItemSyringe("syringe");
@@ -1763,12 +1757,6 @@ public class MineFantasyItems {
 	}
 
 	public static void loadTool() {
-		POOR = EnumHelper.addRarity("Poor", TextFormatting.DARK_GRAY, "poor");
-		UNIQUE = EnumHelper.addRarity("Unique", TextFormatting.DARK_GREEN, "unique");
-		RARE = EnumHelper.addRarity("Rare", TextFormatting.DARK_BLUE, "rare");
-
-		RARITY = new EnumRarity[] {POOR, EnumRarity.COMMON, EnumRarity.UNCOMMON, EnumRarity.RARE, EnumRarity.EPIC};
-
 		if (ConfigHardcore.HCCWeakItems) {
 			weakenItems();
 		}

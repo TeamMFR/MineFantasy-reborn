@@ -49,7 +49,7 @@ public class CraftingManagerAlloy extends CraftingManagerBase<AlloyRecipeBase> {
 
 	public void addRecipe(AlloyRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getAlloyRecipeOutput();
-		if (ConfigCrafting.isAlloyItemCraftable(itemStack)) {
+		if (ConfigCrafting.isAlloyRecipeEnabled(key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

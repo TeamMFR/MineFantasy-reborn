@@ -8,6 +8,7 @@ import minefantasy.mfr.api.archery.ISpecialBow;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBow;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
@@ -31,11 +32,11 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -45,6 +46,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -57,7 +59,7 @@ import java.util.List;
 public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo, IFirearm, IRackItem, IClientRegister {
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.##");
 	private final EnumBowType model;
-	private final int itemRarity;
+	private final Rarity itemRarity;
 	private float baseDamage;
 	// ===================================================== CUSTOM START
 	// =============================================================\\
@@ -65,14 +67,14 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 	private String designType = "standard";
 
 	public ItemBowMFR(String name, EnumBowType type) {
-		this(name, ToolMaterial.WOOD, type, 0);
+		this(name, ToolMaterial.WOOD, type, Rarity.COMMON);
 	}
 
-	public ItemBowMFR(String name, ToolMaterial mat, EnumBowType type, int rarity) {
+	public ItemBowMFR(String name, ToolMaterial mat, EnumBowType type, Rarity rarity) {
 		this(name, (int) (mat.getMaxUses() * type.durabilityModifier), type, mat.getAttackDamage(), rarity);
 	}
 
-	private ItemBowMFR(String name, int dura, EnumBowType type, float damage, int rarity) {
+	private ItemBowMFR(String name, int dura, EnumBowType type, float damage, Rarity rarity) {
 		this.baseDamage = damage;
 		model = type;
 		this.maxStackSize = 1;
@@ -274,20 +276,8 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		int lvl = itemRarity;
-
-		EnumRarity[] rarity = new EnumRarity[] {EnumRarity.COMMON, EnumRarity.UNCOMMON, EnumRarity.RARE, EnumRarity.EPIC};
-		if (item.isItemEnchanted()) {
-			if (lvl == 0) {
-				lvl++;
-			}
-			lvl++;
-		}
-		if (lvl >= rarity.length) {
-			lvl = rarity.length - 1;
-		}
-		return rarity[lvl];
+	public IRarity getForgeRarity(ItemStack item) {
+		return Rarity.getForgeRarity(item, itemRarity);
 	}
 
 	@Override
@@ -340,7 +330,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 		if (isCustom) {
 			ArrayList<CustomMaterial> wood = CustomMaterialRegistry.getList(CustomMaterialType.WOOD_MATERIAL);
 			for (CustomMaterial customMat : wood) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
 					items.add(this.construct("iron", customMat.getName()));
 				}
 			}

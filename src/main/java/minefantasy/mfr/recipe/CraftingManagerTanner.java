@@ -47,7 +47,7 @@ public class CraftingManagerTanner extends CraftingManagerBase<TannerRecipeBase>
 
 	public void addRecipe(TannerRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getTannerRecipeOutput();
-		if (ConfigCrafting.isTannerItemCraftable(itemStack)) {
+		if (ConfigCrafting.isTannerRecipeEnabled(key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

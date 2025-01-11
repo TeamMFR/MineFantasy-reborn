@@ -43,7 +43,7 @@ public class CraftingManagerSpecial extends CraftingManagerBase<SpecialRecipeBas
 
 	public void addRecipe(SpecialRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getOutput();
-		if (ConfigCrafting.isSpecialItemCraftable(itemStack)) {
+		if (ConfigCrafting.isSpecialRecipeEnabled(key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

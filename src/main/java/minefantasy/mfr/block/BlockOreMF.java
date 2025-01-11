@@ -1,5 +1,6 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -13,26 +14,26 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockOreMF extends BasicBlockMF {
-	public int rarity;
-	private int xp;
-	private Item drop;
-	private int dropMin;
-	private int dropMax;
-	private Random rand = new Random();
+	public Rarity rarity;
+	private final int xp;
+	private final Item drop;
+	private final int dropMin;
+	private final int dropMax;
+	private final Random rand = new Random();
 
 	public BlockOreMF(String name, int harvestLevel) {
-		this(name, harvestLevel, 0);
+		this(name, harvestLevel, Rarity.COMMON);
 	}
 
-	public BlockOreMF(String name, int harvestLevel, int rarity) {
+	public BlockOreMF(String name, int harvestLevel, Rarity rarity) {
 		this(name, harvestLevel, rarity, null, 1, 1, 0);
 	}
 
-	public BlockOreMF(String name, int harvestLevel, int rarity, Item drop, int min, int max, int xp) {
+	public BlockOreMF(String name, int harvestLevel, Rarity rarity, Item drop, int min, int max, int xp) {
 		this(name, harvestLevel, rarity, drop, min, max, xp, Material.ROCK);
 	}
 
-	public BlockOreMF(String name, int harvestLevel, int rarity, Item drop, int min, int max, int xp, Material material) {
+	public BlockOreMF(String name, int harvestLevel, Rarity rarity, Item drop, int min, int max, int xp, Material material) {
 		super(name, material);
 		this.xp = xp;
 		this.drop = drop;

@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -17,15 +18,16 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -37,7 +39,7 @@ import java.util.List;
  * @author Anonymous Productions
  */
 public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR, IClientRegister {
-	protected int itemRarity;
+	protected Rarity itemRarity;
 	private final ToolMaterial toolMaterial;
 	private final int tier;
 	// ===================================================== CUSTOM START
@@ -45,7 +47,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
 	private boolean isCustom = false;
 	private float efficiencyMod = 1.0F;
 
-	public ItemShearsMFR(String name, ToolMaterial material, int rarity, int tier) {
+	public ItemShearsMFR(String name, ToolMaterial material, Rarity rarity, int tier) {
 		super();
 		this.tier = tier;
 		itemRarity = rarity;
@@ -88,7 +90,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
@@ -116,7 +118,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
 					items.add(this.construct(customMat.getName(), MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}

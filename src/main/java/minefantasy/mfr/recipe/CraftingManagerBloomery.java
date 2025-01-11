@@ -47,7 +47,7 @@ public class CraftingManagerBloomery extends CraftingManagerBase<BloomeryRecipeB
 
 	public void addRecipe(BloomeryRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getBloomeryRecipeOutput();
-		if (ConfigCrafting.isBloomeryItemCraftable(itemStack)) {
+		if (ConfigCrafting.isBloomeryRecipeEnabled(key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

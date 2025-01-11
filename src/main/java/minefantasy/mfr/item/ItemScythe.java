@@ -9,6 +9,7 @@ import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.config.ConfigTools;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
@@ -35,9 +36,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -47,6 +48,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -58,7 +60,7 @@ import java.util.List;
  * @author Anonymous Productions
  */
 public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRackItem, IClientRegister {
-	protected int itemRarity;
+	protected Rarity itemRarity;
 	private final ToolMaterial toolMaterial;
 	private float baseDamage = 3.0F;
 	// ===================================================== CUSTOM START
@@ -69,7 +71,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 	/**
 	 *
 	 */
-	public ItemScythe(String name, ToolMaterial material, int rarity) {
+	public ItemScythe(String name, ToolMaterial material, Rarity rarity) {
 		this.toolMaterial = material;
 		this.setFull3D();
 		itemRarity = rarity;
@@ -250,7 +252,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
@@ -286,7 +288,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
 					items.add(this.construct(customMat.getName(), MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}

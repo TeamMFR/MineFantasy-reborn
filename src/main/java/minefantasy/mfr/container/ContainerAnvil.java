@@ -56,8 +56,8 @@ public class ContainerAnvil extends ContainerBase {
 			if (stackInHand.getItem() instanceof IHotItem && !stackInSlot.isEmpty() && stackInSlot.getItem() instanceof IHotItem){
 				int tempForStackInSlot = ItemHeated.getTemp(stackInSlot);
 				int tempForStackInHand = ItemHeated.getTemp(stackInHand);
-				if (ItemStack.areItemStacksEqual(ItemHeated.getStack(stackInHand), ItemHeated.getStack(stackInSlot))){
-					if (Utils.percentDifferenceCalculator(tempForStackInSlot, tempForStackInHand) <= 1.0F){
+				if (ItemStack.areItemsEqualIgnoreDurability(ItemHeated.getStack(stackInHand), ItemHeated.getStack(stackInSlot))){
+						if (Utils.percentDifferenceCalculator(tempForStackInSlot, tempForStackInHand) <= 1.0F){
 						int averageTemp = (tempForStackInSlot + tempForStackInHand) / 2;
 						ItemHeated.setTemp(stackInHand, averageTemp);
 						ItemHeated.setTemp(stackInSlot, averageTemp);

@@ -1,6 +1,5 @@
 package minefantasy.mfr.mixin;
 
-import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.item.ItemHalbeard;
 import minefantasy.mfr.item.ItemHeavyWeapon;
@@ -51,8 +50,7 @@ public abstract class MixinLayerHeldItem implements LayerRenderer<EntityLivingBa
 				+ "Lnet/minecraft/item/ItemStack;"
 				+ "Lnet/minecraft/client/renderer/block/model/ItemCameraTransforms$TransformType;"
 				+ "Lnet/minecraft/util/EnumHandSide;)V",
-			cancellable = true,
-			remap = MineFantasyReforged.shouldRemap)
+			cancellable = true)
 	private void renderHeldItem(EntityLivingBase entityLivingBase, ItemStack stack, ItemCameraTransforms.TransformType transform, EnumHandSide handSide, CallbackInfo ci) {
 
 		if (!stack.isEmpty()) {

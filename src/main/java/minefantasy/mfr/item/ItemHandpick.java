@@ -5,6 +5,7 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.mining.RandomOre;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.config.ConfigTools;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
@@ -26,14 +27,15 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -48,14 +50,14 @@ import static minefantasy.mfr.registry.CustomMaterialRegistry.DECIMAL_FORMAT;
  * @author Anonymous Productions
  */
 public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientRegister {
-	protected int itemRarity;
+	protected Rarity itemRarity;
 	private float baseDamage = 1F;
 	// ===================================================== CUSTOM START
 	// =============================================================\\
 	private boolean isCustom = false;
 	private float efficiencyMod = 1.0F;
 
-	public ItemHandpick(String name, ToolMaterial material, int rarity) {
+	public ItemHandpick(String name, ToolMaterial material, Rarity rarity) {
 		super(material);
 		itemRarity = rarity;
 		setCreativeTab(MineFantasyTabs.tabOldTools);
@@ -192,7 +194,7 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
@@ -229,7 +231,7 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
 					items.add(this.construct(customMat.getName(), MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}

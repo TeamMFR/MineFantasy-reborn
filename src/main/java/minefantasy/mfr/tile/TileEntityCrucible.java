@@ -45,7 +45,6 @@ import java.util.Random;
 import java.util.Set;
 
 public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITickable {
-	private int ticksExisted;
 	private int progress = 0;
 	private int progressMax = 400;
 	private int temperature;
@@ -112,11 +111,6 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 	public void update() {
 		boolean isHot = getIsHot();
 		temperature = getTemperature();
-		ticksExisted++;
-
-		if (ticksExisted % 20 == 0) {
-			sendUpdates();
-		}
 
 		if (getTier() >= 2) {
 			progressMax = 2000;

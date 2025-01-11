@@ -1,9 +1,11 @@
 package minefantasy.mfr.init;
 
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.registry.types.CustomMaterialType;
+import net.minecraft.item.crafting.Ingredient;
 
 public class MineFantasyMaterials {
 
@@ -90,18 +92,25 @@ public class MineFantasyMaterials {
 
 
 	public static void initLeatherMaterials() {
-		CustomMaterialRegistry.addMaterial(new CustomMaterial(Names.LEATHER, CustomMaterialType.LEATHER_MATERIAL, 0,
-				1.0F, 0.4F, 1.2F, 0F, 0.5F, 0.1F, 15)
-				.setColour(198, 92, 53));
-		CustomMaterialRegistry.addMaterial(new CustomMaterial(Names.HARD_LEATHER, CustomMaterialType.LEATHER_MATERIAL, 1,
-				1.5F, 0.8F, 1.0F, 0F, 0.5F, 0.2F,20)
-				.setColour( 154, 72, 41));
-		CustomMaterialRegistry.addMaterial(new CustomMaterial(Names.MINOTAUR_SKIN, CustomMaterialType.LEATHER_MATERIAL, 2,
-				2.0F, 1.5F, 0.8F, 0F, 1.0F, 0.5F, 25)
-				.setColour( 118, 69, 48));
-		CustomMaterialRegistry.addMaterial(new CustomMaterial(Names.DRAGON_SKIN, CustomMaterialType.LEATHER_MATERIAL, 3,
-				3.0F, 2.0F, 1.0F, 0F, 1.2F, 0.75F, 30)
-				.setColour( 56, 43, 66));
+		CustomMaterialRegistry.addMaterial(new CustomMaterial(Names.LEATHER, CustomMaterialType.LEATHER_MATERIAL,
+				Ingredient.EMPTY, new int[]{198, 92, 53}, 1.0F, 0.4F, 1.2F, 0.5F,
+				0F, 0.1F, 0, Rarity.COMMON, 15,
+				0, null, null, null, null, false));
+
+		CustomMaterialRegistry.addMaterial(new CustomMaterial(Names.HARD_LEATHER, CustomMaterialType.LEATHER_MATERIAL,
+				Ingredient.EMPTY, new int[]{154, 72, 41}, 1.5F, 0.8F, 1.0F, 0.5F,
+				0F, 0.2F, 1, Rarity.UNCOMMON, 20,
+				1, null, null, null, null, false));
+
+		CustomMaterialRegistry.addMaterial(new CustomMaterial(Names.MINOTAUR_SKIN, CustomMaterialType.LEATHER_MATERIAL,
+				Ingredient.EMPTY, new int[]{118, 69, 48}, 2.0F, 1.5F, 0.8F, 1.0F,
+				0F, 0.5F, 2, Rarity.RARE, 25,
+				2, null, null, null, null, false));
+
+		CustomMaterialRegistry.addMaterial(new CustomMaterial(Names.DRAGON_SKIN, CustomMaterialType.LEATHER_MATERIAL,
+				Ingredient.EMPTY, new int[]{154, 72, 41}, 3.0F, 2.0F, 1.0F, 1.2F,
+				0F, 0.75F, 3, Rarity.EPIC, 30,
+				3, null, null, null, null, false));
 	}
 
 	public static void initBaseMaterials() {
@@ -118,7 +127,7 @@ public class MineFantasyMaterials {
 		PADDING = BaseMaterial.addMaterial("padded", 1, 200, -1, 2.0F, -1, 0, 1.00F, 5);
 		STUDDED = BaseMaterial.addMaterial("stud_leather", 1, 500, -1, 2.5F, -1, 5, 1.20F, 15);
 		SCALED = BaseMaterial.addMaterial("scale_leather", 2, 1000, -1, 2.8F, -1, 8, 1.50F, 25);
-		DRAGONSCALE = BaseMaterial.addMaterial("dragonscale", 3, 3000, -1, 5F, -1, 20, 1.20F, 85).setRarity(2);
+		DRAGONSCALE = BaseMaterial.addMaterial("dragonscale", 3, 3000, -1, 5F, -1, 20, 1.20F, 85, Rarity.RARE);
 
 		// name Tier dura, harvest sharpness enchant weight
 		// MISC
@@ -131,8 +140,8 @@ public class MineFantasyMaterials {
 		SILVER = BaseMaterial.addMaterial("silver", -1, 150, 0, 0.0F, 10, 0.70F, 0).setForgeStats(1, 1, 3F, 90, 120);
 		GOLD = BaseMaterial.addMaterial("gold", -1, 150, 0, 0.0F, 25, 1.50F, 0).setForgeStats(1, 1, 3F, 90, 120);
 		// goldPure = addMaterial("PureGold", -1, 50 , 0, 0.0F, 50, 2.00F, 0).setRarity(1);
-		ORNATE = BaseMaterial.addMaterial("ornate", -1, 300, 0, 0.0F, 30, 1.00F, 30).setRarity(1).setForgeStats(1, 1, 4F, 120, 150);
-		TUNGSTEN = BaseMaterial.addMaterial("tungsten", 2, 600, 3, 4F, 5, 1.50F, 0).setRarity(1).setForgeStats(3, 3, 5.0F, 150, 300);
+		ORNATE = BaseMaterial.addMaterial("ornate", -1, 300, 0, 0.0F, 30, 1.00F, 30, Rarity.UNCOMMON).setForgeStats(1, 1, 4F, 120, 150);
+		TUNGSTEN = BaseMaterial.addMaterial("tungsten", 2, 600, 3, 4F, 5, 1.50F, 0, Rarity.UNCOMMON).setForgeStats(3, 3, 5.0F, 150, 300);
 
 		// TIERS
 		// Basic / Common Materials (0-2) Levels 0-50
@@ -145,18 +154,18 @@ public class MineFantasyMaterials {
 
 		// Advanced Materials (3 - 4) Levels 50-75
 		BLACK_STEEL = BaseMaterial.addMaterial("black_steel", 4, 1500, 4, 4.0F, 12, 1.00F, 50).setForgeStats(4, 4, 4.0F, 150, 350);// lvl 50
-		DRAGONFORGE = BaseMaterial.addMaterial("dragonforge", 4, 1500, 4, 5.0F, 14, 1.00F, 60).setForgeStats(4, 4, 8.0F, 250, 350).setRarity(1).setResistances(100F, 0F);// lvl 60
+		DRAGONFORGE = BaseMaterial.addMaterial("dragonforge", 4, 1500, 4, 5.0F, 14, 1.00F, 60, Rarity.UNCOMMON).setForgeStats(4, 4, 8.0F, 250, 350).setResistances(100F, 0F);// lvl 60
 		RED_STEEL = BaseMaterial.addMaterial("red_steel", 5, 2000, 5, 6.0F, 1, 1.15F, 75).setForgeStats(5, 5, 6.5F, 200, 350).setResistances(20F, 0F);// lvl 75
 		BLUE_STEEL = BaseMaterial.addMaterial("blue_steel", 5, 1800, 5, 5.0F, 20, 0.75F, 75).setForgeStats(5, 5, 4.5F, 175, 325).setResistances(0F, 20F);// lvl 75
 
 		// Mythic Materials (5) Levels 75-100
-		ADAMANTIUM = BaseMaterial.addMaterial("adamantium", 6, 3000, 6, 8.0F, 10, 1.25F, 90).setForgeStats(6, 5, 9.0F, 300, 400).setRarity(1).setResistances(35F, 0F);// lvl 90
-		MITHRIL = BaseMaterial.addMaterial("mithril", 6, 2500, 6, 7.0F, 30, 0.50F, 90).setForgeStats(6, 5, 6.0F, 280, 400).setRarity(1).setResistances(0F, 35F);// lvl 90
+		ADAMANTIUM = BaseMaterial.addMaterial("adamantium", 6, 3000, 6, 8.0F, 10, 1.25F, 90, Rarity.UNCOMMON).setForgeStats(6, 5, 9.0F, 300, 400).setResistances(35F, 0F);// lvl 90
+		MITHRIL = BaseMaterial.addMaterial("mithril", 6, 2500, 6, 7.0F, 30, 0.50F, 90, Rarity.UNCOMMON).setForgeStats(6, 5, 6.0F, 280, 400).setResistances(0F, 35F);// lvl 90
 
 		// Masterwork Materials (6) Level 100
-		IGNOTUMITE = BaseMaterial.addMaterial("ignotumite", 7, 1000, 7, 14.0F, 20, 2.00F, 100).setForgeStats(7, 5, 15.0F, 350, 400).setRarity(2).setResistances(50F, 0F);// High damage, heavy, fire resist lvl 100
-		MITHIUM = BaseMaterial.addMaterial("mithium", 7, 1000, 7, 10.0F, 40, 0.25F, 100).setForgeStats(7, 5, 15.0F, 330, 400).setRarity(2).setResistances(0F, 50F);// Low damage, light, magic resist lvl 100
-		ENDERFORGE = BaseMaterial.addMaterial("enderforge", 7, 1000, 7, 12.0F, 20, 1.00F, 100).setForgeStats(7, 5, 15.0F, 400, 450).setRarity(2).setResistances(25F, 25F);// Middle lvl 100
+		IGNOTUMITE = BaseMaterial.addMaterial("ignotumite", 7, 1000, 7, 14.0F, 20, 2.00F, 100, Rarity.RARE).setForgeStats(7, 5, 15.0F, 350, 400).setResistances(50F, 0F);// High damage, heavy, fire resist lvl 100
+		MITHIUM = BaseMaterial.addMaterial("mithium", 7, 1000, 7, 10.0F, 40, 0.25F, 100, Rarity.RARE).setForgeStats(7, 5, 15.0F, 330, 400).setResistances(0F, 50F);// Low damage, light, magic resist lvl 100
+		ENDERFORGE = BaseMaterial.addMaterial("enderforge", 7, 1000, 7, 12.0F, 20, 1.00F, 100, Rarity.RARE).setForgeStats(7, 5, 15.0F, 400, 450).setResistances(25F, 25F);// Middle lvl 100
 
 		// Engineer Materials
 		// steel = addMaterial("Steel", 3, 750, 2, 2.5F, 10, 1.00F, 25).setForgeStats(3,

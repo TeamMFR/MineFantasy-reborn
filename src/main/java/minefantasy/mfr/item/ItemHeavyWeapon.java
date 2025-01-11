@@ -1,6 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.weapon.IExtendedReachWeapon;
+import minefantasy.mfr.constants.Rarity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
@@ -19,7 +20,7 @@ public abstract class ItemHeavyWeapon extends ItemWeaponMFR implements IExtended
 	 * <p>
 	 * Heavy weapons weigh more and throw you off balance when used.
 	 */
-	public ItemHeavyWeapon(Item.ToolMaterial material, String named, int rarity, float weight) {
+	public ItemHeavyWeapon(Item.ToolMaterial material, String named, Rarity rarity, float weight) {
 		super(material, named, rarity, weight);
 		setMaxDamage((int) (getMaxDamage() * 1.5F));
 	}

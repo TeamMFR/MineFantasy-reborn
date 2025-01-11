@@ -2,6 +2,7 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.armour.ArmourDesign;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -16,6 +17,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
 
@@ -26,7 +28,8 @@ public class ItemCustomArmour extends ItemArmourMFR {
 	private final String specialDesign;
 	private float ratingModifier = 1.0F;
 
-	public ItemCustomArmour(String craftDesign, String name, ArmourDesign armourDesign, EntityEquipmentSlot slot, String tex, int rarity) {
+	public ItemCustomArmour(String craftDesign, String name, ArmourDesign armourDesign, EntityEquipmentSlot slot,
+			String tex, Rarity rarity) {
 		super(craftDesign + "_" + name, MineFantasyMaterials.IRON, armourDesign, slot, craftDesign + "_" + tex, rarity);
 		this.specialDesign = craftDesign;
 		canRepair = false;
@@ -93,7 +96,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
 		ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 		if (items.stream().noneMatch(stack -> stack.getItem() instanceof ItemCustomArmour)) {
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
 					if (tab == MineFantasyTabs.tabArmour) {
 						addSuits(items, customMat.getName());
 					}

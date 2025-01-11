@@ -5,6 +5,7 @@ import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.client.render.item.RenderHotItem;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.entity.EntityItemHeated;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.material.CustomMaterial;
@@ -20,7 +21,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
@@ -31,6 +31,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -133,12 +134,12 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack stack) {
+	public IRarity getForgeRarity(ItemStack stack) {
 		ItemStack item = getStack(stack);
 		if (!item.isEmpty())
 			return item.getItem().getRarity(item);
 
-		return EnumRarity.COMMON;
+		return Rarity.COMMON;
 	}
 
 	@Override

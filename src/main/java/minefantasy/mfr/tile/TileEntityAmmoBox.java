@@ -27,7 +27,6 @@ import net.minecraftforge.items.ItemStackHandler;
 public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable, IBasicMetre {
 	public int angle, stock;
 	public ItemStack inventoryStack = ItemStack.EMPTY;
-	private int ticksExisted;
 
 	public TileEntityAmmoBox() {
 		super("ammo_box_basic", CustomMaterialRegistry.NONE);
@@ -35,10 +34,6 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable,
 
 	@Override
 	public void update() {
-		++ticksExisted;
-		if (ticksExisted == 20 || ticksExisted % 100 == 0) {
-			syncData();
-		}
 		if (angle > 0)
 			--angle;
 	}

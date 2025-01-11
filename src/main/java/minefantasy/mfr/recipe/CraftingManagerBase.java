@@ -2,6 +2,8 @@ package minefantasy.mfr.recipe;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import minefantasy.mfr.MineFantasyReforged;
@@ -92,6 +94,15 @@ public abstract class CraftingManagerBase<T extends IRecipeMFR> {
 				try {
 					reader = Files.newBufferedReader(file);
 					JsonObject json = JsonUtils.fromJson(GSON, reader, JsonObject.class);
+
+					if (json.has("modIds")) {
+						JsonArray modIds = JsonUtils.getJsonArray(json, "modIds");
+						for (JsonElement modId : modIds) {
+							if (!Loader.isModLoaded(modId.getAsString())) {
+								return;
+							}
+						}
+					}
 
 					String type = ctx.appendModId(JsonUtils.getString(json, "type"));
 					if (Loader.isModLoaded(mod.getModId())) {

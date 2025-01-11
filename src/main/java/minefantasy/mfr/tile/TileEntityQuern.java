@@ -29,7 +29,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TileEntityQuern extends TileEntityBase implements ITickable {
-	private int ticksExisted;
 	private int postUseTicks;
 	private int turnAngle;
 	private Set<String> knownResearches = new HashSet<>();
@@ -69,11 +68,6 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 	public void update() {
 		int max = getMaxRevs();
 		int levels = max / 4;
-		ticksExisted++;
-
-		if (ticksExisted % 20 == 0) {
-			sendUpdates();
-		}
 
 		if (postUseTicks > 0) {
 			--postUseTicks;

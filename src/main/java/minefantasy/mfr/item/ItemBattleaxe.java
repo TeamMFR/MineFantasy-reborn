@@ -2,6 +2,7 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -13,7 +14,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -31,7 +31,7 @@ public class ItemBattleaxe extends ItemHeavyWeapon {
 	 * A battleaxe is a heavy counterpart to the waraxe, it does more damage and
 	 * knockback, can also parry easier
 	 */
-	public ItemBattleaxe(String name, Item.ToolMaterial material, int rarity, float weight) {
+	public ItemBattleaxe(String name, ToolMaterial material, Rarity rarity, float weight) {
 		super(material, name, rarity, weight);
 	}
 

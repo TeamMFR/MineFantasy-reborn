@@ -6,23 +6,21 @@ import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
 import minefantasy.mfr.data.PlayerData;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.util.InventoryUtils;
 import minefantasy.mfr.util.PlayerUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<TransformationRecipeBase> implements IRecipeMFR{
 	public static IStoredVariable<TransformationBlockWrapper> TRANSFORMATION_BLOCK = IStoredVariable.StoredVariable
@@ -30,9 +28,10 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 			.setSynced();
 
 	protected Tool tool;
-	protected List<ItemStack> consumableStacks;
-	protected ItemStack dropStack;
-	protected ItemStack offhandStack;
+	protected NonNullList<Ingredient> consumableStacks;
+	protected Ingredient dropStack;
+	protected boolean shouldDropOnProgress;
+	protected Ingredient offhandStack;
 	protected int maxProgress;
 	protected SoundEvent sound;
 	protected String requiredResearch;
@@ -43,9 +42,10 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 
 	public TransformationRecipeBase(
 			Tool tool,
-			List<ItemStack> consumableStacks,
-			ItemStack dropStack,
-			ItemStack offhandStack,
+			NonNullList<Ingredient> consumableStacks,
+			Ingredient dropStack,
+			boolean shouldDropOnProgress,
+			Ingredient offhandStack,
 			Skill skill,
 			String research,
 			int skillXp,
@@ -55,6 +55,7 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 		this.tool = tool;
 		this.consumableStacks = consumableStacks;
 		this.dropStack = dropStack;
+		this.shouldDropOnProgress = shouldDropOnProgress;
 		this.offhandStack = offhandStack;
 		this.skill = skill;
 		this.requiredResearch = research;
@@ -83,34 +84,12 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 			EntityPlayer player,
 			EnumFacing facing);
 
-	protected static boolean validateTransformation(BlockPos pos, ItemStack item, EntityPlayer player, EnumFacing facing, TransformationRecipeBase recipe) {
-		// Check Player can change block and has Recipe Research unlocked
-		if (player.canPlayerEdit(pos, facing, item)) {
-			String requiredResearch = recipe.getRequiredResearch();
-			if (requiredResearch.equals("none")
-					|| ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(requiredResearch))) {
-				ItemStack offhandStack = recipe.getOffhandStack().copy();
-				// Check if the offhand stack is in the offhand slot or bypass if empty
-				if (offhandStack.isEmpty() || player.getHeldItemOffhand().isItemEqualIgnoreDurability(offhandStack)) {
-
-					List<ItemStack> consumableStacks = new ArrayList<>(recipe.getConsumableStacks());
-					// Check if the consumable stack is present in player inventory or bypass if empty
-					return consumableStacks.isEmpty() || consumableStacks.stream().allMatch(stack -> player.inventory.hasItemStack(stack));
-				}
-			}
-			else {
-				player.sendMessage(new TextComponentTranslation("knowledge.unknownUse"));
-				return false;
-			}
-		}
-		return false;
-	}
-
 	protected EnumActionResult handleProgressTransformation(
 			World world, BlockPos pos, ItemStack item, EntityPlayer player,
-			TransformationRecipeBase recipe, List<ItemStack> consumableStacks, IBlockState newState, IBlockState oldState) {
+			TransformationRecipeBase recipe, NonNullList<Ingredient> consumableStacks,
+			IBlockState newState, IBlockState oldState) {
 		PlayerData data = PlayerData.get(player);
-		String displayName = newState.getBlock().getLocalizedName();
+		String displayName = newState != Blocks.AIR.getDefaultState() ? newState.getBlock().getLocalizedName() : dropStack.getMatchingStacks()[0].getDisplayName();
 		if (data != null) {
 			TransformationBlockWrapper transformationBlock = data.getVariable(TRANSFORMATION_BLOCK);
 			// Update Transformation Block
@@ -141,6 +120,11 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 				data.setVariable(TRANSFORMATION_BLOCK,
 						new TransformationBlockWrapper(item, pos, oldState, 1, this.maxProgress, displayName));
 			}
+			// Check if the drop stack should be dropped on each progression
+			if (shouldDropOnProgress) {
+				// Handle drop stack
+				handleDropStack(world, pos, recipe);
+			}
 			//Sync with client
 			data.sync();
 			return EnumActionResult.PASS;
@@ -149,23 +133,25 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 	}
 
 	protected EnumActionResult performTransformation(World world, BlockPos pos, ItemStack item, EntityPlayer player,
-			List<ItemStack> consumableStacks, TransformationRecipeBase recipe, IBlockState newState) {
+			NonNullList<Ingredient> consumableStacks, TransformationRecipeBase recipe, IBlockState newState) {
 		if (!player.capabilities.isCreativeMode) {
 			//Handle consumable stack
 			if (!consumableStacks.isEmpty()) {
-				for (ItemStack recipeStack : consumableStacks) {
-					ItemStack consumableStack = recipeStack.copy();
-					// consume stack
-					player.inventory.decrStackSize(PlayerUtils.getSlotFor(player, consumableStack),
-							consumableStack.getCount());
-					// determine return item for the consumable, aka its container item
-					ItemStack returnItem = consumableStack.getItem().getContainerItem() != null
-							? new ItemStack(consumableStack.getItem().getContainerItem())
-							: ItemStack.EMPTY;
+				for (Ingredient recipeIngredient : consumableStacks) {
+					for (ItemStack ingredientStack : recipeIngredient.getMatchingStacks()) {
+						ItemStack consumableStack = ingredientStack.copy();
+						// consume stack
+						player.inventory.decrStackSize(PlayerUtils.getSlotFor(player, consumableStack),
+								consumableStack.getCount());
+						// determine return item for the consumable, aka its container item
+						ItemStack returnItem = consumableStack.getItem().getContainerItem() != null
+								? new ItemStack(consumableStack.getItem().getContainerItem())
+								: ItemStack.EMPTY;
 
-					// return the return stack to inventory or drop if inventory full
-					if (!returnItem.isEmpty() && !player.inventory.addItemStackToInventory(returnItem)) {
-						player.entityDropItem(returnItem, 0F);
+						// return the return stack to inventory or drop if inventory full
+						if (!returnItem.isEmpty() && !player.inventory.addItemStackToInventory(returnItem)) {
+							player.entityDropItem(returnItem, 0F);
+						}
 					}
 				}
 			}
@@ -180,9 +166,8 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 		item.damageItem(recipe.getMaxProgress(), player);
 
 		// Handle drop stack
-		ItemStack dropStack = recipe.getDropStack().copy();
-		if (!dropStack.isEmpty()) {
-			InventoryUtils.dropItemInWorld(world, dropStack, pos.add(0, 1, 0));
+		if (!shouldDropOnProgress) {
+			handleDropStack(world, pos, recipe);
 		}
 
 		world.destroyBlock(pos, false);
@@ -190,19 +175,27 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 		return EnumActionResult.PASS;
 	}
 
+	protected static void handleDropStack(World world, BlockPos pos, TransformationRecipeBase recipe) {
+		// Handle drop stack
+		Ingredient dropStack = recipe.getDropStack();
+		if (dropStack != Ingredient.EMPTY) {
+			InventoryUtils.dropItemInWorld(world, dropStack.getMatchingStacks()[0].copy(), pos.add(0, 1, 0));
+		}
+	}
+
 	public Tool getTool() {
 		return tool;
 	}
 
-	public List<ItemStack> getConsumableStacks() {
+	public NonNullList<Ingredient> getConsumableStacks() {
 		return consumableStacks;
 	}
 
-	public ItemStack getDropStack() {
+	public Ingredient getDropStack() {
 		return dropStack;
 	}
 
-	public ItemStack getOffhandStack() {
+	public Ingredient getOffhandStack() {
 		return offhandStack;
 	}
 

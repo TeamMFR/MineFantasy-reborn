@@ -1,13 +1,16 @@
 package minefantasy.mfr.registry.factories;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.material.WoodMaterial;
+import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.registry.types.CustomMaterialType;
 import net.minecraft.util.JsonUtils;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.JsonContext;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class CustomMaterialFactory {
 
@@ -26,7 +29,7 @@ public class CustomMaterialFactory {
 	private CustomMaterial parseMetalMaterial(JsonContext context, JsonObject json) {
 		String name = JsonUtils.getString(json, "name");
 
-		String oreDictList = JsonUtils.getString(json, "oreDictList");
+		JsonElement ingredientJson = json.get("materialIngredient");
 
 		JsonObject properties = JsonUtils.getJsonObject(json, "properties");
 		float durability = JsonUtils.getFloat(properties, "durability");
@@ -37,7 +40,7 @@ public class CustomMaterialFactory {
 		float density = JsonUtils.getFloat(properties, "density");
 		int tier = JsonUtils.getInt(properties, "tier");
 		int meltingPoint = JsonUtils.getInt(properties, "melting_point");
-		int rarity = JsonUtils.getInt(properties, "rarity");
+		String rarity = JsonUtils.getString(properties, "rarity");
 		int enchantability = JsonUtils.getInt(properties, "enchantability");
 		int craftTier = JsonUtils.getInt(properties, "craft_tier");
 		int craftTimeModifier = JsonUtils.getInt(properties, "craft_time_modifier");
@@ -47,7 +50,7 @@ public class CustomMaterialFactory {
 		float cuttingProtection = JsonUtils.getFloat(armourStats, "cutting");
 		float bluntProtection = JsonUtils.getFloat(armourStats, "blunt");
 		float piercingProtection = JsonUtils.getFloat(armourStats, "piercing");
-		float[] armour = {cuttingProtection, bluntProtection, piercingProtection};
+		Float[] armour = {cuttingProtection, bluntProtection, piercingProtection};
 
 		JsonObject color = JsonUtils.getJsonObject(json, "color");
 		int red = JsonUtils.getInt(color, "red");
@@ -55,23 +58,21 @@ public class CustomMaterialFactory {
 		int blue = JsonUtils.getInt(color, "blue");
 		int[] colors = {red, green, blue};
 
-		MetalMaterial metal = new MetalMaterial(name, tier, hardness, durability, flexibility,
-				sharpness, resistance, density, enchantability, armour, colors, oreDictList);
+		float time = 2F + (sharpness * 2F);
 
-		metal.setMeltingPoint(meltingPoint);
-		metal.setRarity(rarity);
-		metal.setCrafterTiers(craftTier);
-		metal.modifyCraftTime(craftTimeModifier);
-		metal.setUnbreakable(unbreakable);
+		CustomMaterial material = new MetalMaterial(name, CustomMaterialType.METAL_MATERIAL, null, colors, hardness, durability,
+				flexibility, sharpness, resistance, density, tier, Rarity.valueOf(rarity), enchantability, craftTier,
+				Math.min(craftTier, 4), craftTimeModifier * time, meltingPoint, armour, unbreakable);
 
-		return metal;
+		CustomMaterialRegistry.INGREDIENT_JSON_MAP.put(material, ImmutablePair.of(ingredientJson, context));
+
+		return material;
 	}
 
 	private CustomMaterial parseWoodMaterial(JsonContext context, JsonObject json) {
 		String name = JsonUtils.getString(json, "name");
 
-		ResourceLocation inputItemResourceLocation = new ResourceLocation(JsonUtils.getString(json, "inputItem"));
-		int inputItemMeta = JsonUtils.getInt(json, "inputItemMeta");
+		JsonElement ingredientJson = json.get("materialIngredient");
 
 		JsonObject properties = JsonUtils.getJsonObject(json, "properties");
 		float durability = JsonUtils.getFloat(properties, "durability");
@@ -80,7 +81,7 @@ public class CustomMaterialFactory {
 		float resistance = JsonUtils.getFloat(properties, "resistance");
 		float density = JsonUtils.getFloat(properties, "density");
 		int tier = JsonUtils.getInt(properties, "tier");
-		int rarity = JsonUtils.getInt(properties, "rarity");
+		String rarity = JsonUtils.getString(properties, "rarity");
 		int craftTier = JsonUtils.getInt(properties, "craft_tier");
 		int craftTimeModifier = JsonUtils.getInt(properties, "craft_time_modifier");
 
@@ -90,13 +91,12 @@ public class CustomMaterialFactory {
 		int blue = JsonUtils.getInt(color, "blue");
 		int[] colors = {red, green, blue};
 
-		WoodMaterial wood = new WoodMaterial(name, tier, hardness, durability, flexibility,
-				resistance, density, colors, inputItemResourceLocation, inputItemMeta);
+		CustomMaterial material = new WoodMaterial(name, CustomMaterialType.WOOD_MATERIAL, null,  colors, hardness,
+				durability, flexibility, 0F, resistance, density, tier, Rarity.valueOf(rarity), 0, craftTier,
+				craftTimeModifier * 4F, false);
 
-		wood.setRarity(rarity);
-		wood.setCrafterTiers(craftTier);
-		wood.modifyCraftTime(craftTimeModifier);
+		CustomMaterialRegistry.INGREDIENT_JSON_MAP.put(material, ImmutablePair.of(ingredientJson, context));
 
-		return wood;
+		return material;
 	}
 }

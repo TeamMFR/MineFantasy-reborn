@@ -42,7 +42,6 @@ import java.util.Random;
 import java.util.Set;
 
 public class TileEntityBloomery extends TileEntityBase implements ITickable {
-	private int ticksExisted;
 	private float progress;
 	private float progressMax;
 	private boolean hasBloom;
@@ -157,7 +156,6 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 				isActive = false;
 				return;
 			}
-			ticksExisted++;
 			if (!world.isRemote) {
 				++progress;
 				if (progress >= progressMax) {
@@ -165,9 +163,6 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 				}
 				if (rand.nextInt(4) == 0) {
 					SmokeMechanics.spawnSmoke(world, pos, 1);
-				}
-				if (ticksExisted % 20 == 0) {
-					sendUpdates();
 				}
 			}
 		} else if (isActive) {

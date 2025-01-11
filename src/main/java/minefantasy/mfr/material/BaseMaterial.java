@@ -1,5 +1,6 @@
 package minefantasy.mfr.material;
 
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
@@ -68,12 +69,13 @@ public class BaseMaterial {
 	public float fireResistance;
 	public float arcaneResistance;
 	public boolean isMythic = false;
-	public int rarity;
+	public Rarity rarity;
 	// SPECIALS
 	private ArmorMaterialMFR armourConversion;
 	private ToolMaterial toolConversion;
 
-	public BaseMaterial(String name, int tier, int durability, int harvestLevel, float hardness, float sharpness, int enchantability, float weight, int lvl) {
+	public BaseMaterial(String name, int tier, int durability, int harvestLevel, float hardness, float sharpness,
+			int enchantability, float weight, int lvl, Rarity rarity) {
 		this.requiredLevel = lvl;
 		this.name = name;
 		this.tier = tier;
@@ -83,6 +85,22 @@ public class BaseMaterial {
 		this.enchantability = enchantability;
 		this.weight = weight;
 		this.harvestLevel = harvestLevel;
+		this.rarity = rarity;
+	}
+
+	public static BaseMaterial addMaterial(String name, int tier, int durability, int harvestLevel, float sharpness, int enchantment, float weight, int lvl, Rarity rarity) {
+		float armorClass;
+		armorClass = ((sharpness + SWORD_DAMAGE) / armourVsSwordBalance) - 1.0F;
+		MFRLogUtil.logDebug("Added Ratio Armour Material " + name + " AR = " + armorClass);
+		float initAc = armorClass;
+
+		armorClass = Math.round(armorClass * (100F / ACrounding));
+		armorClass = armorClass / (100F / ACrounding);
+
+		if (initAc != armorClass) {
+			MFRLogUtil.logDebug("Auto-Calculated ArmourRating for tier: " + name + ", modified to " + armorClass);
+		}
+		return addMaterial(name, tier, durability, harvestLevel, armorClass, sharpness, enchantment, weight, lvl, rarity);
 	}
 
 	public static BaseMaterial addMaterial(String name, int tier, int durability, int harvestLevel, float sharpness, int enchantment, float weight, int lvl) {
@@ -100,8 +118,14 @@ public class BaseMaterial {
 		return addMaterial(name, tier, durability, harvestLevel, armorClass, sharpness, enchantment, weight, lvl);
 	}
 
-	public static BaseMaterial addMaterial(String name, int tier, int durability, int harvestLevel, float hardness, float sharpness, int enchantment, float weight, int lvl) {
-		return register(new BaseMaterial(name, tier, durability, harvestLevel, hardness, sharpness, enchantment, weight, lvl));
+	public static BaseMaterial addMaterial(String name, int tier, int durability, int harvestLevel, float hardness,
+			float sharpness, int enchantment, float weight, int lvl, Rarity rarity) {
+		return register(new BaseMaterial(name, tier, durability, harvestLevel, hardness, sharpness, enchantment, weight, lvl, rarity));
+	}
+
+	public static BaseMaterial addMaterial(String name, int tier, int durability, int harvestLevel, float hardness,
+			float sharpness, int enchantment, float weight, int lvl) {
+		return register(new BaseMaterial(name, tier, durability, harvestLevel, hardness, sharpness, enchantment, weight, lvl, Rarity.COMMON));
 	}
 
 	public static BaseMaterial register(BaseMaterial material) {
@@ -125,11 +149,6 @@ public class BaseMaterial {
 	public BaseMaterial setResistances(float fire, float arcane) {
 		fireResistance = fire;
 		arcaneResistance = arcane;
-		return this;
-	}
-
-	public BaseMaterial setRarity(int value) {
-		rarity = value;
 		return this;
 	}
 

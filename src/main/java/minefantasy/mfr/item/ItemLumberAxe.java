@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.config.ConfigTools;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.StaminaMechanics;
 import minefantasy.mfr.tile.TileEntityRack;
@@ -41,7 +42,7 @@ import static minefantasy.mfr.registry.CustomMaterialRegistry.DECIMAL_FORMAT;
 public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 	private final Random rand = new Random();
 
-	public ItemLumberAxe(String name, Item.ToolMaterial material, int rarity) {
+	public ItemLumberAxe(String name, Item.ToolMaterial material, Rarity rarity) {
 		super(name, material, rarity);
 		this.setMaxDamage(getMaxDamage() * 5);
 	}

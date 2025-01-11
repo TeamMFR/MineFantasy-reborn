@@ -6,7 +6,10 @@
     "metal_material": [
         {
             "name": "cold_iron",
-            "oreDictList": "ingotColdIron",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotColdIron"
+            },
             "properties": {
                 "tier": 6,
                 "durability": 7.0,
@@ -16,7 +19,7 @@
                 "resistance": 65,
                 "density": 2.0,
                 "melting_point": 2000,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 30,
                 "craft_tier": 5,
                 "craft_time_modifier": 12.0,

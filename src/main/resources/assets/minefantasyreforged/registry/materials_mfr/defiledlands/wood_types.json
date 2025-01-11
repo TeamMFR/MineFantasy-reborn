@@ -6,8 +6,9 @@
     "wood_material": [
         {
             "name": "tenebra_wood",
-            "inputItem": "defiledlands:tenebra_planks",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "defiledlands:tenebra_planks"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 0.9,
@@ -15,7 +16,7 @@
                 "flexibility": 1.2,
                 "resistance": 45,
                 "density": 0.9,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 2.0
             },

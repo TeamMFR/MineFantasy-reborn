@@ -765,7 +765,9 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			resultStackSpecial.getDisplayName();
 		}
 
-		return resultStack.isEmpty() || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR) ? I18n.format("gui.no_project_set") : resultStack.getDisplayName();
+		return resultStack.isEmpty() || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR)
+				? I18n.format("gui.no_project_set")
+				: resultStack.getDisplayName();
 	}
 
 	public int getToolTierNeeded() {

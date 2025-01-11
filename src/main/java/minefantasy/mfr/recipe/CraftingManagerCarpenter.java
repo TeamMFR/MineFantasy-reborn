@@ -45,7 +45,7 @@ public class CraftingManagerCarpenter extends CraftingManagerBase<CarpenterRecip
 
 	public void addRecipe(CarpenterRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getCarpenterRecipeOutput();
-		if (ConfigCrafting.isCarpenterItemCraftable(itemStack)) {
+		if (ConfigCrafting.isCarpenterRecipeEnabled(key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

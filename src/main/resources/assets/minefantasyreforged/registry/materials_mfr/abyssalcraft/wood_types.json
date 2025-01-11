@@ -6,8 +6,9 @@
     "wood_material": [
         {
             "name": "darklands_oak_wood",
-            "inputItem": "abyssalcraft:dltplank",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "abyssalcraft:dltplank"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 0.8,
@@ -15,7 +16,7 @@
                 "flexibility": 1.2,
                 "resistance": 40,
                 "density": 0.8,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 2.0
             },
@@ -27,8 +28,9 @@
         },
         {
             "name": "dreadlands_wood",
-            "inputItem": "abyssalcraft:dreadplanks",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "abyssalcraft:dreadplanks"
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 0.6,
@@ -36,7 +38,7 @@
                 "flexibility": 1.2,
                 "resistance": 50,
                 "density": 0.9,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 2.0
             },

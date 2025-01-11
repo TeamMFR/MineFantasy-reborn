@@ -6,7 +6,10 @@
     "metal_material": [
         {
             "name": "hellstone",
-            "oreDictList": "ingotHellstone",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotHellstone"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 3.0,
@@ -16,7 +19,7 @@
                 "resistance": 40,
                 "density": 2.0,
                 "melting_point": 2500,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 9,
                 "craft_tier": 3,
                 "craft_time_modifier": 12.0,
@@ -35,7 +38,10 @@
         },
         {
             "name": "shadium",
-            "oreDictList": "ingotShadium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotShadium"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 4.0,
@@ -45,7 +51,7 @@
                 "resistance": 50,
                 "density": 3.0,
                 "melting_point": 1200,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 15,
                 "craft_tier": 3,
                 "craft_time_modifier": 12.0,
@@ -64,7 +70,10 @@
         },
         {
             "name": "celestium",
-            "oreDictList": "ingotCelestium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotCelestium"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 5.5,
@@ -74,7 +83,7 @@
                 "resistance": 50,
                 "density": 3.5,
                 "melting_point": 1400,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 16,
                 "craft_tier": 3,
                 "craft_time_modifier": 15.0,
@@ -93,7 +102,10 @@
         },
         {
             "name": "mekyum",
-            "oreDictList": "ingotMekyum",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotMekyum"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 5.0,
@@ -103,7 +115,7 @@
                 "resistance": 40,
                 "density": 2.5,
                 "melting_point": 1400,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 12,
                 "craft_tier": 3,
                 "craft_time_modifier": 12.0,
@@ -122,7 +134,10 @@
         },
         {
             "name": "korite",
-            "oreDictList": "ingotKorite",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotKorite"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 6.0,
@@ -132,7 +147,7 @@
                 "resistance": 40,
                 "density": 2.5,
                 "melting_point": 1400,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 13,
                 "craft_tier": 3,
                 "craft_time_modifier": 15.0,
@@ -151,7 +166,10 @@
         },
         {
             "name": "storon",
-            "oreDictList": "ingotStoron",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotStoron"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 5.0,
@@ -161,7 +179,7 @@
                 "resistance": 50,
                 "density": 3.5,
                 "melting_point": 1500,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 12,
                 "craft_tier": 3,
                 "craft_time_modifier": 12.0,
@@ -180,7 +198,10 @@
         },
         {
             "name": "lunium",
-            "oreDictList": "ingotLunium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotLunium"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 8.0,
@@ -190,7 +211,7 @@
                 "resistance": 55,
                 "density": 2.5,
                 "melting_point": 1800,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 17,
                 "craft_tier": 3,
                 "craft_time_modifier": 12.0,
@@ -209,7 +230,10 @@
         },
         {
             "name": "flairium",
-            "oreDictList": "ingotFlairium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotFlairium"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 8.0,
@@ -219,7 +243,7 @@
                 "resistance": 55,
                 "density": 2.5,
                 "melting_point": 2500,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 16,
                 "craft_tier": 3,
                 "craft_time_modifier": 15.0,
@@ -238,7 +262,10 @@
         },
         {
             "name": "orbadite",
-            "oreDictList": "ingotOrbadite",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotOrbadite"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 8.0,
@@ -248,7 +275,7 @@
                 "resistance": 55,
                 "density": 3.5,
                 "melting_point": 2000,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 17,
                 "craft_tier": 3,
                 "craft_time_modifier": 15.0,
@@ -267,7 +294,10 @@
         },
         {
             "name": "des",
-            "oreDictList": "ingotDes",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotDes"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 6.0,
@@ -277,7 +307,7 @@
                 "resistance": 60,
                 "density": 3.0,
                 "melting_point": 2000,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 24,
                 "craft_tier": 3,
                 "craft_time_modifier": 17.0,

@@ -6,7 +6,10 @@
     "metal_material": [
         {
             "name": "carbon",
-            "oreDictList": "ingotCarbon",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotColdIron"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 1.0,
@@ -16,7 +19,7 @@
                 "resistance": 30,
                 "density": 1.0,
                 "melting_point": 2300,
-                "rarity": 5,
+                "rarity": "COMMON",
                 "enchantability": 4,
                 "craft_tier": 3,
                 "craft_time_modifier": 12.0,
@@ -35,7 +38,10 @@
         },
         {
             "name": "mercury",
-            "oreDictList": "ingotMercury",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotMercury"
+            },
             "properties": {
                 "tier": 6,
                 "durability": 2.0,
@@ -45,7 +51,7 @@
                 "resistance": 60,
                 "density": 2.0,
                 "melting_point": 1300,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 7,
                 "craft_tier": 6,
                 "craft_time_modifier": 21.0,
@@ -64,7 +70,10 @@
         },
         {
             "name": "uranium",
-            "oreDictList": "ingotUranium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotUranium"
+            },
             "properties": {
                 "tier": 6,
                 "durability": 1.5,
@@ -74,7 +83,7 @@
                 "resistance": 40,
                 "density": 4.0,
                 "melting_point": 3000,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 8,
                 "craft_tier": 6,
                 "craft_time_modifier": 14.0,
@@ -93,7 +102,10 @@
         },
         {
             "name": "palladium",
-            "oreDictList": "ingotPalladium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotPalladium"
+            },
             "properties": {
                 "tier": 4,
                 "durability": 3.0,
@@ -103,7 +115,7 @@
                 "resistance": 65,
                 "density": 1.5,
                 "melting_point": 4200,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 5,
                 "craft_tier": 4,
                 "craft_time_modifier": 30.0,
@@ -122,7 +134,10 @@
         },
         {
             "name": "nickel",
-            "oreDictList": "ingotNickel",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotNickel"
+            },
             "properties": {
                 "tier": 2,
                 "durability": 2.0,
@@ -132,7 +147,7 @@
                 "resistance": 40,
                 "density": 2.5,
                 "melting_point": 1400,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 5,
                 "craft_tier": 2,
                 "craft_time_modifier": 14.0,
@@ -151,7 +166,10 @@
         },
         {
             "name": "magnesium",
-            "oreDictList": "ingotMagnesium",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotMagnesium"
+            },
             "properties": {
                 "tier": 5,
                 "durability": 2.9,
@@ -161,7 +179,7 @@
                 "resistance": 50,
                 "density": 2.5,
                 "melting_point": 1500,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 7,
                 "craft_tier": 5,
                 "craft_time_modifier": 15.0,
@@ -180,7 +198,10 @@
         },
         {
             "name": "crystal",
-            "oreDictList": "ingotCrystal",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotCrystal"
+            },
             "properties": {
                 "tier": 6,
                 "durability": 8.0,
@@ -190,7 +211,7 @@
                 "resistance": 45,
                 "density": 2.5,
                 "melting_point": 2300,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 9,
                 "craft_tier": 6,
                 "craft_time_modifier": 16.0,
@@ -209,7 +230,10 @@
         },
         {
             "name": "zinc",
-            "oreDictList": "ingotZinc",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotZinc"
+            },
             "properties": {
                 "tier": 6,
                 "durability": 3.0,
@@ -219,7 +243,7 @@
                 "resistance": 45,
                 "density": 3.0,
                 "melting_point": 2400,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 5,
                 "craft_tier": 6,
                 "craft_time_modifier": 8.0,
@@ -238,7 +262,10 @@
         },
         {
             "name": "dark_iron",
-            "oreDictList": "ingotDarkIron",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotDarkIron"
+            },
             "properties": {
                 "tier": 2,
                 "durability": 2.0,
@@ -248,7 +275,7 @@
                 "resistance": 25,
                 "density": 4.0,
                 "melting_point": 1200,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 7,
                 "craft_tier": 2,
                 "craft_time_modifier": 6.0,
@@ -267,7 +294,10 @@
         },
         {
             "name": "lead",
-            "oreDictList": "ingotLead",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotLead"
+            },
             "properties": {
                 "tier": 2,
                 "durability": 1.8,
@@ -277,7 +307,7 @@
                 "resistance": 30,
                 "density": 4.0,
                 "melting_point": 1100,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 5,
                 "craft_tier": 2,
                 "craft_time_modifier": 5.0,

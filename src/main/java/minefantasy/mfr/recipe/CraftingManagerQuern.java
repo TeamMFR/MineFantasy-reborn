@@ -47,7 +47,7 @@ public class CraftingManagerQuern extends CraftingManagerBase<QuernRecipeBase> {
 
 	public void addRecipe(QuernRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getQuernRecipeOutput();
-		if (ConfigCrafting.isQuernItemCraftable(itemStack)) {
+		if (ConfigCrafting.isQuernRecipeEnabled(key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

@@ -11,8 +11,10 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
+import net.minecraft.util.NonNullList;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,9 +30,9 @@ public class JEITransformationRecipe implements IRecipeWrapper {
 	private final TransformationRecipeBase recipe;
 
 	private final List<ItemStack> outputs;
-	private final List<ItemStack> consumableStacks;
-	private final ItemStack offhandStack;
-	private final ItemStack dropStack;
+	private final NonNullList<Ingredient> consumableStacks;
+	private final Ingredient offhandStack;
+	private final Ingredient dropStack;
 
 
 	public JEITransformationRecipe(TransformationRecipeBase recipe) {
@@ -123,15 +125,15 @@ public class JEITransformationRecipe implements IRecipeWrapper {
 		return outputs;
 	}
 
-	public List<ItemStack> getConsumableStacks() {
+	public NonNullList<Ingredient> getConsumableStacks() {
 		return consumableStacks;
 	}
 
-	public ItemStack getOffhandStack() {
+	public Ingredient getOffhandStack() {
 		return offhandStack;
 	}
 
-	public ItemStack getDropStack() {
+	public Ingredient getDropStack() {
 		return dropStack;
 	}
 }

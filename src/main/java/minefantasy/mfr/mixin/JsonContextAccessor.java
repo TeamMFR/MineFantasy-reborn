@@ -7,12 +7,12 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.Map;
 
-@Mixin(JsonContext.class)
+@Mixin(value = JsonContext.class, remap = false)
 public interface JsonContextAccessor {
 
-	@Accessor(value = "constants", remap = false)
+	@Accessor(value = "constants")
 	Map<String, Ingredient> getConstants();
 
-	@Accessor(value = "constants", remap = false)
+	@Accessor(value = "constants")
 	void setConstants(Map<String, Ingredient> constants);
 }

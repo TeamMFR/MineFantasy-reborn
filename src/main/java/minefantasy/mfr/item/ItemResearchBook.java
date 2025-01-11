@@ -1,17 +1,18 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -28,8 +29,8 @@ public class ItemResearchBook extends ItemBaseMFR {
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		return EnumRarity.UNCOMMON;
+	public IRarity getForgeRarity(ItemStack item) {
+		return Rarity.UNCOMMON;
 	}
 
 	/**

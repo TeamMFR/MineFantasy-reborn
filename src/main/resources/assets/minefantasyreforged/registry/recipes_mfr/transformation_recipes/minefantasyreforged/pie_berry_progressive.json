@@ -1,0 +1,21 @@
+{
+	"type": "transformation_recipe_progressive",
+	"tool_type": "knife",
+	"skill": "provisioning",
+	"skill_xp": 1,
+	"vanilla_xp": 0.3,
+	"soundName": "minecraft:block.wood.hit",
+	"maxProgress": 9,
+	"dropStack": {
+		"item": "minefantasyreforged:pieslice_berry"
+	},
+	"shouldDropOnProgress": true,
+	"inputBlockState": {
+		"Name": "minefantasyreforged:pie_berry"
+	},
+	"propertyName": "bites",
+	"shouldIncrement": true,
+	"outputBlockState": {
+		"Name": "minecraft:air"
+	}
+}

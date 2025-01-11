@@ -6,7 +6,10 @@
     "metal_material": [
         {
             "name": "khnumite",
-            "oreDictList": "ingotKhnumite",
+            "materialIngredient": {
+                "type": "forge:ore_dict",
+                "ore": "ingotKhnumite"
+            },
             "properties": {
                 "tier": 3,
                 "durability": 4.0,
@@ -16,7 +19,7 @@
                 "resistance": 50,
                 "density": 3.5,
                 "melting_point": 1400,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "enchantability": 4,
                 "craft_tier": 3,
                 "craft_time_modifier": 8.0,

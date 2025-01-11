@@ -5,6 +5,7 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -16,7 +17,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.EnumActionResult;
@@ -25,6 +25,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IRarity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -34,7 +35,7 @@ import java.util.List;
  * @author Anonymous Productions
  */
 public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
-	protected int itemRarity;
+	protected Rarity itemRarity;
 	private int tier;
 	private Tool toolType;
 	// ===================================================== CUSTOM START
@@ -44,6 +45,7 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
 	public ItemBasicCraftTool(String name, Tool type, int tier, int uses) {
 		super(1.0F, 1.0F, ToolMaterial.WOOD, Sets.newHashSet(new Block[] {}));
 		this.tier = tier;
+		this.itemRarity = Rarity.COMMON;
 		setCreativeTab(MineFantasyTabs.tabCraftTool);
 
 		toolType = type;
@@ -133,7 +135,7 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack item) {
+	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 

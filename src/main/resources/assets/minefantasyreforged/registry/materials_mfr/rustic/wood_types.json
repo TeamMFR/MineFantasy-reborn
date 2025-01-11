@@ -6,8 +6,10 @@
     "wood_material": [
         {
             "name": "olive_wood",
-            "inputItem": "rustic:planks",
-            "inputItemMeta": 0,
+            "materialIngredient": {
+                "item": "rustic:planks",
+                "data": 0
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 1.5,
@@ -15,7 +17,7 @@
                 "flexibility": 1.0,
                 "resistance": 75,
                 "density": 1.2,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
@@ -27,8 +29,10 @@
         },
         {
             "name": "ironwood_wood",
-            "inputItem": "rustic:planks",
-            "inputItemMeta": 1,
+            "materialIngredient": {
+                "item": "rustic:planks",
+                "data": 1
+            },
             "properties": {
                 "tier": 1,
                 "hardness": 2,
@@ -36,7 +40,7 @@
                 "flexibility": 0.8,
                 "resistance": 75,
                 "density": 1.5,
-                "rarity": 0,
+                "rarity": "COMMON",
                 "craft_tier": 1,
                 "craft_time_modifier": 3.0
             },
