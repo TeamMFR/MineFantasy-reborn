@@ -5,6 +5,7 @@ import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.recipe.factories.CarpenterRecipeFactory;
 import minefantasy.mfr.recipe.types.CarpenterRecipeType;
+import minefantasy.mfr.recipe.types.RecipeType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -45,7 +46,7 @@ public class CraftingManagerCarpenter extends CraftingManagerBase<CarpenterRecip
 
 	public void addRecipe(CarpenterRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getCarpenterRecipeOutput();
-		if (ConfigCrafting.isCarpenterRecipeEnabled(key)) {
+		if (ConfigCrafting.isCarpenterRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.CARPENTER_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

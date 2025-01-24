@@ -5,6 +5,7 @@ import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.recipe.factories.AlloyRecipeFactory;
 import minefantasy.mfr.recipe.types.AlloyRecipeType;
+import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.tile.TileEntityCrucible;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
@@ -49,7 +50,7 @@ public class CraftingManagerAlloy extends CraftingManagerBase<AlloyRecipeBase> {
 
 	public void addRecipe(AlloyRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getAlloyRecipeOutput();
-		if (ConfigCrafting.isAlloyRecipeEnabled(key)) {
+		if (ConfigCrafting.isAlloyRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.ALLOY_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

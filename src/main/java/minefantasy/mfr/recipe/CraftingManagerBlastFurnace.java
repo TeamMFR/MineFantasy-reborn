@@ -5,6 +5,7 @@ import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.recipe.factories.BlastFurnaceRecipeFactory;
 import minefantasy.mfr.recipe.types.BlastFurnaceRecipeType;
+import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -47,7 +48,7 @@ public class CraftingManagerBlastFurnace extends CraftingManagerBase<BlastFurnac
 
 	public void addRecipe(BlastFurnaceRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getBlastFurnaceRecipeOutput();
-		if (ConfigCrafting.isBlastFurnaceRecipeEnabled(key)) {
+		if (ConfigCrafting.isBlastFurnaceRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.BLAST_FURNACE_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

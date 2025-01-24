@@ -28,6 +28,7 @@ import minefantasy.mfr.init.MineFantasyOreDict;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
+import minefantasy.mfr.recipe.BlockedRecipeManager;
 import minefantasy.mfr.recipe.CraftingManagerAlloy;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
@@ -82,6 +83,7 @@ public class MineFantasyReforged {
 	@Mod.Instance
 	public static MineFantasyReforged INSTANCE;
 
+	public static final BlockedRecipeManager BLOCKED_RECIPE_MANAGER = new BlockedRecipeManager();
 	public static final CraftingManagerAnvil CRAFTING_MANAGER_ANVIL = new CraftingManagerAnvil();
 	public static final CraftingManagerCarpenter CRAFTING_MANAGER_CARPENTER = new CraftingManagerCarpenter();
 	public static final CraftingManagerBigFurnace CRAFTING_MANAGER_BIG_FURNACE = new CraftingManagerBigFurnace();
@@ -189,6 +191,8 @@ public class MineFantasyReforged {
 
 		registerIngredients();
 
+		BLOCKED_RECIPE_MANAGER.loadBlockedRecipes();
+
 		CRAFTING_MANAGER_ANVIL.loadRecipes();
 		CRAFTING_MANAGER_CARPENTER.loadRecipes();
 		CRAFTING_MANAGER_BIG_FURNACE.loadRecipes();
@@ -260,6 +264,7 @@ public class MineFantasyReforged {
 
 	@SubscribeEvent
 	public void createRegistry(RegistryEvent.NewRegistry evt) {
+		CustomMaterialRegistry.init();
 		CraftingManagerAnvil.init();
 		CraftingManagerCarpenter.init();
 		CraftingManagerBigFurnace.init();

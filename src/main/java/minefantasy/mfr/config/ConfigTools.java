@@ -3,9 +3,11 @@ package minefantasy.mfr.config;
 public class ConfigTools extends ConfigurationBaseMF {
 	public static final String CATEGORY_BONUS = "Bonuses";
 	public static final String CATEGORY_PENALTIES = "Penalties";
+	public static final String CATEGORY_INCOMPATIBILITY = "Incompatibilities";
 	public static float handpickBonus;
 	public static boolean handpickFortune;
 	public static int lumberAxeMaxLogs;
+	public static String[] lumberAxeIncompatibleModList = new String[0];
 	public static float heavy_tool_drop_chance;
 
 	public ConfigTools(String name) {
@@ -16,6 +18,7 @@ public class ConfigTools extends ConfigurationBaseMF {
 	protected void initializeCategories() {
 		config.addCustomCategoryComment(CATEGORY_BONUS, "Controls Tool Bonuses");
 		config.addCustomCategoryComment(CATEGORY_PENALTIES, "Controls Tool Penalties");
+		config.addCustomCategoryComment(CATEGORY_INCOMPATIBILITY, "Controls Tool Incompatibilities");
 	}
 
 	@Override
@@ -33,5 +36,13 @@ public class ConfigTools extends ConfigurationBaseMF {
 		heavy_tool_drop_chance = Float.parseFloat(config.get(CATEGORY_PENALTIES, "Heavy ruin-drop chance", 25F,
 				"This is the percent value (0-100) heavy picks/shovels and lumber axe do NOT drop blocks on break")
 				.getString());
+
+
+		lumberAxeIncompatibleModList = config.get(
+				CATEGORY_INCOMPATIBILITY,
+				"Lumberaxe Mod Incompatibility List",
+				new String[]{"dynamictrees"},
+				"This is a list of Mod Ids that should cause the lumberaxe to not try to break the whole tree.\nAny of these mods being loaded will cause this effect.")
+				.getStringList();
 	}
 }

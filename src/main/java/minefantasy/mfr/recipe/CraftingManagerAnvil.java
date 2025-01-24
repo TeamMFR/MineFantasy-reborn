@@ -5,6 +5,7 @@ import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.recipe.factories.AnvilRecipeFactory;
 import minefantasy.mfr.recipe.types.AnvilRecipeType;
+import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -48,7 +49,7 @@ public class CraftingManagerAnvil extends CraftingManagerBase<AnvilRecipeBase> {
 	@Override
 	public void addRecipe(AnvilRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getAnvilRecipeOutput();
-		if (ConfigCrafting.isAnvilRecipeEnabled(key)) {
+		if (ConfigCrafting.isAnvilRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.ANVIL_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

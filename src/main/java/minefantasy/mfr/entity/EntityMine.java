@@ -180,7 +180,7 @@ public class EntityMine extends Entity {
 		double radius = Math.max(1.0D, getRangeOfBlast() - 1.5D);
 
 		if (ticksExisted % 5 == 0) {
-			List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().expand(radius * 2, radius, radius * 2));
+			List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().grow(radius * 2, radius, radius * 2));
 			if (fuse == 0 && !list.isEmpty()) {
 				boolean detonate = false;
 				for (EntityLivingBase e : list) {
@@ -238,7 +238,7 @@ public class EntityMine extends Entity {
 		world.createExplosion(this, posX, posY, posZ, 0, false);
 		if (!this.world.isRemote) {
 			double area = getRangeOfBlast() * 2D * getPowderType().rangeModifier;
-			AxisAlignedBB AABB = this.getEntityBoundingBox().expand(area, area / 2, area);
+			AxisAlignedBB AABB = this.getEntityBoundingBox().grow(area, area / 2, area);
 			List<EntityLivingBase> entitiesWithinAABB = this.world.getEntitiesWithinAABB(EntityLivingBase.class, AABB);
 
 			if (entitiesWithinAABB != null && !entitiesWithinAABB.isEmpty()) {

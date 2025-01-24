@@ -6,6 +6,7 @@ import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.recipe.factories.RoastRecipeFactory;
+import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.recipe.types.RoastRecipeType;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemFood;
@@ -54,7 +55,7 @@ public class CraftingManagerRoast extends CraftingManagerBase<RoastRecipeBase> {
 
 	public void addRecipe(RoastRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getRoastRecipeOutput();
-		if (ConfigCrafting.isRoastRecipeEnabled(key)) {
+		if (ConfigCrafting.isRoastRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.ROAST_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

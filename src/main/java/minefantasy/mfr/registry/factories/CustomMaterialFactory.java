@@ -58,11 +58,9 @@ public class CustomMaterialFactory {
 		int blue = JsonUtils.getInt(color, "blue");
 		int[] colors = {red, green, blue};
 
-		float time = 2F + (sharpness * 2F);
-
-		CustomMaterial material = new MetalMaterial(name, CustomMaterialType.METAL_MATERIAL, null, colors, hardness, durability,
+		CustomMaterial material = new MetalMaterial(name, null, colors, hardness, durability,
 				flexibility, sharpness, resistance, density, tier, Rarity.valueOf(rarity), enchantability, craftTier,
-				Math.min(craftTier, 4), craftTimeModifier * time, meltingPoint, armour, unbreakable);
+				craftTimeModifier, meltingPoint, armour, unbreakable);
 
 		CustomMaterialRegistry.INGREDIENT_JSON_MAP.put(material, ImmutablePair.of(ingredientJson, context));
 
@@ -91,7 +89,7 @@ public class CustomMaterialFactory {
 		int blue = JsonUtils.getInt(color, "blue");
 		int[] colors = {red, green, blue};
 
-		CustomMaterial material = new WoodMaterial(name, CustomMaterialType.WOOD_MATERIAL, null,  colors, hardness,
+		CustomMaterial material = new WoodMaterial(name, null,  colors, hardness,
 				durability, flexibility, 0F, resistance, density, tier, Rarity.valueOf(rarity), 0, craftTier,
 				craftTimeModifier * 4F, false);
 

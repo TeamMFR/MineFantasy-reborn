@@ -5,6 +5,7 @@ import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.recipe.factories.BloomeryRecipeFactory;
 import minefantasy.mfr.recipe.types.BloomeryRecipeType;
+import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -47,7 +48,7 @@ public class CraftingManagerBloomery extends CraftingManagerBase<BloomeryRecipeB
 
 	public void addRecipe(BloomeryRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getBloomeryRecipeOutput();
-		if (ConfigCrafting.isBloomeryRecipeEnabled(key)) {
+		if (ConfigCrafting.isBloomeryRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.BLOOMERY_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

@@ -5,6 +5,7 @@ import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.recipe.factories.TransformationRecipeFactory;
+import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.recipe.types.TransformationRecipeType;
 import minefantasy.mfr.util.PlayerUtils;
 import net.minecraft.block.state.IBlockState;
@@ -60,9 +61,9 @@ public class CraftingManagerTransformation extends CraftingManagerBase<Transform
 		}
 	}
 
-	private static void addBlockStateRecipe(TransformationRecipeBlockState recipe, boolean checkForExistence, ResourceLocation key) {
+	private void addBlockStateRecipe(TransformationRecipeBlockState recipe, boolean checkForExistence, ResourceLocation key) {
 		IBlockState state = recipe.getOutput();
-		if (ConfigCrafting.isTransformationRecipeEnabled(key)) {
+		if (ConfigCrafting.isTransformationRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.TRANSFORMATION_RECIPES, key)) {
 			if (!checkForExistence || !TRANSFORMATION_RECIPES.containsKey(recipe.getRegistryName())) {
 				TRANSFORMATION_RECIPES.register(recipe);
 			}
@@ -76,9 +77,9 @@ public class CraftingManagerTransformation extends CraftingManagerBase<Transform
 		}
 	}
 
-	private static void addStandardRecipe(TransformationRecipeStandard recipe, boolean checkForExistence, ResourceLocation key) {
+	private void addStandardRecipe(TransformationRecipeStandard recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getOutput();
-		if (ConfigCrafting.isTransformationRecipeEnabled(key)) {
+		if (ConfigCrafting.isTransformationRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.TRANSFORMATION_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			itemStack.getItem().getSubItems(itemStack.getItem().getCreativeTab(), subItems);

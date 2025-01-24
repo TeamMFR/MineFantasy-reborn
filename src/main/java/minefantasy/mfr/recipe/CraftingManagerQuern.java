@@ -5,6 +5,7 @@ import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.recipe.factories.QuernRecipeFactory;
 import minefantasy.mfr.recipe.types.QuernRecipeType;
+import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -47,7 +48,7 @@ public class CraftingManagerQuern extends CraftingManagerBase<QuernRecipeBase> {
 
 	public void addRecipe(QuernRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getQuernRecipeOutput();
-		if (ConfigCrafting.isQuernRecipeEnabled(key)) {
+		if (ConfigCrafting.isQuernRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.QUERN_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

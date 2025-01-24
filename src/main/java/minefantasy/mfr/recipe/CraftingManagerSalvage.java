@@ -5,6 +5,7 @@ import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.recipe.factories.SalvageRecipeFactory;
+import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.recipe.types.SalvageRecipeType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -45,7 +46,7 @@ public class CraftingManagerSalvage extends CraftingManagerBase<SalvageRecipeBas
 
 	public void addRecipe(SalvageRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getInput();
-		if (ConfigCrafting.isSalvageRecipeEnabled(key)) {
+		if (ConfigCrafting.isSalvageRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.SALVAGE_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

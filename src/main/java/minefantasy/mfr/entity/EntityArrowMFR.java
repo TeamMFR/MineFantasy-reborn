@@ -490,7 +490,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 		world.createExplosion(this, posX, posY, posZ, 0, false);
 		if (!this.world.isRemote) {
 			double area = getRangeOfBlast() * 2D;
-			AxisAlignedBB entityBoundBox = this.getEntityBoundingBox().expand(area, area / 2, area);
+			AxisAlignedBB entityBoundBox = this.getEntityBoundingBox().grow(area, area / 2, area);
 			List<Entity> entitiesWithinAABB = this.world.getEntitiesWithinAABB(EntityLivingBase.class, entityBoundBox);
 
 			if (entitiesWithinAABB != null && !entitiesWithinAABB.isEmpty()) {

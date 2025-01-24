@@ -7,11 +7,11 @@ import net.minecraft.item.crafting.Ingredient;
 
 public class WoodMaterial extends CustomMaterial {
 
-	public WoodMaterial (String name, CustomMaterialType type, Ingredient materialIngredient,  int[] colourRGB, float hardness,
+	public WoodMaterial (String name,Ingredient materialIngredient,  int[] colourRGB, float hardness,
 			float durability, float flexibility, float sharpness, float resistance, float density, int tier, Rarity rarity,
 			int enchantability, int crafterTier, Float craftTimeModifier, boolean unbreakable) {
 
-		super(name, type, materialIngredient, colourRGB, hardness, durability, flexibility, sharpness, resistance, density,
+		super(name, CustomMaterialType.WOOD_MATERIAL, materialIngredient, colourRGB, hardness, durability, flexibility, sharpness, resistance, density,
 				tier, rarity, enchantability, crafterTier, null, craftTimeModifier,
 				null, null, unbreakable);
 	}

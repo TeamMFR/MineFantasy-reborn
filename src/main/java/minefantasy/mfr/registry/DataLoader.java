@@ -10,8 +10,6 @@ import java.io.File;
 
 public abstract class DataLoader {
 
-	public static final String JSON_FILE_EXT = "json";
-
 	public void loadRegistry(String type, String defaultDirectory, String configDirectory) {
 		ModContainer modContainer = Loader.instance().activeModContainer();
 

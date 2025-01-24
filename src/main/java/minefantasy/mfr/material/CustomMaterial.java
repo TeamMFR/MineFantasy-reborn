@@ -156,7 +156,7 @@ public class CustomMaterial extends IForgeRegistryEntry.Impl<CustomMaterial>{
 		return craftTimeModifier;
 	}
 
-	public float getMeltingPoint() {
+	public Integer getMeltingPoint() {
 		return meltingPoint;
 	}
 

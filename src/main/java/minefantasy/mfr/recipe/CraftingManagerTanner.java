@@ -4,6 +4,7 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.recipe.factories.TannerRecipeFactory;
+import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.recipe.types.TannerRecipeType;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
@@ -47,7 +48,7 @@ public class CraftingManagerTanner extends CraftingManagerBase<TannerRecipeBase>
 
 	public void addRecipe(TannerRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getTannerRecipeOutput();
-		if (ConfigCrafting.isTannerRecipeEnabled(key)) {
+		if (ConfigCrafting.isTannerRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.TANNER_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

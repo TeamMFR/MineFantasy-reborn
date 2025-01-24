@@ -67,6 +67,10 @@ public class CustomMaterialRegistry extends DataLoader {
 	public static final CustomMaterialFactory FACTORY = new CustomMaterialFactory();
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
+	public static void init() {
+		//call this so that the static final gets initialized at proper time
+	}
+
 	public void preInit() {
 		FileUtils.createCustomDataDirectory(CUSTOM_MATERIAL_DIRECTORY);
 		for (CustomMaterialType type : CustomMaterialType.values()) {
@@ -81,7 +85,7 @@ public class CustomMaterialRegistry extends DataLoader {
 		FileUtils.findFiles(source, base, (root, file) -> {
 			String extension = FilenameUtils.getExtension(file.toString());
 
-			if (!extension.equals(JSON_FILE_EXT)) {
+			if (!extension.equals(Constants.JSON_FILE_EXT)) {
 				return;
 			}
 
@@ -209,7 +213,7 @@ public class CustomMaterialRegistry extends DataLoader {
 	}
 
 	/**
-	 * Gets the Custom Material of an ItemStacl
+	 * Gets the Custom Material of an ItemStack
 	 * @param item The ItemStack to get the Material of
 	 * @param slot The 'position' of the Material
 	 * @return The Custom Material

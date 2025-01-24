@@ -5,6 +5,7 @@ import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.recipe.factories.BigFurnaceRecipeFactory;
 import minefantasy.mfr.recipe.types.BigFurnaceRecipeType;
+import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -49,7 +50,7 @@ public class CraftingManagerBigFurnace extends CraftingManagerBase<BigFurnaceRec
 	@Override
 	public void addRecipe(BigFurnaceRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getBigFurnaceRecipeOutput();
-		if (ConfigCrafting.isBigFurnaceRecipeEnabled(key)) {
+		if (ConfigCrafting.isBigFurnaceRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.BIG_FURNACE_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

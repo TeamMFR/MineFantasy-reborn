@@ -4,6 +4,7 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.recipe.factories.SpecialRecipeFactory;
+import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.recipe.types.SpecialRecipeType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -43,7 +44,7 @@ public class CraftingManagerSpecial extends CraftingManagerBase<SpecialRecipeBas
 
 	public void addRecipe(SpecialRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getOutput();
-		if (ConfigCrafting.isSpecialRecipeEnabled(key)) {
+		if (ConfigCrafting.isSpecialRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.SPECIAL_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

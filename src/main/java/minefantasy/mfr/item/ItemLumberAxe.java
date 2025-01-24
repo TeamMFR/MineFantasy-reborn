@@ -26,10 +26,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,7 +51,11 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack item, World world, IBlockState state, BlockPos pos, EntityLivingBase user) {
-		if (!user.world.isRemote && user instanceof EntityPlayer && StaminaMechanics.canAcceptCost(user)) {
+		if (!user.world.isRemote
+				&& user instanceof EntityPlayer
+				&& StaminaMechanics.canAcceptCost(user)
+				&& !user.isSneaking()
+				&& Arrays.stream(ConfigTools.lumberAxeIncompatibleModList).noneMatch(Loader::isModLoaded)) {
 			breakTree(world, pos, item, user, ConfigTools.lumberAxeMaxLogs);
 		}
 		return super.onBlockDestroyed(item, world, state, pos, user);

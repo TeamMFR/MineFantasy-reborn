@@ -31,6 +31,7 @@ import minefantasy.mfr.recipe.SpecialRecipeBase;
 import minefantasy.mfr.recipe.TannerRecipeBase;
 import minefantasy.mfr.recipe.TransformationRecipeBlockState;
 import minefantasy.mfr.recipe.TransformationRecipeStandard;
+import minefantasy.mfr.recipe.types.RecipeType;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -706,6 +707,16 @@ public class MineFantasyReforgedAPI {
 		MineFantasyReforged.CRAFTING_MANAGER_TRANSFORMATION.addRecipe(new TransformationRecipeBlockState(input, output, tool,
 				consumableStacks, dropStack, shouldDropOnProgress, offhandStack, skill, research, skillXp, vanillaXp, progressMax, soundName),
 				true, new ResourceLocation(modId, name));
+	}
+
+	/**
+	 * Adds a Blocked Recipe Entry for the given type of Recipe, blocking the given Recipe
+	 *
+	 * @param recipeType 	The type of Recipe to be blocked, see {@link RecipeType}
+	 * @param recipe 		The Resource Location of the Recipe to be blocked
+	 */
+	public static void addBlockedRecipeEntry(RecipeType recipeType, ResourceLocation recipe) {
+		MineFantasyReforged.BLOCKED_RECIPE_MANAGER.addBlockedRecipeToType(recipeType, recipe);
 	}
 
 	public static void registerFuelHandler(IFuelHandler handler) {

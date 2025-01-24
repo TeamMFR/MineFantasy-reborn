@@ -213,7 +213,7 @@ public class EntityBomb extends Entity {
 
 		if (object instanceof EntityChicken) {
 			EntityChicken chook = (EntityChicken) object;
-			Entity target = world.findNearestEntityWithinAABB(Entity.class, chook.getEntityBoundingBox().expand(64, 8, 64), chook);
+			Entity target = world.findNearestEntityWithinAABB(Entity.class, chook.getEntityBoundingBox().grow(64, 8, 64), chook);
 			if (target != null) {
 				if (target instanceof EntityLivingBase) {
 					chook.setCustomNameTag("Suicide Chook!");
@@ -274,7 +274,7 @@ public class EntityBomb extends Entity {
 		world.createExplosion(this, posX, posY, posZ, 0, false);
 		if (!this.world.isRemote) {
 			double area = getRangeOfBlast() * 2D;
-			AxisAlignedBB axisAlignedBB = this.getEntityBoundingBox().expand(area, area / 2, area);
+			AxisAlignedBB axisAlignedBB = this.getEntityBoundingBox().grow(area, area / 2, area);
 			List<EntityLivingBase> entitiesWithinAABB = this.world.getEntitiesWithinAABB(EntityLivingBase.class, axisAlignedBB);
 
 			if (entitiesWithinAABB != null && !entitiesWithinAABB.isEmpty()) {

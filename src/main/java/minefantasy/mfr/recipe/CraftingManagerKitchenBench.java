@@ -5,6 +5,7 @@ import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.recipe.factories.KitchenBenchRecipeFactory;
 import minefantasy.mfr.recipe.types.KitchenBenchRecipeType;
+import minefantasy.mfr.recipe.types.RecipeType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -45,7 +46,7 @@ public class CraftingManagerKitchenBench extends CraftingManagerBase<KitchenBenc
 
 	public void addRecipe(KitchenBenchRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getKitchenBenchRecipeOutput();
-		if (ConfigCrafting.isKitchenBenchRecipeEnabled(key)) {
+		if (ConfigCrafting.isKitchenBenchRecipeEnabled(key) && !BlockedRecipeManager.isRecipeBlocked(RecipeType.KITCHEN_BENCH_RECIPES, key)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
 			recipe.setRegistryName(key);

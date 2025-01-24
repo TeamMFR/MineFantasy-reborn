@@ -13,13 +13,14 @@ import java.util.ArrayList;
 
 public class MetalMaterial extends CustomMaterial {
 
-	public MetalMaterial(String name, CustomMaterialType type, Ingredient materialIngredient, int[] colourRGB, float hardness,
+	public MetalMaterial(String name, Ingredient materialIngredient, int[] colourRGB, float hardness,
 			float durability, float flexibility, float sharpness, float resistance, float density, int tier, Rarity rarity,
-			int enchantability, int crafterTier, Integer crafterAnvilTier, Float craftTimeModifier, Integer meltingPoint,
+			int enchantability, int crafterTier, int craftTimeModifier, Integer meltingPoint,
 			Float[] armourProtection, boolean unbreakable) {
 
-		super(name, type, materialIngredient, colourRGB, hardness, durability, flexibility, sharpness, resistance, density, tier,
-				rarity, enchantability, crafterTier, crafterAnvilTier, craftTimeModifier,
+		super(name, CustomMaterialType.METAL_MATERIAL, materialIngredient, colourRGB, hardness, durability, flexibility, sharpness, resistance, density, tier,
+				rarity, enchantability, crafterTier, Math.min(crafterTier, 4),
+				craftTimeModifier * (2F + (sharpness * 2F)),
 				meltingPoint, armourProtection, unbreakable);
 
 		setArmourStats(1.0F, flexibility, 1F / flexibility);// Harder materials absorb blunt less but resist cutting and piercing more

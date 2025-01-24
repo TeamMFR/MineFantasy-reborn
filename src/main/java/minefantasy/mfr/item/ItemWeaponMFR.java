@@ -289,10 +289,6 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	public void addInformation(ItemStack weapon, World world, List<String> list, ITooltipFlag flag) {
 		super.addInformation(weapon, world, list, flag);
 
-		if (material == ToolMaterial.WOOD) {
-			return;
-		}
-
 		if (isCustom) {
 			CustomToolHelper.addInformation(weapon, list);
 		}
@@ -530,7 +526,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	}
 
 	protected void hurtInRange(EntityLivingBase user, double range) {
-		AxisAlignedBB bb = user.getEntityBoundingBox().expand(range, range, range);
+		AxisAlignedBB bb = user.getEntityBoundingBox().grow(range, range, range);
 		List<Entity> hurt = user.world.getEntitiesWithinAABBExcludingEntity(user, bb);
 		for (Entity hit : hurt) {
 			if (user.canEntityBeSeen(hit)) {

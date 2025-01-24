@@ -67,7 +67,7 @@ public class EntityFireBlast extends EntityFireball {
 				}
 			}
 		}
-		AxisAlignedBB bb = this.getEntityBoundingBox().expand(1D, 1D, 1D);
+		AxisAlignedBB bb = this.getEntityBoundingBox().grow(1D);
 		if (!world.isRemote)
 			this.destroyBlocksInAABB(bb);
 	}

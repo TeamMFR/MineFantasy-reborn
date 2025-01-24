@@ -109,7 +109,7 @@ public class ItemMobSpawner extends ItemBaseMFR {
 	}
 
 	protected double getYOffset(World world, BlockPos pos) {
-		AxisAlignedBB axisalignedbb = (new AxisAlignedBB(pos)).expand(0.0D, -1.0D, 0.0D);
+		AxisAlignedBB axisalignedbb = (new AxisAlignedBB(pos)).grow(0.0D, -1.0D, 0.0D);
 		List<AxisAlignedBB> list = world.getCollisionBoxes(null, axisalignedbb);
 
 		if (list.isEmpty()) {

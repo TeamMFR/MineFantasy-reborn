@@ -112,13 +112,15 @@ public class EntitySmoke extends Entity {
 			}
 
 			Entity entity = null;
-			List<Entity> entityList = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+			List<Entity> entityList = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox()
+					.expand(this.motionX, this.motionY, this.motionZ)
+					.grow(1.0D, 1.0D, 1.0D));
 			double d0 = 0.0D;
 
 			for (Entity entity1 : entityList) {
 				if (entity1.canBeCollidedWith() && (!entity1.isEntityEqual(this.shootingEntity))) {
 					float f = 0.3F;
-					AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().expand(f, f, f);
+					AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().grow(f, f, f);
 					RayTraceResult rayTraceIntercept = axisalignedbb.calculateIntercept(vec3, vec31);
 
 					if (rayTraceIntercept != null) {

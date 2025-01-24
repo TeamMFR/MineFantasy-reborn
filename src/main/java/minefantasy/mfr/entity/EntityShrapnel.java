@@ -117,15 +117,17 @@ public class EntityShrapnel extends Entity implements IDamageType {
 			}
 
 			Entity entity = null;
-			List<Entity> entitiesWithinAABBExcludingEntity = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+			List<Entity> entitiesWithinAABBExcludingEntity = this.world.
+					getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox()
+							.expand(this.motionX, this.motionY, this.motionZ).grow(1.0D, 1.0D, 1.0D));
 			double d0 = 0.0D;
 
 			for (Entity value : entitiesWithinAABBExcludingEntity) {
 
-				if (((Entity) value).canBeCollidedWith()
-						&& (!((Entity) value).isEntityEqual(this.shootingEntity) || this.ticksInAir >= 25)) {
+				if (value.canBeCollidedWith()
+						&& (!value.isEntityEqual(this.shootingEntity) || this.ticksInAir >= 25)) {
 					float f = 0.3F;
-					AxisAlignedBB axisalignedbb = ((Entity) value).getEntityBoundingBox().expand(f, f, f);
+					AxisAlignedBB axisalignedbb = value.getEntityBoundingBox().grow(f, f, f);
 					RayTraceResult rayTraceResult1 = axisalignedbb.calculateIntercept(vec3, vec31);
 
 					if (rayTraceResult1 != null) {

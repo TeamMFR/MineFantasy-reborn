@@ -50,7 +50,7 @@ public class RecipeTimberDynamic extends ShapedOreRecipe {
 				} else {
 					if (!matrix.getStackInRowAndColumn(x, y).isEmpty()) {
 						inputItemStack = matrix.getStackInRowAndColumn(x, y);
-						belowInputItemStack = matrix.getStackInRowAndColumn(x, y - 1);
+						belowInputItemStack = matrix.getStackInRowAndColumn(x, Math.max(0, y - 1));
 					}
 				}
 			}
